@@ -1,4 +1,20 @@
+/*
+ * main.cpp
+ *
+ *  Created on: Jul 31, 2017
+ *      Author: robert
+ */
 
+#include <iostream>
+#include <opencv/cv.hpp>
+#include <opencv/highgui.h>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/videoio.hpp>
+#include <stdio.h>
+#include <unistd.h>
+#include <thread>
+#include <chrono>
+//#include <functional>
 
 cv::Mat bg,b1,b2,b3;
 
