@@ -14,9 +14,48 @@
 #include <unistd.h>
 #include <thread>
 #include <chrono>
+#include <string>
+#include <fstream>
 //#include <functional>
 
 cv::Mat bg,b1,b2,b3;
+int screen1_flag=1;
+std::string language;
+
+void touch_callback(int event,int x,int y,int,void*)
+{
+	switch(event)
+	{
+	case CV_EVENT_LBUTTONUP:
+	{
+		if((x>50&&x<50+b1.cols)&&(y>25&&y<25+b1.rows))
+		{
+			char buffer[20];
+			sprintf(buffer,"./img/%s/s2_bg.png",language.c_str());
+			bg=cv::imread(buffer,1);
+			cv::imshow("test",bg);
+			screen1_flag=0;
+		}
+		else if((x>220&&x<220+b2.cols)&&(y>150&&y<150+b2.rows))
+		{
+			char buffer[20];
+			sprintf(buffer,"./img/%s/s3_bg.png",language.c_str());
+			bg=cv::imread(buffer,1);
+			cv::imshow("test",bg);
+			screen1_flag=0;
+		}
+		else if((x>0&&x<0+b3.cols)&&(y>bg.rows-b3.rows&&y<bg.rows-b3.rows+b3.rows))
+		{
+			char buffer[20];
+			sprintf(buffer,"./img/%s/s4_bg.png",language.c_str());
+			bg=cv::imread(buffer,1);
+			cv::imshow("test",bg);
+			screen1_flag=0;
+		}
+		break;
+	}
+	}
+}
 
 void copy_transparent(cv::Mat bg,cv::Mat fg,int x,int y)
 {
@@ -31,33 +70,37 @@ void copy_transparent(cv::Mat bg,cv::Mat fg,int x,int y)
 		{
 			if(channels[3].at<uchar>(i,j)>=50)
 			{
-				copy.at<cv::Vec3b>(x+i,y+j)[0]=fg.at<cv::Vec4b>(i,j)[0];
-				copy.at<cv::Vec3b>(x+i,y+j)[1]=fg.at<cv::Vec4b>(i,j)[1];
-				copy.at<cv::Vec3b>(x+i,y+j)[2]=fg.at<cv::Vec4b>(i,j)[2];
-				copy.at<cv::Vec3b>(x+i,y+j)[3]=fg.at<cv::Vec4b>(i,j)[3];
+				copy.at<cv::Vec3b>(y+i,x+j)[0]=fg.at<cv::Vec4b>(i,j)[0];
+				copy.at<cv::Vec3b>(y+i,x+j)[1]=fg.at<cv::Vec4b>(i,j)[1];
+				copy.at<cv::Vec3b>(y+i,x+j)[2]=fg.at<cv::Vec4b>(i,j)[2];
+				copy.at<cv::Vec3b>(y+i,x+j)[3]=fg.at<cv::Vec4b>(i,j)[3];
 			}
 		}
 	}
-
 	copy.copyTo(bg);
 }
 
 void show_screen1()
 {
 	static int i=1;
-	bg=cv::imread("./img/eng/bg.png",1);
-	b1=cv::imread("./img/eng/b1.png",cv::IMREAD_UNCHANGED);
-	b2=cv::imread("./img/eng/b2.png",cv::IMREAD_UNCHANGED);
-	b3=cv::imread("./img/eng/b3.png",cv::IMREAD_UNCHANGED);
 
-	char buffer[30];
-	sprintf(buffer,"./img/eng/fan_%d.png",i);
+	char buffer[20];
+	sprintf(buffer,"./img/%s/bg.png",language.c_str());
+	bg=cv::imread(buffer,1);
+	sprintf(buffer,"./img/%s/b1.png",language.c_str());
+	b1=cv::imread(buffer,cv::IMREAD_UNCHANGED);
+	sprintf(buffer,"./img/%s/b2.png",language.c_str());
+	b2=cv::imread(buffer,cv::IMREAD_UNCHANGED);
+	sprintf(buffer,"./img/%s/b3.png",language.c_str());
+	b3=cv::imread(buffer,cv::IMREAD_UNCHANGED);
+
+	sprintf(buffer,"./img/%s/fan_%d.png",language.c_str(),i);
 
 	cv::Mat f=cv::imread(buffer,cv::IMREAD_UNCHANGED);
 
-	copy_transparent(bg,b1,25,50);
-	copy_transparent(bg,b2,150,150);
-	copy_transparent(bg,b3,bg.rows-b3.rows,0);
+	copy_transparent(bg,b1,50,25);
+	copy_transparent(bg,b2,220,150);
+	copy_transparent(bg,b3,0,bg.rows-b3.rows);
 	cv::resize(f,f,cv::Size(),0.5,0.5,CV_INTER_CUBIC);
 	copy_transparent(bg,f,350,600);
 
@@ -82,23 +125,47 @@ void timer_start(std::function<void(void)> func,unsigned int interval)
 
 int main()
 {
+	std::fstream file_stream("./config.txt");
+	std::getline(file_stream,language);
+
+	int first=language.find("\"");
+	int last=language.find_last_of("\"");
+
+	language=language.substr(first+1,last-first-1);
+
 	cv::namedWindow("test",CV_WINDOW_NORMAL);
 	cv::setWindowProperty("test",CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
+
+	char buffer[20];
+	sprintf(buffer,"./img/%s/bg.png",language.c_str());
+//	if(fopen(buffer[0],"r")==NULL)
+//	{
+//		std::cout<<"no such language implemented!\r\n";
+//		return 0;
+//	}
 
 	//std::thread t(&show_screen1);
 	//t.join();
 
 	//timer_start(show_screen1,1000);
 
-	show_screen1();
-	cv::VideoCapture capture("./img/test_video.mp4");
+	cv::setMouseCallback("test",touch_callback);
 
-	while(1)
+	show_screen1();
+	cv::VideoCapture capture("./img/sample.avi");
+
+	while(screen1_flag)
 	{
 		cv::Mat frame;
 		capture>>frame;
 
-		cv::resize(frame,frame,cv::Size(),0.2,0.2,CV_INTER_LINEAR);
+		if(frame.cols==0)
+		{
+			capture.set(CV_CAP_PROP_POS_AVI_RATIO,0);
+			capture>>frame;
+		}
+
+		cv::resize(frame,frame,cv::Size(),0.3,0.3,CV_INTER_CUBIC);
 
 		frame.copyTo(bg(cv::Rect(600,100,frame.cols,frame.rows)));
 		cv::imshow("test",bg);
