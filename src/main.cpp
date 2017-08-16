@@ -125,6 +125,8 @@ void timer_start(std::function<void(void)> func,unsigned int interval)
 
 int main()
 {
+	std::system("sudo rmmod psmouse");
+
 	std::fstream file_stream("./config.txt");
 	std::getline(file_stream,language);
 
@@ -171,6 +173,7 @@ int main()
 		cv::imshow("test",bg);
 		if(cv::waitKey(1)=='a')
 		{
+			std::system("sudo modprobe psmouse");
 			break;
 		}
 	}
