@@ -19,11 +19,14 @@
 //#include <functional>
 
 cv::Mat bg,b1,b2,b3;
-int screen1_flag=1;
+int screen1_flag=1,push=0;
 std::string language;
+
+void show_screen1(int push);
 
 void touch_callback(int event,int x,int y,int,void*)
 {
+	std::cout<<x<<" "<<y<<std::endl;
 	switch(event)
 	{
 	case CV_EVENT_LBUTTONUP:
@@ -51,6 +54,18 @@ void touch_callback(int event,int x,int y,int,void*)
 			bg=cv::imread(buffer,1);
 			cv::imshow("test",bg);
 			screen1_flag=0;
+		}
+		else if((x>950&&x<1400)&&(y>550&&y<850))
+		{
+			show_screen1(0);
+		}
+		break;
+	}
+	case CV_EVENT_LBUTTONDOWN:
+	{
+		if((x>50&&x<50+b1.cols)&&(y>25&&y<25+b1.rows))
+		{
+			show_screen1(0);
 		}
 		break;
 	}
@@ -80,14 +95,21 @@ void copy_transparent(cv::Mat bg,cv::Mat fg,int x,int y)
 	copy.copyTo(bg);
 }
 
-void show_screen1()
+void show_screen1(int push)
 {
 	static int i=1;
 
 	char buffer[20];
 	sprintf(buffer,"./img/%s/bg.png",language.c_str());
 	bg=cv::imread(buffer,1);
-	sprintf(buffer,"./img/%s/b1.png",language.c_str());
+	if(push==1)
+	{
+		sprintf(buffer,"./img/%s/b1.png",language.c_str());
+	}
+	else
+	{
+		sprintf(buffer,"./img/%s/b1_p.png",language.c_str());
+	}
 	b1=cv::imread(buffer,cv::IMREAD_UNCHANGED);
 	sprintf(buffer,"./img/%s/b2.png",language.c_str());
 	b2=cv::imread(buffer,cv::IMREAD_UNCHANGED);
@@ -125,7 +147,7 @@ void timer_start(std::function<void(void)> func,unsigned int interval)
 
 int main()
 {
-	std::system("sudo rmmod psmouse");
+	//std::system("sudo rmmod psmouse");
 
 	std::fstream file_stream("./config.txt");
 	std::getline(file_stream,language);
@@ -153,7 +175,7 @@ int main()
 
 	cv::setMouseCallback("test",touch_callback);
 
-	show_screen1();
+	show_screen1(1);
 	cv::VideoCapture capture("./img/sample.avi");
 
 	while(screen1_flag)
@@ -173,7 +195,7 @@ int main()
 		cv::imshow("test",bg);
 		if(cv::waitKey(1)=='a')
 		{
-			std::system("sudo modprobe psmouse");
+			//std::system("sudo modprobe psmouse");
 			break;
 		}
 	}
