@@ -5,7 +5,7 @@
  *      Author: robert
  */
 
-#include "GUI.h"
+#include "../inc/GUI.h"
 
 GUI::GUI(std::string path) {
 	// TODO Auto-generated constructor stub

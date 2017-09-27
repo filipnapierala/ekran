@@ -17,7 +17,7 @@
 #include <string>
 #include <fstream>
 #include <memory>
-#include "GUI.h"
+#include "inc/GUI.h"
 //#include <functional>
 
 cv::Mat bg,b1,b2,b3;
