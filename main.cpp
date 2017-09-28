@@ -18,7 +18,6 @@
 #include <fstream>
 #include <memory>
 #include "inc/GUI.h"
-//#include <functional>
 
 cv::Mat bg,b1,b2,b3;
 int screen1_flag=1,push=0;
@@ -149,10 +148,6 @@ void timer_start(std::function<void(void)> func,unsigned int interval)
 
 int main()
 {
-
-
-	//std::system("sudo rmmod psmouse");
-
 	std::fstream file_stream("./config.txt");
 	std::getline(file_stream,language);
 
@@ -160,36 +155,22 @@ int main()
 	int last=language.find_last_of("\"");
 
 	language=language.substr(first+1,last-first-1);
-
+	language="pl";
 
 	cv::namedWindow("test",CV_WINDOW_NORMAL);
 
 	cv::setWindowProperty("test",CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
 
-
-
 	char buffer[20];
 	sprintf(buffer,"./img/%s/bg.png",language.c_str());
-//	if(fopen(buffer[0],"r")==NULL)
-//	{
-//		std::cout<<"no such language implemented!\r\n";
-//		return 0;
-//	}
-
-	//std::thread t(&show_screen1);
-	//t.join();
-
-	//timer_start(show_screen1,1000);
 
 	cv::setMouseCallback("test",touch_callback);
-
 
 	show_screen1(1);
 
 	cv::VideoCapture capture("./img/sample.avi");
 
 	auto gui=std::make_unique<GUI>("./data/config/config.yml");
-	//GUI gui("./data/config/config.yml");
 
 	std::cout<<gui->config.language;
 
@@ -210,24 +191,10 @@ int main()
 		cv::imshow("test",bg);
 		if(cv::waitKey(1)=='a')
 		{
-			//std::system("sudo modprobe psmouse");
 			break;
 		}
 	}
 
-//	while(1)
-//	{
-//		cv::waitKey(10);
-//		show_screen1(1);
-//		cv::waitKey(10);
-//		show_screen1(2);
-//		cv::waitKey(10);
-//		show_screen1(3);
-//		if(cv::waitKey(100)=='a')
-//		{
-//			break;
-//		}
-//	}
 	cv::waitKey(0);
 	return 0;
 }
