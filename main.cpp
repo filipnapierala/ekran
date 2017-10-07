@@ -170,9 +170,13 @@ int main()
 
 	cv::VideoCapture capture("./img/sample.avi");
 
-	auto gui=std::make_unique<GUI>("./data/config/config.yml");
+	auto gui=std::make_unique<GUI>("./data/config/config.yml","./data/img/");
+	gui->add_screen();
+	gui->draw_screen();
 
-	std::cout<<gui->config.language;
+	cv::waitKey(0);
+
+	//std::cout<<gui->config.language;
 
 	while(screen1_flag)
 	{

@@ -7,9 +7,11 @@
 
 #include "../inc/GUI.h"
 
-GUI::GUI(std::string path) {
-	// TODO Auto-generated constructor stub
-	parse(path);
+GUI::GUI(std::string conf_path,std::string data_path) {
+	parse(conf_path);
+	this->path=data_path+config.language;
+
+	this->actual_screen=0;
 }
 
 GUI::~GUI() {
@@ -33,3 +35,18 @@ void GUI::parse(std::string path)
 	file.release();
 }
 
+void GUI::add_screen()
+{
+	screen_vector.push_back(Screen(this->path+"/s"+std::to_string(this->actual_screen)));
+	this->actual_screen++;
+}
+
+void GUI::delete_screen()
+{
+
+}
+
+void GUI::draw_screen()
+{
+	this->screen_vector[0].Draw();
+}

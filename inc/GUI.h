@@ -10,10 +10,11 @@
 
 #include <string>
 #include <opencv/cv.hpp>
+#include <../inc/Screen.h>
 
 class GUI {
 public:
-	GUI(std::string path);
+	GUI(std::string conf_path,std::string data_path);
 	virtual ~GUI();
 
 	struct
@@ -22,7 +23,14 @@ public:
 		std::string custom_program_path;
 	} config;
 
+	int actual_screen;
+	void add_screen();
+	void delete_screen();
+	void draw_screen();
+
 private:
+	std::string path;
+	std::vector<Screen> screen_vector;
 	void parse(std::string path);
 };
 
