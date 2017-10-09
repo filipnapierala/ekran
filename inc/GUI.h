@@ -10,7 +10,7 @@
 
 #include <string>
 #include <opencv/cv.hpp>
-#include <../inc/Screen.h>
+#include "../inc/Screen.h"
 
 class GUI {
 public:
