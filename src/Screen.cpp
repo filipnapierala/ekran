@@ -20,11 +20,16 @@ Screen::~Screen() {
 
 void Screen::Draw()
 {
-	this->draw_background();
+	cv::imshow("",this->bg);
 }
 
 void Screen::draw_background()
 {
-	std::cout<<this->path<<std::endl;
+	this->draw_background();
 	cv::imshow("",this->bg);
+}
+
+void Screen::add_button()
+{
+	this->button_vector.push_back(this->path);
 }

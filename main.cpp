@@ -148,13 +148,6 @@ void timer_start(std::function<void(void)> func,unsigned int interval)
 
 int main()
 {
-	std::fstream file_stream("./config.txt");
-	std::getline(file_stream,language);
-
-	int first=language.find("\"");
-	int last=language.find_last_of("\"");
-
-	language=language.substr(first+1,last-first-1);
 	language="pl";
 
 	cv::namedWindow("test",CV_WINDOW_NORMAL);

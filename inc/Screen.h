@@ -17,6 +17,7 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/videoio.hpp>
 #include "../inc/Element.h"
+#include "../inc/Button.h"
 
 class Screen {
 public:
@@ -34,6 +35,8 @@ private:
 
 	std::string path;
 	std::vector<Element> element_vector;
+	std::vector<Button> button_vector;
+
 	int elements_num;
 	void draw_background();
 
