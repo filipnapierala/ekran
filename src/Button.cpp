@@ -5,7 +5,7 @@
  *      Author: robert
  */
 
-#include "Button.h"
+#include "../inc/Button.h"
 
 Button::Button(std::string path) {
 	// TODO Auto-generated constructor stub
