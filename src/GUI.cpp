@@ -51,5 +51,9 @@ void GUI::delete_screen()
 
 void GUI::draw_screen()
 {
+<<<<<<< HEAD
 	this->screen_vector[this->actual_screen].Draw();
+=======
+	this->screen_vector[this->actual_screen-1].Draw();
+>>>>>>> dac8cbbdcb2510502cc87bd127162af2f4a93254
 }

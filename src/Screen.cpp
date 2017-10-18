@@ -5,7 +5,7 @@
  *      Author: robert
  */
 
-#include "Screen.h"
+#include "../inc/Screen.h"
 
 Screen::Screen(std::string data_path) {
 
