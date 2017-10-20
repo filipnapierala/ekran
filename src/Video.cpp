@@ -5,7 +5,7 @@
  *      Author: robert
  */
 
-#include "Video.h"
+#include "../inc/Video.h"
 
 Video::Video() {
 	// TODO Auto-generated constructor stub

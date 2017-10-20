@@ -5,7 +5,7 @@
  *      Author: robert
  */
 
-#include "Image.h"
+#include "../inc/Image.h"
 #include <iostream>
 
 Image::Image(std::string path, int x, int y, double resize) {

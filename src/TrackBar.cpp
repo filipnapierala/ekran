@@ -5,7 +5,7 @@
  *      Author: robert
  */
 
-#include "TrackBar.h"
+#include "../inc/TrackBar.h"
 
 TrackBar::TrackBar() {
 	// TODO Auto-generated constructor stub
