@@ -50,8 +50,8 @@ void Screen::add_trackbar()
 	//this->element_vector.push_back(std::make_unique<TrackBar>());
 }
 
-void Screen::add_video()
+void Screen::add_video(std::string video_path, int x, int y)
 {
-	//this->element_vector.push_back(std::make_unique<Video>());
+	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y));
 }
 

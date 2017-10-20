@@ -10,10 +10,21 @@
 
 #include "../inc/Element.h"
 
+#include <opencv/cv.hpp>
+#include <opencv/highgui.h>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/videoio.hpp>
+
 class Video:public Element {
 public:
-	Video();
+	Video(std::string path,int x, int y);
 	virtual ~Video();
+
+	cv::VideoCapture capture;
+
+	std::string path;
+
+	void draw(cv::Mat bg);
 };
 
 #endif /* VIDEO_H_ */

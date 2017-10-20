@@ -29,7 +29,7 @@ public:
 
 	void add_button(std::string button_path, int x, int y);
 	void add_trackbar();
-	void add_video();
+	void add_video(std::string video_path, int x, int y);
 	void add_image(std::string image_path,int x, int y);
 
 	void Draw();
