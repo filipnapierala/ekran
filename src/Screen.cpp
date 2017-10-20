@@ -20,7 +20,6 @@ Screen::~Screen() {
 
 void Screen::Draw()
 {
-	std::cout<<element_vector.size();
 	for(auto i=0;i<this->element_vector.size();i++)
 	{
 		//copy_transparent(*button_vector[i]);
@@ -53,5 +52,21 @@ void Screen::add_trackbar()
 void Screen::add_video(std::string video_path, int x, int y)
 {
 	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y));
+}
+
+int Screen::touch_callback(int x, int y)
+{
+	for(auto i=0;i<this->element_vector.size();i++)
+	{
+		auto offset_x=this->element_vector[i]->x;
+		auto offset_y=this->element_vector[i]->y;
+
+		if((x>offset_x&&x<offset_x+this->element_vector[i]->width)
+				&&(y>offset_y&&y<offset_y+this->element_vector[i]->height))
+		{
+			return i;
+		}
+	}
+	return -1;
 }
 

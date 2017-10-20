@@ -34,7 +34,5 @@ void Element::copy_transparent(cv::Mat img, cv::Mat bg)
 			}
 		}
 	}
-	std::cout<<"wchodzi";
-	//copy.copyTo(this->bg);
 }
 

@@ -17,6 +17,9 @@ Image::Image(std::string path, int x, int y, double resize) {
 
 	this->img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
 	cv::resize(this->img,this->img,cv::Size(),resize,resize,CV_INTER_CUBIC);
+
+	this->width=this->img.cols;
+	this->height=this->img.rows;
 }
 
 Image::~Image() {

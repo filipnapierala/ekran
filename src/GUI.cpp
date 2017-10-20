@@ -15,6 +15,7 @@ GUI::GUI(std::string conf_path,std::string data_path) {
 
 	cv::namedWindow("",CV_WINDOW_NORMAL);
 	cv::setWindowProperty("",CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
+	//cv::setWindowProperty("",CV_WND_PROP_AUTOSIZE,CV_WINDOW_AUTOSIZE);
 }
 
 GUI::~GUI() {
@@ -53,3 +54,5 @@ void GUI::draw_screen()
 {
 	this->screen_vector[this->actual_screen]->Draw();
 }
+
+

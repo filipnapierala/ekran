@@ -15,59 +15,48 @@
 #include <memory>
 #include "inc/GUI.h"
 
-//void touch_callback(int event,int x,int y,int,void*)
-//{
-//	//std::cout<<x<<" "<<y<<std::endl;
-//	switch(event)
-//	{
-//	case CV_EVENT_LBUTTONUP:
-//	{
-//		if((x>50&&x<50+b1.cols)&&(y>25&&y<25+b1.rows))
-//		{
-//			char buffer[20];
-//			sprintf(buffer,"./img/%s/s2_bg.png",language.c_str());
-//			bg=cv::imread(buffer,1);
-//			cv::imshow("test",bg);
-//			screen1_flag=0;
-//		}
-//		else if((x>220&&x<220+b2.cols)&&(y>150&&y<150+b2.rows))
-//		{
-//			char buffer[20];
-//			sprintf(buffer,"./img/%s/s3_bg.png",language.c_str());
-//			bg=cv::imread(buffer,1);
-//			cv::imshow("test",bg);
-//			screen1_flag=0;
-//		}
-//		else if((x>0&&x<0+b3.cols)&&(y>bg.rows-b3.rows&&y<bg.rows-b3.rows+b3.rows))
-//		{
-//			char buffer[20];
-//			sprintf(buffer,"./img/%s/s4_bg.png",language.c_str());
-//			bg=cv::imread(buffer,1);
-//			cv::imshow("test",bg);
-//			screen1_flag=0;
-//		}
-//		else if((x>950&&x<1400)&&(y>550&&y<850))
-//		{
-//			//show_screen1(0);
-//		}
-//		break;
-//	}
-//	case CV_EVENT_LBUTTONDOWN:
-//	{
-//		if((x>50&&x<50+b1.cols)&&(y>25&&y<25+b1.rows))
-//		{
-//			//show_screen1(0);
-//		}
-//		break;
-//	}
-//	}
-//}
+auto gui=std::make_unique<GUI>("./data/config/config.yml","./data/img/");
+
+void touch_callback(int event,int x,int y,int,void*)
+{
+	//std::cout<<x<<" "<<y<<std::endl;
+	switch(event)
+	{
+	case CV_EVENT_LBUTTONUP:
+	{
+		switch(gui->screen_vector[gui->actual_screen]->touch_callback(x,y))
+		{
+		case 0:
+		{
+			gui->actual_screen=1;
+			break;
+		}
+		case 1:
+		{
+			gui->actual_screen=2;
+			break;
+		}
+		case 2:
+		{
+			gui->actual_screen=3;
+			break;
+		}
+		}
+
+		break;
+	}
+	case CV_EVENT_LBUTTONDOWN:
+	{
+		std::cout<<"right"<<std::endl;
+		break;
+	}
+	}
+}
 
 int main()
 {
-	//cv::setMouseCallback("test",touch_callback);
+	cv::setMouseCallback("",touch_callback);
 
-	auto gui=std::make_unique<GUI>("./data/config/config.yml","./data/img/");
 	gui->add_screen();
 	gui->screen_vector[gui->actual_screen]->add_button("/b1",50,25);
 	gui->screen_vector[gui->actual_screen]->add_button("/b2",220,150);
@@ -77,7 +66,13 @@ int main()
 
 	gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100);
 
-	gui->draw_screen();
+	gui->add_screen();
+	gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100);
+
+	gui->add_screen();
+	gui->add_screen();
+
+	gui->actual_screen=0;
 
 	while(cv::waitKey(1)!='a')
 	{

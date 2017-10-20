@@ -16,6 +16,9 @@ Button::Button(std::string path,int x, int y) {
 	this->img=cv::imread(this->path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
 	this->x=x;
 	this->y=y;
+
+	this->width=this->img.cols;
+	this->height=this->img.rows;
 }
 
 Button::~Button() {
@@ -24,10 +27,7 @@ Button::~Button() {
 
 void Button::draw(cv::Mat bg)
 {
-	std::cout<<"wchodzi";
-
 	this->copy_transparent(this->img,bg);
-	//this->copy_transparent(this->img,&bg);
 }
 
 void Button::changeState()

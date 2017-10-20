@@ -34,6 +34,8 @@ public:
 
 	void Draw();
 
+	int touch_callback(int x, int y);
+
 private:
 
 	std::string path;

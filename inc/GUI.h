@@ -24,6 +24,7 @@ public:
 	} config;
 
 	int actual_screen;
+
 	void add_screen();
 	void delete_screen();
 	void draw_screen();
