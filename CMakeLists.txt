@@ -8,6 +8,6 @@ set(CMAKE_CXX_STANDARD 14)
 #link_directories(${CMAKE_BINARY_DIR}/bin)
 #set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-add_executable (operator_HMI inc/GUI.h inc/Screen.h inc/Element.h inc/Button.h src/GUI.cpp src/Screen.cpp src/Element.cpp src/Button.cpp main.cpp)
+add_executable (operator_HMI inc/GUI.h inc/Screen.h inc/Element.h inc/Button.h inc/Video.h inc/TrackBar.h inc/Image.h src/GUI.cpp src/Screen.cpp src/Element.cpp src/Button.cpp src/Video.cpp src/TrackBar.cpp src/Image.cpp main.cpp)
 
 target_link_libraries (operator_HMI ${OpenCV_LIBS} pthread)

@@ -9,13 +9,27 @@
 #define BUTTON_H_
 
 #include <string>
+#include "../inc/Element.h"
+
+#include <opencv/cv.hpp>
+#include <opencv/highgui.h>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/videoio.hpp>
 
 class Button {
 public:
-	Button(std::string path);
+	Button(std::string path, int x, int y);
 	virtual ~Button();
 
 	void draw();
+
+	int x,y;
+	int pushed;
+
+	void changeState();
+
+	cv::Mat img;
+	std::string path;
 };
 
 #endif /* BUTTON_H_ */

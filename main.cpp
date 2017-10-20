@@ -98,52 +98,7 @@ void copy_transparent(cv::Mat bg,cv::Mat fg,int x,int y)
 
 void show_screen1(int push)
 {
-	static int i=1;
 
-	char buffer[20];
-	sprintf(buffer,"./img/%s/bg.png",language.c_str());
-	bg=cv::imread(buffer,1);
-	if(push==1)
-	{
-		sprintf(buffer,"./img/%s/b1.png",language.c_str());
-	}
-	else
-	{
-		sprintf(buffer,"./img/%s/b1_p.png",language.c_str());
-	}
-	b1=cv::imread(buffer,cv::IMREAD_UNCHANGED);
-	sprintf(buffer,"./img/%s/b2.png",language.c_str());
-	b2=cv::imread(buffer,cv::IMREAD_UNCHANGED);
-	sprintf(buffer,"./img/%s/b3.png",language.c_str());
-	b3=cv::imread(buffer,cv::IMREAD_UNCHANGED);
-
-	sprintf(buffer,"./img/%s/fan_%d.png",language.c_str(),i);
-
-	cv::Mat f=cv::imread(buffer,cv::IMREAD_UNCHANGED);
-
-	copy_transparent(bg,b1,50,25);
-	copy_transparent(bg,b2,220,150);
-	copy_transparent(bg,b3,0,bg.rows-b3.rows);
-	cv::resize(f,f,cv::Size(),0.5,0.5,CV_INTER_CUBIC);
-	copy_transparent(bg,f,350,600);
-
-	cv::imshow("test",bg);
-	if(i>3)
-	{
-		i=1;
-	}
-}
-
-void timer_start(std::function<void(void)> func,unsigned int interval)
-{
-	std::thread([func,interval]()
-			{
-				while(1)
-					{
-						func();
-						std::this_thread::sleep_for(std::chrono::microseconds(interval));
-					}
-			}).detach();
 }
 
 int main()
@@ -151,7 +106,6 @@ int main()
 	language="pl";
 
 	cv::namedWindow("test",CV_WINDOW_NORMAL);
-
 	cv::setWindowProperty("test",CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
 
 	char buffer[20];
@@ -159,39 +113,43 @@ int main()
 
 	cv::setMouseCallback("test",touch_callback);
 
-	show_screen1(1);
+	//show_screen1(1);
 
 	cv::VideoCapture capture("./img/sample.avi");
 
 	auto gui=std::make_unique<GUI>("./data/config/config.yml","./data/img/");
 	gui->add_screen();
+	gui->screen_vector[gui->actual_screen]->add_button("/b1",50,25);
+	gui->screen_vector[gui->actual_screen]->add_button("/b2",220,150);
+	//gui->screen_vector[gui->actual_screen]->add_button("/b3",0,300);
+
 	gui->draw_screen();
 
 	cv::waitKey(0);
 
 	//std::cout<<gui->config.language;
 
-	while(screen1_flag)
-	{
-		cv::Mat frame;
-		capture>>frame;
-
-		if(frame.cols==0)
-		{
-			capture.set(CV_CAP_PROP_POS_AVI_RATIO,0);
-			capture>>frame;
-		}
-
-		cv::resize(frame,frame,cv::Size(),0.3,0.3,CV_INTER_CUBIC);
-
-		frame.copyTo(bg(cv::Rect(600,100,frame.cols,frame.rows)));
-		cv::imshow("test",bg);
-		if(cv::waitKey(1)=='a')
-		{
-			break;
-		}
-	}
-
-	cv::waitKey(0);
+//	while(screen1_flag)
+//	{
+//		cv::Mat frame;
+//		capture>>frame;
+//
+//		if(frame.cols==0)
+//		{
+//			capture.set(CV_CAP_PROP_POS_AVI_RATIO,0);
+//			capture>>frame;
+//		}
+//
+//		cv::resize(frame,frame,cv::Size(),0.3,0.3,CV_INTER_CUBIC);
+//
+//		frame.copyTo(bg(cv::Rect(600,100,frame.cols,frame.rows)));
+//		cv::imshow("test",bg);
+//		if(cv::waitKey(1)=='a')
+//		{
+//			break;
+//		}
+//	}
+//
+//	cv::waitKey(0);
 	return 0;
 }

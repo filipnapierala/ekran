@@ -28,9 +28,10 @@ public:
 	void delete_screen();
 	void draw_screen();
 
+	std::vector<std::unique_ptr<Screen>> screen_vector;
+
 private:
 	std::string path;
-	std::vector<Screen> screen_vector;
 	void parse(std::string path);
 };
 
