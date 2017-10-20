@@ -30,7 +30,7 @@ public:
 	void add_button(std::string button_path, int x, int y);
 	void add_trackbar();
 	void add_video();
-	void add_image();
+	void add_image(std::string image_path,int x, int y);
 
 	void Draw();
 
@@ -39,6 +39,8 @@ private:
 	std::string path;
 	std::vector<std::unique_ptr<Button>> button_vector;
 	std::vector<std::unique_ptr<Image>> image_vector;
+
+	std::vector<std::unique_ptr<Element>> element_vector;
 
 	//std::vector<Button> button_vector;
 

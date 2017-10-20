@@ -22,9 +22,12 @@ Button::~Button() {
 	// TODO Auto-generated destructor stub
 }
 
-void Button::draw()
+void Button::draw(cv::Mat bg)
 {
+	std::cout<<"wchodzi";
 
+	this->copy_transparent(this->img,bg);
+	//this->copy_transparent(this->img,&bg);
 }
 
 void Button::changeState()

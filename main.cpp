@@ -103,14 +103,6 @@ void show_screen1(int push)
 
 int main()
 {
-	language="pl";
-
-	cv::namedWindow("test",CV_WINDOW_NORMAL);
-	cv::setWindowProperty("test",CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
-
-	char buffer[20];
-	sprintf(buffer,"./img/%s/bg.png",language.c_str());
-
 	cv::setMouseCallback("test",touch_callback);
 
 	//show_screen1(1);
@@ -121,7 +113,9 @@ int main()
 	gui->add_screen();
 	gui->screen_vector[gui->actual_screen]->add_button("/b1",50,25);
 	gui->screen_vector[gui->actual_screen]->add_button("/b2",220,150);
-	//gui->screen_vector[gui->actual_screen]->add_button("/b3",0,300);
+	gui->screen_vector[gui->actual_screen]->add_button("/b3",0,264);
+
+	gui->screen_vector[gui->actual_screen]->add_image("/fan",100,100);
 
 	gui->draw_screen();
 

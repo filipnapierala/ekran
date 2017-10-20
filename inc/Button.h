@@ -16,14 +16,14 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/videoio.hpp>
 
-class Button {
+class Button:public Element {
 public:
 	Button(std::string path, int x, int y);
 	virtual ~Button();
 
-	void draw();
+	void draw(cv::Mat bg);
 
-	int x,y;
+	int resize=0;
 	int pushed;
 
 	void changeState();

@@ -10,10 +10,24 @@
 
 #include "../inc/Element.h"
 
+#include <opencv/cv.hpp>
+#include <opencv/highgui.h>
+#include <opencv2/imgcodecs.hpp>
+#include <opencv2/videoio.hpp>
+
 class Image:public Element {
 public:
-	Image();
+	Image(std::string path, int x, int y, double resize);
 	virtual ~Image();
+
+	void draw(cv::Mat bg);
+
+	int state;
+
+	void changeState();
+
+	cv::Mat img;
+	std::string path;
 };
 
 #endif /* IMAGE_H_ */

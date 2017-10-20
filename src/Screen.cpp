@@ -20,10 +20,11 @@ Screen::~Screen() {
 
 void Screen::Draw()
 {
-	std::cout<<button_vector.size();
-	for(auto i=0;i<this->button_vector.size();i++)
+	std::cout<<element_vector.size();
+	for(auto i=0;i<this->element_vector.size();i++)
 	{
-		copy_transparent(*button_vector[i]);
+		//copy_transparent(*button_vector[i]);
+		this->element_vector[i]->draw(this->bg);
 	}
 	cv::imshow("",this->bg);
 }
@@ -36,12 +37,12 @@ void Screen::draw_background()
 
 void Screen::add_button(std::string button_path,int x, int y)
 {
-	this->button_vector.push_back(std::make_unique<Button>(this->path+button_path,x,y));
+	this->element_vector.push_back(std::make_unique<Button>(this->path+button_path,x,y));
 }
 
-void Screen::add_image()
+void Screen::add_image(std::string image_path,int x, int y)
 {
-	this->image_vector.push_back(std::make_unique<Image>());
+	this->element_vector.push_back(std::make_unique<Image>(this->path+image_path,x,y,0.5));
 }
 
 void Screen::add_trackbar()
@@ -54,23 +55,3 @@ void Screen::add_video()
 	//this->element_vector.push_back(std::make_unique<Video>());
 }
 
-void Screen::copy_transparent(Button button)
-{
-	std::vector<cv::Mat> channels;
-	cv::split(button.img ,channels);
-
-	for(int i=0;i<button.img.rows;i++)
-	{
-		for(int j=0;j<button.img.cols;j++)
-		{
-			if(channels[3].at<uchar>(i,j)>=50)
-			{
-				this->bg.at<cv::Vec3b>(button.y+i,button.x+j)[0]=button.img.at<cv::Vec4b>(i,j)[0];
-				this->bg.at<cv::Vec3b>(button.y+i,button.x+j)[1]=button.img.at<cv::Vec4b>(i,j)[1];
-				this->bg.at<cv::Vec3b>(button.y+i,button.x+j)[2]=button.img.at<cv::Vec4b>(i,j)[2];
-				this->bg.at<cv::Vec3b>(button.y+i,button.x+j)[3]=button.img.at<cv::Vec4b>(i,j)[3];
-			}
-		}
-	}
-	//copy.copyTo(this->bg);
-}
