@@ -6,13 +6,47 @@
  */
 
 #include "../inc/TrackBar.h"
+#include <iostream>
 
-TrackBar::TrackBar() {
-	// TODO Auto-generated constructor stub
+TrackBar::TrackBar(std::string radial_path, std::string slider_path, int x, int y, int maxValue) {
 
+	this->x=x;
+	this->y=y;
+
+	this->maxValue=maxValue;
+	this->value=0;
+
+	this->pushed=0;
+
+	this->slider=cv::imread(slider_path+".png",cv::IMREAD_UNCHANGED);
+	this->radial=cv::imread(radial_path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
+
+	this->width=this->slider.cols;
+	std::cout<<"width: "<<this->width<<std::endl;
+	this->height=this->slider.rows;
 }
 
 TrackBar::~TrackBar() {
 	// TODO Auto-generated destructor stub
+}
+
+void TrackBar::draw(cv::Mat bg)
+{
+	this->copy_transparent(this->slider,bg);
+
+	int position=(float(this->width)/float(this->maxValue))
+					*this->value-this->radial.cols/2;
+	this->copy_transparent(this->radial,bg,position);
+}
+
+void TrackBar::changeState()
+{
+
+}
+
+void TrackBar::changeValue(int x, int y)
+{
+	this->value=float((float(x)-float(this->x))/float(this->width))*this->maxValue;
+	this->value=std::min(std::max(this->value,0),255);
 }
 

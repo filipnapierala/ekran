@@ -22,7 +22,9 @@ public:
 	virtual ~Button();
 
 	void draw(cv::Mat bg);
+	void changeValue(int x, int y);
 
+private:
 	int resize=0;
 	int pushed;
 

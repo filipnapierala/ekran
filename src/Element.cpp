@@ -16,7 +16,7 @@ Element::~Element() {
 	// TODO Auto-generated destructor stub
 }
 
-void Element::copy_transparent(cv::Mat img, cv::Mat bg)
+void Element::copy_transparent(cv::Mat img, cv::Mat bg, int offset)
 {
 	std::vector<cv::Mat> channels;
 	cv::split(img ,channels);
@@ -27,10 +27,10 @@ void Element::copy_transparent(cv::Mat img, cv::Mat bg)
 		{
 			if(channels[3].at<uchar>(i,j)>=50)
 			{
-				bg.at<cv::Vec3b>(this->y+i,this->x+j)[0]=img.at<cv::Vec4b>(i,j)[0];
-				bg.at<cv::Vec3b>(this->y+i,this->x+j)[1]=img.at<cv::Vec4b>(i,j)[1];
-				bg.at<cv::Vec3b>(this->y+i,this->x+j)[2]=img.at<cv::Vec4b>(i,j)[2];
-				bg.at<cv::Vec3b>(this->y+i,this->x+j)[3]=img.at<cv::Vec4b>(i,j)[3];
+				bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[0]=img.at<cv::Vec4b>(i,j)[0];
+				bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[1]=img.at<cv::Vec4b>(i,j)[1];
+				bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[2]=img.at<cv::Vec4b>(i,j)[2];
+				bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[3]=img.at<cv::Vec4b>(i,j)[3];
 			}
 		}
 	}

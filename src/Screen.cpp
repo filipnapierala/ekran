@@ -20,12 +20,15 @@ Screen::~Screen() {
 
 void Screen::Draw()
 {
+	cv::Mat bg_copy;
+	bg_copy=this->bg.clone();
+
 	for(auto i=0;i<this->element_vector.size();i++)
 	{
 		//copy_transparent(*button_vector[i]);
-		this->element_vector[i]->draw(this->bg);
+		this->element_vector[i]->draw(bg_copy);
 	}
-	cv::imshow("",this->bg);
+	cv::imshow("",bg_copy);
 }
 
 void Screen::draw_background()
@@ -44,9 +47,9 @@ void Screen::add_image(std::string image_path,int x, int y)
 	this->element_vector.push_back(std::make_unique<Image>(this->path+image_path,x,y,0.5));
 }
 
-void Screen::add_trackbar()
+void Screen::add_trackbar(std::string radial_path,std::string slider_path, int x, int y, int maxValue)
 {
-	//this->element_vector.push_back(std::make_unique<TrackBar>());
+	this->element_vector.push_back(std::make_unique<TrackBar>(this->path+radial_path, this->path+slider_path, x, y, maxValue));
 }
 
 void Screen::add_video(std::string video_path, int x, int y)
@@ -70,3 +73,7 @@ int Screen::touch_callback(int x, int y)
 	return -1;
 }
 
+void Screen::trackbarChangeValue(int x,int element)
+{
+	this->element_vector[element]->changeValue(x,0);
+}

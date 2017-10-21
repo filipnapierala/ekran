@@ -34,6 +34,8 @@ public:
 private:
 	std::string path;
 	void parse(std::string path);
+	int x_res;
+	int y_res;
 };
 
 #endif /* GUI_H_ */

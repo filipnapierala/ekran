@@ -23,8 +23,10 @@ public:
 	int width,height;
 
 	virtual void draw(cv::Mat bg)=0;
+	//virtual void changeState(int i)=0;
+	virtual void changeValue(int x, int y)=0;
 
-	void copy_transparent(cv::Mat img, cv::Mat bg);
+	void copy_transparent(cv::Mat img, cv::Mat bg, int offset=0);
 
 };
 

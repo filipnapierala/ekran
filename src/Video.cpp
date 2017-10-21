@@ -29,4 +29,9 @@ void Video::draw(cv::Mat bg)
 }
 
 
+void Video::changeValue(int x, int y)
+{
+
+}
+
 

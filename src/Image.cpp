@@ -30,3 +30,8 @@ void Image::draw(cv::Mat bg)
 {
 	this->copy_transparent(this->img,bg);
 }
+
+void Image::changeValue(int x, int y)
+{
+
+}

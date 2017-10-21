@@ -25,6 +25,7 @@ public:
 	std::string path;
 
 	void draw(cv::Mat bg);
+	void changeValue(int x, int y);
 };
 
 #endif /* VIDEO_H_ */

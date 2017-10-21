@@ -35,3 +35,8 @@ void Button::changeState()
 	this->pushed=(this->pushed+1)%2;
 	this->img=cv::imread(this->path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
 }
+
+void Button::changeValue(int x, int y)
+{
+
+}

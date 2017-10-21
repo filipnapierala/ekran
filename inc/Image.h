@@ -25,6 +25,7 @@ public:
 	int state;
 
 	void changeState();
+	void changeValue(int x, int y);
 
 	cv::Mat img;
 	std::string path;

@@ -28,7 +28,8 @@ public:
 	virtual ~Screen();
 
 	void add_button(std::string button_path, int x, int y);
-	void add_trackbar();
+	void add_trackbar(std::string radial_path,std::string slider_path,
+			int x, int y, int maxValue);
 	void add_video(std::string video_path, int x, int y);
 	void add_image(std::string image_path,int x, int y);
 
@@ -36,22 +37,19 @@ public:
 
 	int touch_callback(int x, int y);
 
+	void trackbarChangeValue(int x,int element);
+
 private:
 
 	std::string path;
-	std::vector<std::unique_ptr<Button>> button_vector;
-	std::vector<std::unique_ptr<Image>> image_vector;
 
 	std::vector<std::unique_ptr<Element>> element_vector;
-
-	//std::vector<Button> button_vector;
 
 	int elements_num;
 	void draw_background();
 	void copy_transparent(Button button);
 
 	cv::Mat bg;
-
 };
 
 #endif /* SCREEN_H_ */
