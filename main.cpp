@@ -48,7 +48,7 @@ void Screen1_callback(int x, int y, int event)
 	{
 	case 0:
 	{
-		gui->actual_screen=0;
+		//gui->actual_screen=0;
 		break;
 	}
 	case 1:
@@ -68,7 +68,7 @@ void Screen1_callback(int x, int y, int event)
 	{
 		switch(gui->screen_vector[gui->actual_screen]->touch_callback(x,y))
 			{
-			case 1:
+			case 0:
 			{
 				move=true;
 				break;
@@ -97,7 +97,7 @@ void touch_callback(int event,int x,int y,int flags,void*)
 {
 	if(event==CV_EVENT_MOUSEMOVE&&move==true)
 	{
-		gui->screen_vector[1]->trackbarChangeValue(x,1);
+		gui->screen_vector[1]->trackbarChangeValue(x,0);
 	}
 	//std::cout<<x<<" "<<y<<std::endl;
 	switch(event)
@@ -185,7 +185,7 @@ int main()
 	gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100);
 
 	gui->add_screen();
-	gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100);
+	//gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100);
 	gui->screen_vector[gui->actual_screen]->add_trackbar("/r1","/s1",200,100,255);
 
 	gui->add_screen();

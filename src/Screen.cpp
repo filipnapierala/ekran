@@ -75,5 +75,5 @@ int Screen::touch_callback(int x, int y)
 
 void Screen::trackbarChangeValue(int x,int element)
 {
-	this->element_vector[element]->changeValue(x,0);
+	this->element_vector[element]->changeValue(x,1);
 }
