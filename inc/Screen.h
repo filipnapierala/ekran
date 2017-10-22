@@ -12,10 +12,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
-#include <opencv/cv.hpp>
-#include <opencv/highgui.h>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/videoio.hpp>
+
 #include "../inc/Element.h"
 #include "../inc/Button.h"
 #include "../inc/TrackBar.h"

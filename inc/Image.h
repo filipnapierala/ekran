@@ -10,11 +10,6 @@
 
 #include "../inc/Element.h"
 
-#include <opencv/cv.hpp>
-#include <opencv/highgui.h>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/videoio.hpp>
-
 class Image:public Element {
 public:
 	Image(std::string path, int x, int y, double resize);

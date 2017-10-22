@@ -10,11 +10,6 @@
 
 #include "../inc/Element.h"
 
-#include <opencv/cv.hpp>
-#include <opencv/highgui.h>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/videoio.hpp>
-
 class TrackBar:public Element {
 public:
 	TrackBar(std::string radial_path, std::string slider_path, int x, int y, int maxValue);

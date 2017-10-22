@@ -6,10 +6,6 @@
  */
 
 #include <iostream>
-#include <opencv/cv.hpp>
-#include <opencv/highgui.h>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/videoio.hpp>
 #include <thread>
 #include <string>
 #include <memory>

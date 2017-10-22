@@ -8,10 +8,8 @@
 #ifndef ELEMENT_H_
 #define ELEMENT_H_
 
-#include <opencv/cv.hpp>
-#include <opencv/highgui.h>
+#include <opencv2/opencv.hpp>
 #include <opencv2/imgcodecs.hpp>
-#include <opencv2/videoio.hpp>
 
 class Element {
 public:

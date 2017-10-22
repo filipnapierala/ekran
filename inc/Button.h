@@ -11,11 +11,6 @@
 #include <string>
 #include "../inc/Element.h"
 
-#include <opencv/cv.hpp>
-#include <opencv/highgui.h>
-#include <opencv2/imgcodecs.hpp>
-#include <opencv2/videoio.hpp>
-
 class Button:public Element {
 public:
 	Button(std::string path, int x, int y);

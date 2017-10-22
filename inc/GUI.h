@@ -9,7 +9,6 @@
 #define GUI_H_
 
 #include <string>
-#include <opencv/cv.hpp>
 #include "../inc/Screen.h"
 
 class GUI {
