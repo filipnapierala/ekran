@@ -25,7 +25,7 @@ void Video::draw(cv::Mat bg)
 	this->capture>>frame;
 	cv::resize(frame,frame,cv::Size(),0.3,0.3,CV_INTER_CUBIC);
 
-	frame.copyTo(bg(cv::Rect(600,100,frame.cols,frame.rows)));
+	frame.copyTo(bg(cv::Rect(this->x,this->y,frame.cols,frame.rows)));
 }
 
 
