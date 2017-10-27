@@ -7,11 +7,14 @@
 
 #include "../inc/Screen.h"
 
-Screen::Screen(std::string data_path) {
+Screen::Screen(std::string data_path,int res_x,int res_y) {
 
 	this->path=data_path;
 	this->bg=cv::imread(this->path+"/bg.png",1);
 	this->elements_num=0;
+
+	this->res_x=res_x;
+	this->res_y=res_y;
 }
 
 Screen::~Screen() {
@@ -52,9 +55,9 @@ void Screen::add_trackbar(std::string radial_path,std::string slider_path, int x
 	this->element_vector.push_back(std::make_unique<TrackBar>(this->path+radial_path, this->path+slider_path, x, y, maxValue));
 }
 
-void Screen::add_video(std::string video_path, int x, int y)
+void Screen::add_video(std::string video_path, int x, int y, int res_x, int res_y)
 {
-	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y));
+	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y,res_x,res_y));
 }
 
 int Screen::touch_callback(int x, int y)

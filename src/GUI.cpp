@@ -42,7 +42,7 @@ void GUI::parse(std::string path)
 void GUI::add_screen()
 {
 	this->actual_screen++;
-	screen_vector.push_back(std::make_unique<Screen>(this->path+"/s"+std::to_string(this->actual_screen)));
+	screen_vector.push_back(std::make_unique<Screen>(this->path+"/s"+std::to_string(this->actual_screen),this->x_res,this->y_res));
 }
 
 void GUI::delete_screen()

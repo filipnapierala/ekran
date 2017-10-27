@@ -186,6 +186,9 @@ int main()
 	cv::setMouseCallback("",touch_callback);
 
 	gui->add_screen();
+	gui->screen_vector[gui->actual_screen]->add_video("/intro",0,0);
+
+	gui->add_screen();
 	gui->screen_vector[gui->actual_screen]->add_button("/b1",50,25);
 	gui->screen_vector[gui->actual_screen]->add_button("/b2",220,150);
 	gui->screen_vector[gui->actual_screen]->add_button("/b3",0,262);
@@ -194,7 +197,7 @@ int main()
 	gui->screen_vector[gui->actual_screen]->add_image("/fan",650,350);
 	gui->screen_vector[gui->actual_screen]->add_image("/fan",800,350);
 
-	gui->screen_vector[gui->actual_screen]->add_video("/vid",550,100);
+	gui->screen_vector[gui->actual_screen]->add_video("/vid",550,100,300,150);
 
 	gui->add_screen();
 
@@ -230,6 +233,15 @@ int main()
 	gui->screen_vector[gui->actual_screen]->add_button("/pr1",700,500);
 
 	gui->actual_screen=0;
+
+	//comment to disable intro
+	while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
+	{
+		gui->draw_screen();
+		cv::waitKey(1);
+	}
+
+	gui->actual_screen=1;
 
 	while(cv::waitKey(1)!='a')
 	{

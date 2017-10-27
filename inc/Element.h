@@ -19,6 +19,7 @@ public:
 	int resize;
 	int x,y;
 	int width,height;
+	int is_end;
 
 	virtual void draw(cv::Mat bg)=0;
 	//virtual void changeState(int i)=0;
