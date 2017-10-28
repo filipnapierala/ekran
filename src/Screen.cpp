@@ -28,7 +28,6 @@ void Screen::Draw()
 
 	for(auto i=0;i<this->element_vector.size();i++)
 	{
-		//copy_transparent(*button_vector[i]);
 		this->element_vector[i]->draw(bg_copy);
 	}
 	cv::imshow("",bg_copy);
