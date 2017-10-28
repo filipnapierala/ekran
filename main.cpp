@@ -235,17 +235,20 @@ int main()
 	gui->actual_screen=0;
 
 	//comment to disable intro
-	while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
-	{
-		gui->draw_screen();
-		cv::waitKey(1);
-	}
-
+//	while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
+//	{
+//		gui->draw_screen();
+//		cv::waitKey(1);
+//	}
+	clock_t start,stop;
 	gui->actual_screen=1;
 
 	while(cv::waitKey(1)!='a')
 	{
+		start=clock();
 		gui->draw_screen();
+		stop=clock();
+		std::cout<<"fps: "<<int(1/(double((stop-start))/CLOCKS_PER_SEC))<<std::endl;
 	}
 
 //		if(frame.cols==0)
