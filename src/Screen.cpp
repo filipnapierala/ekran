@@ -46,7 +46,7 @@ void Screen::add_button(std::string button_path,int x, int y)
 
 void Screen::add_image(std::string image_path,int x, int y)
 {
-	this->element_vector.push_back(std::make_unique<Image>(this->path+image_path,x,y,0.5));
+	this->element_vector.push_back(std::make_unique<Image>(this->path+image_path,x,y,1));
 }
 
 void Screen::add_trackbar(std::string radial_path,std::string slider_path, int x, int y, int maxValue)

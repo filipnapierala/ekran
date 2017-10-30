@@ -190,14 +190,21 @@ int main()
 
 	gui->add_screen();
 	gui->screen_vector[gui->actual_screen]->add_button("/b1",50,25);
-	gui->screen_vector[gui->actual_screen]->add_button("/b2",220,150);
-	gui->screen_vector[gui->actual_screen]->add_button("/b3",0,262);
+	gui->screen_vector[gui->actual_screen]->add_button("/b2",250,150);
+	gui->screen_vector[gui->actual_screen]->add_button("/b3",340,350);
+	gui->screen_vector[gui->actual_screen]->add_button("/b4",0,460);
+	gui->screen_vector[gui->actual_screen]->add_button("/b5",1180,50);
+	gui->screen_vector[gui->actual_screen]->add_button("/b6",1180,700);
 
-	gui->screen_vector[gui->actual_screen]->add_image("/fan",500,350);
-	gui->screen_vector[gui->actual_screen]->add_image("/fan",650,350);
-	gui->screen_vector[gui->actual_screen]->add_image("/fan",800,350);
+	gui->screen_vector[gui->actual_screen]->add_image("/alarm",1230,50);
 
-	gui->screen_vector[gui->actual_screen]->add_video("/vid",550,100,300,150);
+#define x 25
+	gui->screen_vector[gui->actual_screen]->add_image("/fan",650+x,480);
+	gui->screen_vector[gui->actual_screen]->add_image("/red",790+x,500);
+	gui->screen_vector[gui->actual_screen]->add_image("/blue",890+x,500);
+	gui->screen_vector[gui->actual_screen]->add_image("/pr",1030+x,480);
+
+	gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100,600,300);
 
 	gui->add_screen();
 
