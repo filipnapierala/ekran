@@ -192,7 +192,7 @@ int main()
 	gui->add_screen();
 	gui->screen_vector[gui->actual_screen]->add_button("/b1",50,25);
 	gui->screen_vector[gui->actual_screen]->add_button("/b2",250,150);
-	gui->screen_vector[gui->actual_screen]->add_button("/b3",340,350);
+	gui->screen_vector[gui->actual_screen]->add_button("/b3",350,350);
 	gui->screen_vector[gui->actual_screen]->add_button("/b4",0,460);
 	gui->screen_vector[gui->actual_screen]->add_button("/b5",1180,50);
 	gui->screen_vector[gui->actual_screen]->add_button("/b6",1180,700);
@@ -250,7 +250,7 @@ int main()
 //	}
 	gui->actual_screen=1;
 
-	while(cv::waitKey(1)!='a')
+	while(1)
 	{
 		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
 		gui->draw_screen();
@@ -258,6 +258,15 @@ int main()
 
 		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
 		std::cout<<"fps: "<<1000/double(count)<<std::endl;
+
+		if(cv::waitKey(1)=='d')
+		{
+			gui->turnBoxes();
+		}
+		else if(cv::waitKey(1)=='a')
+		{
+			break;
+		}
 	}
 
 //		if(frame.cols==0)

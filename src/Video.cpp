@@ -7,14 +7,14 @@
 
 #include "../inc/Video.h"
 
-Video::Video(std::string path,int x, int y, int res_x, int res_y) {
+Video::Video(std::string path,int x, int y, int width, int height) {
 	this->x=x;
 	this->y=y;
 	this->path=path;
 	this->capture=cv::VideoCapture(this->path+".avi");
 
-	this->res_x=res_x;
-	this->res_y=res_y;
+	this->width=width;
+	this->height=height;
 
 	this->is_end=0;
 }
@@ -29,13 +29,14 @@ void Video::draw(cv::Mat bg)
 	this->capture>>frame;
 	if(frame.cols!=0)
 	{
-		cv::resize(frame,frame,cv::Size(this->res_x,this->res_y),0,0,CV_INTER_CUBIC);
+		cv::resize(frame,frame,cv::Size(this->width,this->height),0,0,CV_INTER_CUBIC);
 		frame.copyTo(bg(cv::Rect(this->x,this->y,frame.cols,frame.rows)));
 	}
 	else
 	{
 		this->is_end=1;
 	}
+	cv::rectangle(bg,cv::Point(this->x,this->y),cv::Point(this->x+this->width,this->y+this->height), cv::Scalar(0,0,0),10);
 }
 
 

@@ -26,7 +26,7 @@ public:
 	virtual void changeValue(int x, int y)=0;
 
 	void copy_transparent(cv::Mat img, cv::Mat bg, int offset=0);
-
+	void draw_boundingBox(cv::Mat bg);
 };
 
 #endif /* ELEMENT_H_ */

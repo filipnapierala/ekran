@@ -30,9 +30,14 @@ void Element::copy_transparent(cv::Mat img, cv::Mat bg, int offset)
 				bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[0]=img.at<cv::Vec4b>(i,j)[0];
 				bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[1]=img.at<cv::Vec4b>(i,j)[1];
 				bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[2]=img.at<cv::Vec4b>(i,j)[2];
-				bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[3]=img.at<cv::Vec4b>(i,j)[3];
+				//bg.at<cv::Vec3b>(this->y+i,this->x+j+offset)[3]=img.at<cv::Vec4b>(i,j)[3];
 			}
 		}
 	}
+}
+
+void Element::draw_boundingBox(cv::Mat bg)
+{
+	cv::rectangle(bg,cv::Point(this->x,this->y),cv::Point(this->x+this->width,this->y+this->height), cv::Scalar(0,0,0),2);
 }
 

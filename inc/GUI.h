@@ -25,8 +25,9 @@ public:
 	int actual_screen;
 
 	void add_screen();
-	void delete_screen();
+	void delete_screen(int number);
 	void draw_screen();
+	void turnBoxes();
 
 	std::vector<std::unique_ptr<Screen>> screen_vector;
 

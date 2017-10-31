@@ -41,6 +41,8 @@ public:
 
 	std::vector<std::unique_ptr<Element>> element_vector;
 
+	bool debug;
+
 private:
 
 	std::string path;

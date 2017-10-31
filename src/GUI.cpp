@@ -44,9 +44,9 @@ void GUI::add_screen()
 	screen_vector.push_back(std::make_unique<Screen>(this->path+"/s"+std::to_string(this->actual_screen),this->x_res,this->y_res));
 }
 
-void GUI::delete_screen()
+void GUI::delete_screen(int number)
 {
-
+	this->screen_vector.erase(this->screen_vector.begin()+number);
 }
 
 void GUI::draw_screen()
@@ -54,4 +54,8 @@ void GUI::draw_screen()
 	this->screen_vector[this->actual_screen]->Draw();
 }
 
+void GUI::turnBoxes()
+{
+	this->screen_vector[this->actual_screen]->debug=!this->screen_vector[this->actual_screen]->debug;
+}
 

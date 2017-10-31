@@ -15,6 +15,8 @@ Screen::Screen(std::string data_path,int res_x,int res_y) {
 
 	this->res_x=res_x;
 	this->res_y=res_y;
+
+	this->debug=false;
 }
 
 Screen::~Screen() {
@@ -29,6 +31,10 @@ void Screen::Draw()
 	for(auto i=0;i<this->element_vector.size();i++)
 	{
 		this->element_vector[i]->draw(bg_copy);
+		if(this->debug)
+		{
+			this->element_vector[i]->draw_boundingBox(bg_copy);
+		}
 	}
 	cv::imshow("",bg_copy);
 }
