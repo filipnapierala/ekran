@@ -10,6 +10,7 @@
 #include <string>
 #include <memory>
 #include "inc/GUI.h"
+#include <chrono>
 
 auto gui=std::make_unique<GUI>("./data/config/config.yml","./data/img/");
 
@@ -247,15 +248,16 @@ int main()
 //		gui->draw_screen();
 //		cv::waitKey(1);
 //	}
-	clock_t start,stop;
 	gui->actual_screen=1;
 
 	while(cv::waitKey(1)!='a')
 	{
-		start=clock();
+		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
 		gui->draw_screen();
-		stop=clock();
-		std::cout<<"fps: "<<int(1/(double((stop-start))/CLOCKS_PER_SEC))<<std::endl;
+		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
+
+		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
+		std::cout<<"fps: "<<1000/double(count)<<std::endl;
 	}
 
 //		if(frame.cols==0)
