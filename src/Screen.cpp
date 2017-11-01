@@ -65,7 +65,7 @@ void Screen::add_video(std::string video_path, int x, int y,std::string id, int 
 	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y,id,res_x,res_y));
 }
 
-std::string Screen::touch_callback(int x, int y)
+std::string Screen::touch_callback(int x, int y, int& n)
 {
 	for(auto i=0;i<this->element_vector.size();i++)
 	{
@@ -75,6 +75,7 @@ std::string Screen::touch_callback(int x, int y)
 		if((x>offset_x&&x<offset_x+this->element_vector[i]->width)
 				&&(y>offset_y&&y<offset_y+this->element_vector[i]->height))
 		{
+			n=i;
 			return this->element_vector[i]->id;
 		}
 	}

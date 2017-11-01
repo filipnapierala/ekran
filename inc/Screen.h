@@ -35,7 +35,7 @@ public:
 
 	void Draw();
 
-	std::string touch_callback(int x, int y);
+	std::string touch_callback(int x, int y, int& n);
 
 	void trackbarChangeValue(int x,int element);
 
