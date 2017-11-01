@@ -182,20 +182,23 @@ void touch_callback(int event,int x,int y,int flags,void*)
 	}
 }
 
-int main()
+void screen0()
 {
-	cv::setMouseCallback("",touch_callback);
-
 	gui->add_screen();
+
 	gui->screen_vector[gui->actual_screen]->add_video("/intro",0,0);
+}
 
+void screen1()
+{
 	gui->add_screen();
-	gui->screen_vector[gui->actual_screen]->add_button("/b1",50,25);
-	gui->screen_vector[gui->actual_screen]->add_button("/b2",250,150);
-	gui->screen_vector[gui->actual_screen]->add_button("/b3",350,350);
-	gui->screen_vector[gui->actual_screen]->add_button("/b4",0,460);
-	gui->screen_vector[gui->actual_screen]->add_button("/b5",1180,50);
-	gui->screen_vector[gui->actual_screen]->add_button("/b6",1180,700);
+
+	gui->screen_vector[gui->actual_screen]->add_button("/crio",50,25);
+	gui->screen_vector[gui->actual_screen]->add_button("/hot",250,150);
+	gui->screen_vector[gui->actual_screen]->add_button("/manual",350,350);
+	gui->screen_vector[gui->actual_screen]->add_button("/else",0,460);
+	gui->screen_vector[gui->actual_screen]->add_button("/auto",1180,50);
+	gui->screen_vector[gui->actual_screen]->add_button("/reset",1180,700);
 
 	gui->screen_vector[gui->actual_screen]->add_image("/alarm",1230,50);
 
@@ -206,39 +209,74 @@ int main()
 	gui->screen_vector[gui->actual_screen]->add_image("/pr",1030+x,480);
 
 	gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100,600,300);
+}
 
+void screen2()
+{
 	gui->add_screen();
 
-	gui->screen_vector[gui->actual_screen]->add_trackbar("/r1","/s1",500,200,255);
-	gui->screen_vector[gui->actual_screen]->add_trackbar("/r1","/s1",500,400,255);
-	gui->screen_vector[gui->actual_screen]->add_trackbar("/r1","/s1",500,600,255);
-	gui->screen_vector[gui->actual_screen]->add_button("/ret",1267,0);
+	gui->screen_vector[gui->actual_screen]->add_button("/ret",1130,0);
+	gui->screen_vector[gui->actual_screen]->add_button("/start",0,650);
 
+	gui->screen_vector[gui->actual_screen]->add_button("/minus",200,330);
+	gui->screen_vector[gui->actual_screen]->add_button("/minus",200,400);
+	gui->screen_vector[gui->actual_screen]->add_button("/minus",200,470);
+	gui->screen_vector[gui->actual_screen]->add_button("/plus",1100,330);
+	gui->screen_vector[gui->actual_screen]->add_button("/plus",1100,400);
+	gui->screen_vector[gui->actual_screen]->add_button("/plus",1100,470);
+
+	gui->screen_vector[gui->actual_screen]->add_trackbar("/r1","/s1",240,330,255);
+	gui->screen_vector[gui->actual_screen]->add_trackbar("/r1","/s1",240,400,255);
+	gui->screen_vector[gui->actual_screen]->add_trackbar("/r1","/s1",240,470,255);
+
+	gui->screen_vector[gui->actual_screen]->add_image("/hot",100,330);
+	gui->screen_vector[gui->actual_screen]->add_image("/cold",100,400);
+	gui->screen_vector[gui->actual_screen]->add_image("/time",100,470);
+}
+
+void screen3()
+{
 	gui->add_screen();
 
-	gui->screen_vector[gui->actual_screen]->add_button("/ret",1267,0);
-
-	gui->screen_vector[gui->actual_screen]->add_button("/on",100,100);
-	gui->screen_vector[gui->actual_screen]->add_button("/on",600,100);
-	gui->screen_vector[gui->actual_screen]->add_button("/on",100,500);
-
-	gui->screen_vector[gui->actual_screen]->add_button("/off",300,100);
-	gui->screen_vector[gui->actual_screen]->add_button("/off",800,100);
-	gui->screen_vector[gui->actual_screen]->add_button("/off",300,500);
-
+	gui->screen_vector[gui->actual_screen]->add_button("/ret",1130,0);
+	gui->screen_vector[gui->actual_screen]->add_button("/on",390,250);
+	gui->screen_vector[gui->actual_screen]->add_button("/on",790,250);
+	gui->screen_vector[gui->actual_screen]->add_button("/on",390,550);
+	gui->screen_vector[gui->actual_screen]->add_button("/off",490,250);
+	gui->screen_vector[gui->actual_screen]->add_button("/off",890,250);
+	gui->screen_vector[gui->actual_screen]->add_button("/off",490,550);
 	gui->screen_vector[gui->actual_screen]->add_button("/push",700,500);
 
+	gui->screen_vector[gui->actual_screen]->add_image("/blue",340,150);
+	gui->screen_vector[gui->actual_screen]->add_image("/red",840,150);
+	gui->screen_vector[gui->actual_screen]->add_image("/fan",340,450);
+	gui->screen_vector[gui->actual_screen]->add_image("/crio",700,400);
+}
+
+void screen4()
+{
 	gui->add_screen();
 
-	gui->screen_vector[gui->actual_screen]->add_button("/ret",1267,0);
-	gui->screen_vector[gui->actual_screen]->add_button("/pr1",100,100);
-	gui->screen_vector[gui->actual_screen]->add_button("/pr1",300,100);
-	gui->screen_vector[gui->actual_screen]->add_button("/pr1",500,100);
-	gui->screen_vector[gui->actual_screen]->add_button("/pr1",700,100);
-	gui->screen_vector[gui->actual_screen]->add_button("/pr1",100,500);
-	gui->screen_vector[gui->actual_screen]->add_button("/pr1",300,500);
-	gui->screen_vector[gui->actual_screen]->add_button("/pr1",500,500);
-	gui->screen_vector[gui->actual_screen]->add_button("/pr1",700,500);
+	gui->screen_vector[gui->actual_screen]->add_button("/ret",1130,0);
+	gui->screen_vector[gui->actual_screen]->add_button("/pr1",140,220);
+	gui->screen_vector[gui->actual_screen]->add_button("/pr2",440,220);
+	gui->screen_vector[gui->actual_screen]->add_button("/pr3",740,220);
+	gui->screen_vector[gui->actual_screen]->add_button("/pr4",1040,220);
+	gui->screen_vector[gui->actual_screen]->add_button("/pr5",140,580);
+	gui->screen_vector[gui->actual_screen]->add_button("/pr6",440,580);
+	gui->screen_vector[gui->actual_screen]->add_button("/pr7",740,580);
+	gui->screen_vector[gui->actual_screen]->add_button("/pr8",1040,580);
+}
+
+int main()
+{
+	cv::setMouseCallback("",touch_callback);
+
+	screen0();
+	screen1();
+	screen2();
+	screen3();
+	screen4();
 
 	gui->actual_screen=0;
 
@@ -259,13 +297,19 @@ int main()
 		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
 		std::cout<<"fps: "<<1000/double(count)<<std::endl;
 
-		if(cv::waitKey(1)=='d')
+		char key=cv::waitKey(1);
+		if(key=='d')
 		{
 			gui->turnBoxes();
 		}
-		else if(cv::waitKey(1)=='a')
+		else if(key=='a')
 		{
 			break;
+		}
+
+		if(gui->actual_screen==1)
+		{
+			gui->screen_vector[gui->actual_screen]->change_value(7);
 		}
 	}
 

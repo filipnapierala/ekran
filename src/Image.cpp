@@ -35,3 +35,15 @@ void Image::changeValue(int x, int y)
 {
 
 }
+
+void Image::changeState()
+{
+	this->state++;
+	this->img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
+
+	if(this->img.cols==0)
+	{
+		this->state=0;
+		this->img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
+	}
+}

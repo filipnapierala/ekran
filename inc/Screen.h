@@ -39,6 +39,8 @@ public:
 
 	void trackbarChangeValue(int x,int element);
 
+	void change_value(int element);
+
 	std::vector<std::unique_ptr<Element>> element_vector;
 
 	bool debug;
@@ -49,7 +51,7 @@ private:
 
 	int elements_num;
 	void draw_background();
-	void copy_transparent(Button button);
+	//void copy_transparent(Button button);
 
 	cv::Mat bg;
 

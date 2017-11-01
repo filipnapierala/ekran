@@ -45,4 +45,7 @@ void Video::changeValue(int x, int y)
 
 }
 
+void Video::changeState()
+{
 
+}

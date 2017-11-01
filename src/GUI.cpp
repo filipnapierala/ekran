@@ -58,4 +58,3 @@ void GUI::turnBoxes()
 {
 	this->screen_vector[this->actual_screen]->debug=!this->screen_vector[this->actual_screen]->debug;
 }
-

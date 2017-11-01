@@ -21,6 +21,7 @@ public:
 
 	void draw(cv::Mat bg);
 	void changeValue(int x, int y);
+	void changeState();
 
 private:
 
