@@ -12,7 +12,7 @@
 
 class Image:public Element {
 public:
-	Image(std::string path, int x, int y, double resize);
+	Image(std::string path, int x, int y, double resize,std::string id);
 	virtual ~Image();
 
 	void draw(cv::Mat bg);

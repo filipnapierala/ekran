@@ -7,7 +7,7 @@
 
 #include "../inc/Video.h"
 
-Video::Video(std::string path,int x, int y, int width, int height) {
+Video::Video(std::string path,int x, int y, std::string id, int width, int height) {
 	this->x=x;
 	this->y=y;
 	this->path=path;
@@ -17,6 +17,7 @@ Video::Video(std::string path,int x, int y, int width, int height) {
 	this->height=height;
 
 	this->is_end=0;
+	this->id=id;
 }
 
 Video::~Video() {

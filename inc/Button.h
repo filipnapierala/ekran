@@ -13,7 +13,7 @@
 
 class Button:public Element {
 public:
-	Button(std::string path, int x, int y);
+	Button(std::string path, int x, int y, std::string id);
 	virtual ~Button();
 
 	void draw(cv::Mat bg);

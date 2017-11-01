@@ -20,6 +20,7 @@ public:
 	int x,y;
 	int width,height;
 	int is_end;
+	std::string id;
 
 	virtual void draw(cv::Mat bg)=0;
 	virtual void changeState()=0;

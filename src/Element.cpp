@@ -9,7 +9,7 @@
 #include <iostream>
 
 Element::Element() {
-	// TODO Auto-generated constructor stub
+
 }
 
 Element::~Element() {

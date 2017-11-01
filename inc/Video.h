@@ -12,7 +12,7 @@
 
 class Video:public Element {
 public:
-	Video(std::string path,int x, int y, int width, int height);
+	Video(std::string path,int x, int y, std::string id, int width, int height);
 	virtual ~Video();
 
 	cv::VideoCapture capture;

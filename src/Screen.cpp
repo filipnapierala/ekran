@@ -45,27 +45,27 @@ void Screen::draw_background()
 	cv::imshow("",this->bg);
 }
 
-void Screen::add_button(std::string button_path,int x, int y)
+void Screen::add_button(std::string button_path,int x, int y, std::string id)
 {
-	this->element_vector.push_back(std::make_unique<Button>(this->path+button_path,x,y));
+	this->element_vector.push_back(std::make_unique<Button>(this->path+button_path,x,y,id));
 }
 
-void Screen::add_image(std::string image_path,int x, int y)
+void Screen::add_image(std::string image_path,int x, int y, std::string id)
 {
-	this->element_vector.push_back(std::make_unique<Image>(this->path+image_path,x,y,1));
+	this->element_vector.push_back(std::make_unique<Image>(this->path+image_path,x,y,1, id));
 }
 
-void Screen::add_trackbar(std::string radial_path,std::string slider_path, int x, int y, int maxValue)
+void Screen::add_trackbar(std::string radial_path,std::string slider_path, int x, int y, int maxValue, std::string id)
 {
-	this->element_vector.push_back(std::make_unique<TrackBar>(this->path+radial_path, this->path+slider_path, x, y, maxValue));
+	this->element_vector.push_back(std::make_unique<TrackBar>(this->path+radial_path, this->path+slider_path, x, y, maxValue, id));
 }
 
-void Screen::add_video(std::string video_path, int x, int y, int res_x, int res_y)
+void Screen::add_video(std::string video_path, int x, int y,std::string id, int res_x, int res_y)
 {
-	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y,res_x,res_y));
+	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y,id,res_x,res_y));
 }
 
-int Screen::touch_callback(int x, int y)
+std::string Screen::touch_callback(int x, int y)
 {
 	for(auto i=0;i<this->element_vector.size();i++)
 	{
@@ -75,10 +75,10 @@ int Screen::touch_callback(int x, int y)
 		if((x>offset_x&&x<offset_x+this->element_vector[i]->width)
 				&&(y>offset_y&&y<offset_y+this->element_vector[i]->height))
 		{
-			return i;
+			return this->element_vector[i]->id;
 		}
 	}
-	return -1;
+	return " ";
 }
 
 void Screen::trackbarChangeValue(int x,int element)

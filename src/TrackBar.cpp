@@ -8,7 +8,7 @@
 #include "../inc/TrackBar.h"
 #include <iostream>
 
-TrackBar::TrackBar(std::string radial_path, std::string slider_path, int x, int y, int maxValue) {
+TrackBar::TrackBar(std::string radial_path, std::string slider_path, int x, int y, int maxValue,std::string id) {
 
 	this->x=x;
 	this->y=y;
@@ -22,8 +22,9 @@ TrackBar::TrackBar(std::string radial_path, std::string slider_path, int x, int 
 	this->radial=cv::imread(radial_path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
 
 	this->width=this->slider.cols;
-	std::cout<<"width: "<<this->width<<std::endl;
 	this->height=this->slider.rows;
+
+	this->id=id;
 }
 
 TrackBar::~TrackBar() {

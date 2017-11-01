@@ -12,7 +12,7 @@
 
 class TrackBar:public Element {
 public:
-	TrackBar(std::string radial_path, std::string slider_path, int x, int y, int maxValue);
+	TrackBar(std::string radial_path, std::string slider_path, int x, int y, int maxValue, std::string id);
 	virtual ~TrackBar();
 	int value;
 

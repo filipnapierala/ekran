@@ -9,7 +9,7 @@
 
 #include <iostream>
 
-Button::Button(std::string path,int x, int y) {
+Button::Button(std::string path,int x, int y, std::string id) {
 
 	this->pushed=0;
 	this->path=path;
@@ -19,6 +19,8 @@ Button::Button(std::string path,int x, int y) {
 
 	this->width=this->img.cols;
 	this->height=this->img.rows;
+
+	this->id=id;
 }
 
 Button::~Button() {

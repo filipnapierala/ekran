@@ -8,7 +8,7 @@
 #include "../inc/Image.h"
 #include <iostream>
 
-Image::Image(std::string path, int x, int y, double resize) {
+Image::Image(std::string path, int x, int y, double resize,std::string id) {
 	this->resize=resize;
 	this->state=0;
 	this->path=path;
@@ -20,6 +20,8 @@ Image::Image(std::string path, int x, int y, double resize) {
 
 	this->width=this->img.cols;
 	this->height=this->img.rows;
+
+	this->id=id;
 }
 
 Image::~Image() {

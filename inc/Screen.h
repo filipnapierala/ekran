@@ -27,15 +27,15 @@ public:
 	Screen(std::string data_path,int rex_x,int res_y);
 	virtual ~Screen();
 
-	void add_button(std::string button_path, int x, int y);
+	void add_button(std::string button_path, int x, int y, std::string id);
 	void add_trackbar(std::string radial_path,std::string slider_path,
-			int x, int y, int maxValue);
-	void add_video(std::string video_path, int x, int y, int res_x=X, int res_y=Y);
-	void add_image(std::string image_path,int x, int y);
+			int x, int y, int maxValue,std::string id);
+	void add_video(std::string video_path, int x, int y,std::string id, int res_x=X, int res_y=Y);
+	void add_image(std::string image_path,int x, int y, std::string id);
 
 	void Draw();
 
-	int touch_callback(int x, int y);
+	std::string touch_callback(int x, int y);
 
 	void trackbarChangeValue(int x,int element);
 
