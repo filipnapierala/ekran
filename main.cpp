@@ -9,19 +9,32 @@
 #include <thread>
 #include <string>
 #include <memory>
-#include "inc/GUI.h"
 #include "inc/Touch.h"
 #include <chrono>
 
-auto gui=std::make_unique<GUI>("./data/config/config.yml","./data/img/");
-
 bool move=false;
 bool touch_flag=false;
+
+auto gui=std::make_unique<GUI>("./data/config/config.yml","./data/img/");
 
 Touch touch;
 
 void touch_callback(int event,int x,int y,int flags,void*)
 {
+	if(event==1)
+	{
+		touch.id=gui->screen_vector[gui->actual_screen]->touch_callback(x,y);
+		touch.x=x;
+		touch.y=y;
+		touch.previous_event=touch.event;
+		touch.event=event;
+		touch.screen=gui->actual_screen;
+
+		if(touch.id!=" ")
+		{
+			gui->screen_vector[gui->actual_screen]->change_value(0);
+		}
+	}
 	if(event==4)
 	{
 		touch.id=gui->screen_vector[gui->actual_screen]->touch_callback(x,y);
@@ -64,7 +77,7 @@ void screen1()
 	gui->screen_vector[gui->actual_screen]->add_image("/blue",890+x,500,"blue");
 	gui->screen_vector[gui->actual_screen]->add_image("/pr",1030+x,480,"pr");
 
-	gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100,"video",600,300);
+	gui->screen_vector[gui->actual_screen]->add_video("/vid",600,100,"video",640,360);
 }
 
 void screen2()
@@ -148,7 +161,6 @@ int main()
 	{
 		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
 		gui->draw_screen();
-		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
 
 		char key=cv::waitKey(1);
 		if(key=='d')
@@ -168,13 +180,9 @@ int main()
 		if(touch_flag==true)
 		{
 			touch_flag=false;
-			int change=main_touch(touch);
-			if(change!=-1)
-			{
-				gui->actual_screen=change;
-			}
-
+			main_touch(touch,gui);
 		}
+		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
 		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
 		std::cout<<"fps: "<<1000/double(count)<<std::endl;
 	}

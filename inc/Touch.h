@@ -20,11 +20,11 @@ struct Touch
 	int screen;
 };
 
-int main_touch(Touch touch);
-int Screen0_callback(Touch touch);
-int Screen1_callback(Touch touch);
-int Screen2_callback(Touch touch);
-int Screen3_callback(Touch touch);
-int Screen4_callback(Touch touch);
+int main_touch(Touch touch,std::unique_ptr<GUI>&gui);
+int Screen0_callback(Touch touch,std::unique_ptr<GUI>&gui);
+int Screen1_callback(Touch touch,std::unique_ptr<GUI>&gui);
+int Screen2_callback(Touch touch,std::unique_ptr<GUI>&gui);
+int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui);
+int Screen4_callback(Touch touch,std::unique_ptr<GUI>&gui);
 
 #endif /* TOUCH_H_ */
