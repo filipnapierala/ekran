@@ -84,6 +84,7 @@ int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui)
 		gui->actual_screen=1;
 		return 0;
 	}
+
 	return -1;
 }
 
@@ -91,6 +92,12 @@ int Screen4_callback(Touch touch,std::unique_ptr<GUI>&gui)
 {
 	if(touch.id=="ret")
 	{
+		gui->actual_screen=1;
+		return 0;
+	}
+	else
+	{
+		gui->screen_vector[1]->change_value(10);
 		gui->actual_screen=1;
 		return 0;
 	}
