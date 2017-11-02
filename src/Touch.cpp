@@ -74,6 +74,21 @@ int Screen2_callback(Touch touch,std::unique_ptr<GUI>&gui)
 		gui->actual_screen=1;
 		return 0;
 	}
+	else if(touch.id=="plus1")
+	{
+		gui->screen_vector[gui->actual_screen]->element_vector[8]->changeValue(1,1);;
+		return 0;
+	}
+	else if(touch.id=="plus2")
+	{
+		gui->screen_vector[gui->actual_screen]->element_vector[9]->changeValue(1,1);;
+		return 0;
+	}
+	else if(touch.id=="plus3")
+	{
+		gui->screen_vector[gui->actual_screen]->element_vector[10]->changeValue(1,1);;
+		return 0;
+	}
 	return -1;
 }
 

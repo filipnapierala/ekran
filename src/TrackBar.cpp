@@ -37,7 +37,7 @@ void TrackBar::draw(cv::Mat bg)
 
 	int position=(float(this->width)/float(this->maxValue))
 					*this->value-this->radial.cols/2;
-	this->copy_transparent(this->radial,bg,position);
+	this->copy_transparent(this->radial,bg,position,-(this->slider.rows/2));
 }
 
 void TrackBar::changeState()
@@ -47,7 +47,8 @@ void TrackBar::changeState()
 
 void TrackBar::changeValue(int x, int y)
 {
-	this->value=float((float(x)-float(this->x))/float(this->width))*this->maxValue;
+	this->value+=10;
+	//this->value=float((float(x)-float(this->x))/float(this->width))*this->maxValue;
 	this->value=std::min(std::max(this->value,0),255);
 }
 

@@ -203,7 +203,7 @@ int main()
 		}
 		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
 		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
-		std::cout<<"fps: "<<1000/double(count)<<std::endl;
+		//std::cout<<"fps: "<<1000/double(count)<<std::endl;
 	}
 
 //		if(frame.cols==0)
