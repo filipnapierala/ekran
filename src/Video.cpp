@@ -36,6 +36,7 @@ void Video::draw(cv::Mat bg)
 	else
 	{
 		this->is_end=1;
+		this->capture=cv::VideoCapture(this->path+".avi");
 	}
 	cv::rectangle(bg,cv::Point(this->x,this->y),cv::Point(this->x+this->width,this->y+this->height), cv::Scalar(0,0,0),10);
 }
