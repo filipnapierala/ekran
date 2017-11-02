@@ -13,7 +13,7 @@
 
 struct Touch
 {
-	int x,y,n;
+	int x,y,n,n_1;
 	std::string id;
 	int event;
 	int previous_event;

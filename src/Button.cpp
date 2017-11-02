@@ -13,14 +13,17 @@ Button::Button(std::string path,int x, int y, std::string id) {
 
 	this->pushed=0;
 	this->path=path;
-	this->img=cv::imread(this->path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
+	this->img_u=cv::imread(this->path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
+	this->img_p=cv::imread(this->path+"_"+std::to_string(!this->pushed)+".png",cv::IMREAD_UNCHANGED);
+
 	this->x=x;
 	this->y=y;
 
-	this->width=this->img.cols;
-	this->height=this->img.rows;
+	this->width=this->img_p.cols;
+	this->height=this->img_p.rows;
 
 	this->id=id;
+	this->pushed=false;
 }
 
 Button::~Button() {
@@ -29,16 +32,22 @@ Button::~Button() {
 
 void Button::draw(cv::Mat bg)
 {
-	this->copy_transparent(this->img,bg);
-}
-
-void Button::changeState()
-{
-	this->pushed=(this->pushed+1)%2;
-	this->img=cv::imread(this->path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
+	if(pushed)
+	{
+		this->copy_transparent(this->img_p,bg);
+	}
+	else
+	{
+		this->copy_transparent(this->img_u,bg);
+	}
 }
 
 void Button::changeValue(int x, int y)
+{
+
+}
+
+void Button::changeState()
 {
 
 }

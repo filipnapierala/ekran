@@ -16,13 +16,13 @@ public:
 	virtual ~Image();
 
 	void draw(cv::Mat bg);
-
-	int state;
-
 	void changeState();
 	void changeValue(int x, int y);
 
-	cv::Mat img;
+private:
+	int state;
+
+	std::vector<cv::Mat> img_vector;
 	std::string path;
 };
 

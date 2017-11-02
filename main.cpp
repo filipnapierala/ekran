@@ -23,6 +23,7 @@ void touch_callback(int event,int x,int y,int flags,void*)
 {
 	if(event==1)
 	{
+		touch.n_1=touch.n;
 		touch.id=gui->screen_vector[gui->actual_screen]->touch_callback(x,y,touch.n);
 		touch.x=x;
 		touch.y=y;
@@ -32,11 +33,13 @@ void touch_callback(int event,int x,int y,int flags,void*)
 
 		if(touch.id!=" ")
 		{
-			gui->screen_vector[gui->actual_screen]->change_value(touch.n);
+			gui->screen_vector[gui->actual_screen]->element_vector[touch.n]->pushed=
+					!gui->screen_vector[gui->actual_screen]->element_vector[touch.n]->pushed;
 		}
 	}
 	if(event==4)
 	{
+		touch.n_1=touch.n;
 		touch.id=gui->screen_vector[gui->actual_screen]->touch_callback(x,y,touch.n);
 		touch.x=x;
 		touch.y=y;
@@ -44,9 +47,14 @@ void touch_callback(int event,int x,int y,int flags,void*)
 		touch.event=event;
 		touch.screen=gui->actual_screen;
 
-		if(touch.id!=" ")
+		if(touch.id==" ")
 		{
-			gui->screen_vector[gui->actual_screen]->change_value(touch.n);
+			gui->screen_vector[gui->actual_screen]->element_vector[touch.n_1]->pushed=false;
+		}
+		else if(touch.id!=" ")
+		{
+			gui->screen_vector[gui->actual_screen]->element_vector[touch.n]->pushed=
+					!gui->screen_vector[gui->actual_screen]->element_vector[touch.n]->pushed;
 			touch_flag=true;
 		}
 	}

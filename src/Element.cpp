@@ -13,7 +13,7 @@ Element::Element() {
 }
 
 Element::~Element() {
-	// TODO Auto-generated destructor stub
+
 }
 
 void Element::copy_transparent(cv::Mat img, cv::Mat bg, int offset)

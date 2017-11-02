@@ -15,13 +15,20 @@ Image::Image(std::string path, int x, int y, double resize,std::string id) {
 	this->x=x;
 	this->y=y;
 
-	this->img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
-	cv::resize(this->img,this->img,cv::Size(),resize,resize,CV_INTER_CUBIC);
+	cv::Mat img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
+	this->width=img.cols;
+	this->height=img.rows;
 
-	this->width=this->img.cols;
-	this->height=this->img.rows;
+	while(img.cols!=0)
+	{
+		cv::resize(img,img,cv::Size(),resize,resize,CV_INTER_CUBIC);
+		this->img_vector.push_back(img);
+		this->state++;
+		img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
+	}
 
 	this->id=id;
+	this->state=0;
 }
 
 Image::~Image() {
@@ -30,7 +37,7 @@ Image::~Image() {
 
 void Image::draw(cv::Mat bg)
 {
-	this->copy_transparent(this->img,bg);
+	this->copy_transparent(this->img_vector[this->state],bg);
 }
 
 void Image::changeValue(int x, int y)
@@ -40,12 +47,5 @@ void Image::changeValue(int x, int y)
 
 void Image::changeState()
 {
-	this->state++;
-	this->img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
-
-	if(this->img.cols==0)
-	{
-		this->state=0;
-		this->img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
-	}
+	this->state=(this->state+1)%this->img_vector.size();
 }

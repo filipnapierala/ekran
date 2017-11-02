@@ -21,11 +21,11 @@ public:
 
 private:
 	int resize=0;
-	int pushed;
 
 	void changeState();
 
-	cv::Mat img;
+	cv::Mat img_u,img_p;
+
 	std::string path;
 };
 

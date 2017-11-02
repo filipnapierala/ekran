@@ -16,15 +16,14 @@ public:
 	Element();
 	virtual ~Element();
 
-	int resize;
-	int x,y;
-	int width,height;
-	int is_end;
+	int resize, x, y, width, height, is_end;
+	bool pushed;
+
 	std::string id;
 
 	virtual void draw(cv::Mat bg)=0;
 	virtual void changeState()=0;
-	virtual void changeValue(int x, int y)=0;
+	virtual void changeValue(int, int)=0;
 
 	void copy_transparent(cv::Mat img, cv::Mat bg, int offset=0);
 	void draw_boundingBox(cv::Mat bg);
