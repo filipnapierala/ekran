@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "../inc/GUI.h"
+#include "../inc/Utils.h"
 
 struct Touch
 {

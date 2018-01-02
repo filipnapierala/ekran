@@ -99,6 +99,38 @@ int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui)
 		gui->actual_screen=1;
 		return 0;
 	}
+	else if(touch.id=="on1")
+	{
+		int fd = open_port("/dev/ttyACM1");
+		initport(fd);
+		char buffer[20];
+
+		for(int i=0;i<101;i++)
+		{
+			int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 90, i,
+					0, 1);
+			write(fd, buffer, length);
+			usleep(10000);
+		}
+
+		close(fd);
+	}
+	else if(touch.id=="off1")
+	{
+		int fd = open_port("/dev/ttyACM1");
+		initport(fd);
+		char buffer[20];
+
+		for(int i=100;i>=0;--i)
+		{
+			int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 90, i,
+					0, 1);
+			write(fd, buffer, length);
+			usleep(10000);
+		}
+
+		close(fd);
+	}
 
 	return -1;
 }
