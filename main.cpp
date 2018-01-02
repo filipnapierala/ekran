@@ -15,7 +15,7 @@
 bool move=false;
 bool touch_flag=false;
 
-auto gui=std::make_unique<GUI>("./data/config/config.yml","./data/img/");
+auto gui=std::make_unique<GUI>("./data");
 
 Touch touch;
 

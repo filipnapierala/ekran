@@ -7,9 +7,11 @@
 
 #include "../inc/GUI.h"
 
-GUI::GUI(std::string conf_path,std::string data_path) {
-	parse(conf_path);
-	this->path=data_path+config.language;
+GUI::GUI(std::string data_path) {
+	parse(data_path+"/config/config.yml");
+	this->path=data_path+"/img/"+config.language;
+
+	system((data_path+"/scripts/config.sh").c_str());
 
 	this->actual_screen=-1;
 

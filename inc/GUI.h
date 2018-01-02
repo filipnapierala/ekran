@@ -13,7 +13,7 @@
 
 class GUI {
 public:
-	GUI(std::string conf_path,std::string data_path);
+	GUI(std::string data_path);
 	virtual ~GUI();
 
 	struct
