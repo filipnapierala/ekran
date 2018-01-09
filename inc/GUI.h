@@ -22,6 +22,7 @@ public:
 		std::string custom_program_path;
 	} config;
 
+	std::string path;
 	int actual_screen;
 
 	void add_screen();
@@ -32,7 +33,6 @@ public:
 	std::vector<std::unique_ptr<Screen>> screen_vector;
 
 private:
-	std::string path;
 	void parse(std::string path);
 	int x_res;
 	int y_res;

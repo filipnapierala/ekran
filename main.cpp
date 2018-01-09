@@ -61,7 +61,7 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 void screen0() {
 	gui->add_screen();
 
-	gui->screen_vector[gui->actual_screen]->add_video("/intro", 0, 0, "intro");
+	gui->screen_vector[gui->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
 }
 
 void screen1() {
@@ -202,11 +202,12 @@ int main() {
 	gui->actual_screen = 0;
 
 	//comment to disable intro
-//	while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
-//	{
-//		gui->draw_screen();
-//		cv::waitKey(1);
-//	}
+	system(("mplayer -vo null "+gui->path+"/s0/intro.avi &").c_str());
+	while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
+	{
+		gui->draw_screen();
+		cv::waitKey(1);
+	}
 	gui->actual_screen = 1;
 
 while(1)
