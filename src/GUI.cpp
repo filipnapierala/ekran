@@ -31,10 +31,13 @@ void GUI::parse(std::string path)
 	{
 		file["language"]>>config.language;
 	}
-
-	if(!file["custom_program"].empty())
+	if(!file["customProgram"].empty())
 	{
-		file["custom_program"]>>config.custom_program_path;
+		file["customProgram"]>>config.custom_program_path;
+	}
+	if(!file["usbPort"].empty())
+	{
+		file["usbPort"]>>config.usbPort;
 	}
 
 	file.release();

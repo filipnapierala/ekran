@@ -45,11 +45,11 @@ int initport(int fd) {
 	return 1;
 }
 
-int open_port(char* dev) {
+int open_port(std::string port) {
 
-	int fd = open(dev, O_RDWR | O_NOCTTY | O_NDELAY);
+	int fd = open(port.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
 	if (fd == -1) {
-		perror("open_port: Unable to open /dev/ttyUSB0");
+		perror(("open_port: Unable to open"+port).c_str());
 		std::cout << "!!!error!!!" << std::endl;
 	} else
 		fcntl(fd, F_SETFL, 0);

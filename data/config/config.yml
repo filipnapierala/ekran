@@ -1,3 +1,4 @@
 %YAML:1.0
 language: 'eng'
-custom_program: '...'
+customProgram: '...'
+usbPort: '/dev/ttyUSB0'

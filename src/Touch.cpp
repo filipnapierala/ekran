@@ -101,7 +101,8 @@ int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui)
 	}
 	else if(touch.id=="on1")
 	{
-		int fd = open_port("/dev/ttyACM0");
+		int fd = open_port(gui->config.usbPort);
+		std::cout<<gui->config.usbPort;
 		initport(fd);
 		char buffer[20];
 
@@ -117,7 +118,7 @@ int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui)
 	}
 	else if(touch.id=="off1")
 	{
-		int fd = open_port("/dev/ttyACM0");
+		int fd = open_port(gui->config.usbPort);
 		initport(fd);
 		char buffer[20];
 

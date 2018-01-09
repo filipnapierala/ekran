@@ -16,6 +16,6 @@
 #include <iostream>
 
 int initport(int fd);
-int open_port(char*dev);
+int open_port(std::string port);
 
 #endif /* UTILS_H_ */

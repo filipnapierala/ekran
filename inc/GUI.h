@@ -20,6 +20,7 @@ public:
 	{
 		std::string language;
 		std::string custom_program_path;
+		std::string usbPort;
 	} config;
 
 	std::string path;
