@@ -202,12 +202,19 @@ int main() {
 	gui->actual_screen = 0;
 
 	//comment to disable intro
-	//system(("mplayer -vo null "+gui->path+"/s0/intro.avi &").c_str());
-	//while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
-	//{
-	//	gui->draw_screen();
-	//	cv::waitKey(1);
-	//}
+	system(("mplayer -vo null "+gui->path+"/s0/intro.avi &").c_str());
+	while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
+	{
+		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
+		gui->draw_screen();
+		cv::waitKey(1);
+		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
+		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
+		if(count<200)
+		{
+			cv::waitKey(200-count);
+		}
+	}
 	gui->actual_screen = 1;
 
 while(1)
