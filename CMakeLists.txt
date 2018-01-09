@@ -7,6 +7,6 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS_Release "-O3")
 
-add_executable (operator_HMI inc/GUI.h inc/Screen.h inc/Element.h inc/Button.h inc/Video.h inc/TrackBar.h inc/Image.h inc/Touch.h src/GUI.cpp src/Screen.cpp src/Element.cpp src/Button.cpp src/Video.cpp src/TrackBar.cpp src/Image.cpp src/Touch.cpp main.cpp)
+add_executable (operator_HMI inc/GUI.h inc/Screen.h inc/Element.h inc/Button.h inc/Video.h inc/TrackBar.h inc/Image.h inc/Touch.h inc/Utils.h src/GUI.cpp src/Screen.cpp src/Element.cpp src/Button.cpp src/Video.cpp src/TrackBar.cpp src/Image.cpp src/Touch.cpp src/Utils.cpp main.cpp)
 
 target_link_libraries (operator_HMI ${OpenCV_LIBS} pthread)
