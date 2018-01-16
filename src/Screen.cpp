@@ -7,7 +7,7 @@
 
 #include "../inc/Screen.h"
 
-Screen::Screen(std::string data_path,int res_x,int res_y) {
+Screen::Screen(std::string data_path,int res_x,int res_y, std::string WindowName) {
 
 	this->path=data_path;
 	this->bg=cv::imread(this->path+"/bg.png",1);
@@ -17,6 +17,7 @@ Screen::Screen(std::string data_path,int res_x,int res_y) {
 	this->res_y=res_y;
 
 	this->debug=false;
+	this->WinName=WindowName;
 }
 
 Screen::~Screen() {
@@ -36,13 +37,13 @@ void Screen::Draw()
 			this->element_vector[i]->draw_boundingBox(bg_copy);
 		}
 	}
-	cv::imshow("",bg_copy);
+	cv::imshow(WinName,bg_copy);
 }
 
 void Screen::draw_background()
 {
 	this->draw_background();
-	cv::imshow("",this->bg);
+	cv::imshow(WinName,this->bg);
 }
 
 void Screen::add_button(std::string button_path,int x, int y, std::string id)

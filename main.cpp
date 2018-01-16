@@ -14,10 +14,13 @@
 #include "inc/Utils.h"
 #include "inc/Touch.h"
 
+#define FrameTime 40
+
 bool move = false;
 bool touch_flag = false;
 
-auto gui = std::make_unique<GUI>("./data");
+auto gui = std::make_unique<GUI>("./data/Screen1","1",0,0);
+auto gui2 = std::make_unique<GUI>("./data/Screen2","2",1280,800);
 
 Touch touch;
 
@@ -90,8 +93,7 @@ void screen1() {
 	gui->screen_vector[gui->actual_screen]->add_image("/pr", x + 145, 480,
 			"pr");
 
-	gui->screen_vector[gui->actual_screen]->add_video("/vid", 600, 100, "video",
-			640, 360);
+	gui->screen_vector[gui->actual_screen]->add_video("/vid", 600, 100, "video", 640, 360);
 }
 
 void screen2() {
@@ -190,8 +192,21 @@ void screen4() {
 			"pr8");
 }
 
+
+void screen5() {
+	gui2->add_screen();
+
+	gui2->screen_vector[gui2->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
+}
+
+void screen6() {
+	gui2->add_screen();
+
+	gui2->screen_vector[gui2->actual_screen]->add_video("/vid", 0, 0, "video", 1280, 800);
+}
+
 int main() {
-	cv::setMouseCallback("", touch_callback);
+	cv::setMouseCallback("1", touch_callback);
 
 	screen0();
 	screen1();
@@ -199,28 +214,33 @@ int main() {
 	screen3();
 	screen4();
 
+	screen5();
+	screen6();
+
 	gui->actual_screen = 0;
 
 	//comment to disable intro
-	system(("mplayer -vo null "+gui->path+"/s0/intro.avi &").c_str());
-	while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
-	{
-		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
-		gui->draw_screen();
-		cv::waitKey(1);
-		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
-		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
-		if(count<200)
-		{
-			cv::waitKey(200-count);
-		}
-	}
+//	system(("mplayer -vo null "+gui->path+"/s0/intro.avi &").c_str());
+//	while(gui->screen_vector[gui->actual_screen]->element_vector[0]->is_end==0)
+//	{
+//		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
+//		gui->draw_screen();
+//		cv::waitKey(1);
+//		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
+//		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
+//		if(count<FrameTime)
+//		{
+//			cv::waitKey(FrameTime-count);
+//		}
+//	}
 	gui->actual_screen = 1;
 
 while(1)
 {
 	std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
 	gui->draw_screen();
+
+	gui2->draw_screen();
 
 	char key=cv::waitKey(1);
 	if(key=='d')
@@ -244,6 +264,10 @@ while(1)
 	}
 	std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
 	auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
+	if(count<FrameTime)
+	{
+		//cv::waitKey(FrameTime-count);
+	}
 	//std::cout<<"fps: "<<1000/double(count)<<std::endl;
 }
 

@@ -13,7 +13,7 @@
 
 class GUI {
 public:
-	GUI(std::string data_path);
+	GUI(std::string data_path,std::string WindowName, int posX, int posY);
 	virtual ~GUI();
 
 	struct
@@ -37,6 +37,7 @@ private:
 	void parse(std::string path);
 	int x_res;
 	int y_res;
+	std::string WinName;
 };
 
 #endif /* GUI_H_ */

@@ -18,6 +18,8 @@ Video::Video(std::string path,int x, int y, std::string id, int width, int heigh
 
 	this->is_end=0;
 	this->id=id;
+
+	this->rectangle=rectangle;
 }
 
 Video::~Video() {
@@ -38,7 +40,10 @@ void Video::draw(cv::Mat bg)
 		this->is_end=1;
 		this->capture=cv::VideoCapture(this->path+".avi");
 	}
-	cv::rectangle(bg,cv::Point(this->x,this->y),cv::Point(this->x+this->width,this->y+this->height), cv::Scalar(0,0,0),10);
+	if(rectangle)
+	{
+		cv::rectangle(bg,cv::Point(this->x,this->y),cv::Point(this->x+this->width,this->y+this->height), cv::Scalar(0,0,0),10);
+	}
 }
 
 

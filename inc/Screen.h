@@ -24,7 +24,7 @@
 
 class Screen {
 public:
-	Screen(std::string data_path,int rex_x,int res_y);
+	Screen(std::string data_path,int rex_x,int res_y,std::string WindowName);
 	virtual ~Screen();
 
 	void add_button(std::string button_path, int x, int y, std::string id);
@@ -48,6 +48,7 @@ public:
 private:
 
 	std::string path;
+	std::string WinName;
 
 	int elements_num;
 	void draw_background();

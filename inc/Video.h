@@ -25,6 +25,7 @@ public:
 
 private:
 
+	bool rectangle;
 };
 
 #endif /* VIDEO_H_ */

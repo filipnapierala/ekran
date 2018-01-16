@@ -7,16 +7,18 @@
 
 #include "../inc/GUI.h"
 
-GUI::GUI(std::string data_path) {
+GUI::GUI(std::string data_path,std::string WindowName,int posX, int posY) {
 	parse(data_path+"/config/config.yml");
 	this->path=data_path+"/img/"+config.language;
 
 	system((data_path+"/scripts/config.sh").c_str());
 
 	this->actual_screen=-1;
+	this->WinName=WindowName;
 
-	cv::namedWindow("",CV_WINDOW_NORMAL);
-	cv::setWindowProperty("",CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
+	cv::namedWindow(this->WinName,CV_WINDOW_NORMAL);
+	cv::moveWindow(this->WinName,posX,posY);
+	cv::setWindowProperty(this->WinName,CV_WND_PROP_FULLSCREEN,CV_WINDOW_FULLSCREEN);
 }
 
 GUI::~GUI() {
@@ -46,7 +48,7 @@ void GUI::parse(std::string path)
 void GUI::add_screen()
 {
 	this->actual_screen++;
-	screen_vector.push_back(std::make_unique<Screen>(this->path+"/s"+std::to_string(this->actual_screen),this->x_res,this->y_res));
+	screen_vector.push_back(std::make_unique<Screen>(this->path+"/s"+std::to_string(this->actual_screen),this->x_res,this->y_res,this->WinName));
 }
 
 void GUI::delete_screen(int number)
