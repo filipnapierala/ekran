@@ -20,7 +20,7 @@ bool move = false;
 bool touch_flag = false;
 
 auto gui = std::make_unique<GUI>("./data/Screen1","1",0,0);
-auto gui2 = std::make_unique<GUI>("./data/Screen2","2",1280,800);
+auto gui2 = std::make_unique<GUI>("./data/Screen2","2",1280,0);
 
 Touch touch;
 
@@ -266,7 +266,7 @@ while(1)
 	auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
 	if(count<FrameTime)
 	{
-		//cv::waitKey(FrameTime-count);
+		cv::waitKey(FrameTime-count);
 	}
 	//std::cout<<"fps: "<<1000/double(count)<<std::endl;
 }
