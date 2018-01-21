@@ -59,6 +59,7 @@ int OpenPort(std::string port) {
 
 void SendFrame(std::string port)
 {
+	std::cout<<port<<std::endl;
 	int fd = OpenPort(port);
 	Initport(fd);
 	char buffer[21];

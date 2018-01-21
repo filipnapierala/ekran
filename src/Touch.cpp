@@ -81,16 +81,22 @@ int Screen3_callback(Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<Confi
 		gui->actual_screen = 1;
 		return 0;
 	} else if (touch.id == "on1") {
+		settings.blue=100;
 		SendFrame(config->config.usbPort);
 	} else if (touch.id == "off1") {
+		settings.blue=0;
 		SendFrame(config->config.usbPort);
 	} else if (touch.id == "on2") {
+		settings.red=100;
 		SendFrame(config->config.usbPort);
 	} else if (touch.id == "off2") {
+		settings.red=0;
 		SendFrame(config->config.usbPort);
 	} else if (touch.id == "on3") {
+		settings.fan=1;
 		SendFrame(config->config.usbPort);
 	} else if (touch.id == "off3") {
+		settings.fan=0;
 		SendFrame(config->config.usbPort);
 	}
 

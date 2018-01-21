@@ -22,7 +22,10 @@ void SendFrame(std::string port);
 
 struct
 {
-	int red, blue, fan, crio;
+	int red=0;
+	int blue=0;
+	int fan=0;
+	int crio=0;
 } settings;
 
 #endif /* UTILS_H_ */
