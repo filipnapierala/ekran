@@ -1,0 +1,30 @@
+/*
+ * ConfigReader.h
+ *
+ *  Created on: Jan 21, 2018
+ *      Author: robert
+ */
+
+#include <string>
+#include <opencv2/opencv.hpp>
+
+#ifndef CONFIGREADER_H_
+#define CONFIGREADER_H_
+
+class ConfigReader {
+public:
+	ConfigReader(std::string path);
+	virtual ~ConfigReader();
+
+	struct
+	{
+		std::string language;
+		std::string custom_program_path;
+		std::string usbPort;
+	} config;
+
+private:
+	void Parse(std::string path);
+};
+
+#endif /* CONFIGREADER_H_ */

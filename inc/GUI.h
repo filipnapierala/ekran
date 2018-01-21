@@ -16,13 +16,6 @@ public:
 	GUI(std::string data_path,std::string WindowName, int posX, int posY);
 	virtual ~GUI();
 
-	struct
-	{
-		std::string language;
-		std::string custom_program_path;
-		std::string usbPort;
-	} config;
-
 	std::string path;
 	int actual_screen;
 
@@ -34,7 +27,6 @@ public:
 	std::vector<std::unique_ptr<Screen>> screen_vector;
 
 private:
-	void parse(std::string path);
 	int x_res;
 	int y_res;
 	std::string WinName;

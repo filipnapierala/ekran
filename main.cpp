@@ -13,14 +13,17 @@
 
 #include "inc/Utils.h"
 #include "inc/Touch.h"
+#include "inc/ConfigReader.h"
 
 #define FrameTime 40
 
 bool move = false;
 bool touch_flag = false;
 
-auto gui1 = std::make_unique<GUI>("./data/Screen1","1",0,0);
-auto gui2 = std::make_unique<GUI>("./data/Screen2","2",1280,0);
+auto config = std::make_unique<ConfigReader>("./data/config/config.yml");
+
+auto gui1 = std::make_unique<GUI>("./data/Screen1/img/"+config->config.language,"1",0,0);
+auto gui2 = std::make_unique<GUI>("./data/Screen2/img/"+config->config.language,"2",1280,0);
 
 Touch touch;
 
@@ -204,6 +207,8 @@ void screen6() {
 }
 
 int main() {
+	system("./data/scripts/config.sh");
+
 	cv::setMouseCallback("1", touch_callback);
 
 	screen0();
@@ -238,7 +243,7 @@ while(1)
 	std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
 	gui1->draw_screen();
 
-	//gui2->draw_screen();
+	gui2->draw_screen();
 
 	char key=cv::waitKey(1);
 	if(key=='d')
@@ -258,7 +263,7 @@ while(1)
 	if(touch_flag==true)
 	{
 		touch_flag=false;
-		main_touch(touch,gui1);
+		main_touch(touch,gui1,config);
 	}
 	std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
 	auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();

@@ -7,39 +7,39 @@
 
 #include "../inc/Touch.h"
 
-int main_touch(Touch touch, std::unique_ptr<GUI>&gui) {
+int main_touch(Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 	int change = -1;
 	switch (touch.screen) {
 	case 0: {
-		change = Screen0_callback(touch, gui);
+		change = Screen0_callback(touch, gui, config);
 		break;
 	}
 	case 1: {
-		change = Screen1_callback(touch, gui);
+		change = Screen1_callback(touch, gui,config);
 		break;
 	}
 	case 2: {
-		change = Screen2_callback(touch, gui);
+		change = Screen2_callback(touch, gui,config);
 		break;
 	}
 	case 3: {
-		change = Screen3_callback(touch, gui);
+		change = Screen3_callback(touch, gui,config);
 		break;
 	}
 	case 4: {
-		change = Screen4_callback(touch, gui);
+		change = Screen4_callback(touch, gui,config);
 		break;
 	}
 	}
 	return change;
 }
 
-int Screen0_callback(Touch touch, std::unique_ptr<GUI>&gui) {
+int Screen0_callback(Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 	std::cout << touch.id << std::endl;
 	return 0;
 }
 
-int Screen1_callback(Touch touch, std::unique_ptr<GUI>&gui) {
+int Screen1_callback(Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 	if (touch.id == "diag") {
 		gui->actual_screen = 3;
 		return 0;
@@ -53,7 +53,7 @@ int Screen1_callback(Touch touch, std::unique_ptr<GUI>&gui) {
 	return -1;
 }
 
-int Screen2_callback(Touch touch, std::unique_ptr<GUI>&gui) {
+int Screen2_callback(Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 	if (touch.id == "ret" || touch.id == "start") {
 		gui->actual_screen = 1;
 		return 0;
@@ -76,77 +76,28 @@ int Screen2_callback(Touch touch, std::unique_ptr<GUI>&gui) {
 	return -1;
 }
 
-int Screen3_callback(Touch touch, std::unique_ptr<GUI>&gui) {
+int Screen3_callback(Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 	if (touch.id == "ret") {
 		gui->actual_screen = 1;
 		return 0;
 	} else if (touch.id == "on1") {
-		int fd = open_port(gui->config.usbPort);
-		std::cout << gui->config.usbPort;
-		initport(fd);
-		char buffer[21];
-
-		int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 100,
-				0, 0);
-		write(fd, buffer, length);
-
-		close(fd);
+		SendFrame(config->config.usbPort);
 	} else if (touch.id == "off1") {
-		int fd = open_port(gui->config.usbPort);
-		initport(fd);
-		char buffer[21];
-
-		int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 0, 0,
-				0);
-		write(fd, buffer, length);
-
-		close(fd);
+		SendFrame(config->config.usbPort);
 	} else if (touch.id == "on2") {
-		int fd = open_port(gui->config.usbPort);
-		initport(fd);
-		char buffer[21];
-
-		int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 100, 0,
-				0, 0);
-		write(fd, buffer, length);
-
-		close(fd);
+		SendFrame(config->config.usbPort);
 	} else if (touch.id == "off2") {
-		int fd = open_port(gui->config.usbPort);
-		initport(fd);
-		char buffer[21];
-
-		int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 0, 0,
-				0);
-		write(fd, buffer, length);
-
-		close(fd);
+		SendFrame(config->config.usbPort);
 	} else if (touch.id == "on3") {
-		int fd = open_port(gui->config.usbPort);
-		initport(fd);
-		char buffer[21];
-
-		int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 0, 1,
-				0);
-		write(fd, buffer, length);
-
-		close(fd);
+		SendFrame(config->config.usbPort);
 	} else if (touch.id == "off3") {
-		int fd = open_port(gui->config.usbPort);
-		initport(fd);
-		char buffer[21];
-
-		int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 0, 0,
-				0);
-		write(fd, buffer, length);
-
-		close(fd);
+		SendFrame(config->config.usbPort);
 	}
 
 	return -1;
 }
 
-int Screen4_callback(Touch touch, std::unique_ptr<GUI>&gui) {
+int Screen4_callback(Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 	if (touch.id == "ret") {
 		gui->actual_screen = 1;
 		return 0;

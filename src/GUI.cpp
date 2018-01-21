@@ -8,10 +8,7 @@
 #include "../inc/GUI.h"
 
 GUI::GUI(std::string data_path,std::string WindowName,int posX, int posY) {
-	parse(data_path+"/config/config.yml");
-	this->path=data_path+"/img/"+config.language;
-
-	system((data_path+"/scripts/config.sh").c_str());
+	this->path=data_path;
 
 	this->actual_screen=-1;
 	this->WinName=WindowName;
@@ -23,26 +20,6 @@ GUI::GUI(std::string data_path,std::string WindowName,int posX, int posY) {
 
 GUI::~GUI() {
 	// TODO Auto-generated destructor stub
-}
-
-void GUI::parse(std::string path)
-{
-	cv::FileStorage file(path,cv::FileStorage::READ);
-
-	if(!file["language"].empty())
-	{
-		file["language"]>>config.language;
-	}
-	if(!file["customProgram"].empty())
-	{
-		file["customProgram"]>>config.custom_program_path;
-	}
-	if(!file["usbPort"].empty())
-	{
-		file["usbPort"]>>config.usbPort;
-	}
-
-	file.release();
 }
 
 void GUI::add_screen()

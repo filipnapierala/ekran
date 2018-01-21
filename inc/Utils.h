@@ -15,7 +15,14 @@
 #include <termios.h>
 #include <iostream>
 
-int initport(int fd);
-int open_port(std::string port);
+int Initport(int fd);
+int OpenPort(std::string port);
+
+void SendFrame(std::string port);
+
+struct
+{
+	int red, blue, fan, crio;
+} settings;
 
 #endif /* UTILS_H_ */

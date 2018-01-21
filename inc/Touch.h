@@ -11,6 +11,7 @@
 #include <iostream>
 #include "../inc/GUI.h"
 #include "../inc/Utils.h"
+#include "../inc/ConfigReader.h"
 
 struct Touch
 {
@@ -21,11 +22,11 @@ struct Touch
 	int screen;
 };
 
-int main_touch(Touch touch,std::unique_ptr<GUI>&gui);
-int Screen0_callback(Touch touch,std::unique_ptr<GUI>&gui);
-int Screen1_callback(Touch touch,std::unique_ptr<GUI>&gui);
-int Screen2_callback(Touch touch,std::unique_ptr<GUI>&gui);
-int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui);
-int Screen4_callback(Touch touch,std::unique_ptr<GUI>&gui);
+int main_touch(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen0_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen1_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen2_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen4_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
 
 #endif /* TOUCH_H_ */

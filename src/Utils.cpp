@@ -12,7 +12,7 @@
 #include <iostream>
 #include "../inc/Utils.h"
 
-int initport(int fd) {
+int Initport(int fd) {
 	struct termios options;
 	// Get the current options for the port...
 	tcgetattr(fd, &options);
@@ -45,7 +45,7 @@ int initport(int fd) {
 	return 1;
 }
 
-int open_port(std::string port) {
+int OpenPort(std::string port) {
 
 	int fd = open(port.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
 	if (fd == -1) {
@@ -55,4 +55,17 @@ int open_port(std::string port) {
 		fcntl(fd, F_SETFL, 0);
 
 	return (fd);
+}
+
+void SendFrame(std::string port)
+{
+	int fd = OpenPort(port);
+	Initport(fd);
+	char buffer[21];
+
+	int length = sprintf(buffer,"NASTAWA%03d:%03d:%01d:%01d\r\n", settings.blue, settings.red, settings.fan,
+			settings.crio);
+	write(fd, buffer, length);
+
+	close(fd);
 }

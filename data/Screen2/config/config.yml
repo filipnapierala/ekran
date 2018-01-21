@@ -1,4 +1,0 @@
-%YAML:1.0
-language: 'eng'
-customProgram: '...'
-usbPort: '/dev/ttyUSB0'
