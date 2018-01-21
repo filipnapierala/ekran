@@ -22,11 +22,11 @@ struct Touch
 	int screen;
 };
 
-int main_touch(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
-int Screen0_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
-int Screen1_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
-int Screen2_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
-int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
-int Screen4_callback(Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int main_touch(Settings settings, Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen0_callback(Settings settings,Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen1_callback(Settings settings,Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen2_callback(Settings settings,Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen3_callback(Settings settings,Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
+int Screen4_callback(Settings settings,Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
 
 #endif /* TOUCH_H_ */
