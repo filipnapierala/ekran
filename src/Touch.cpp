@@ -83,13 +83,13 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 
 		return 0;
 	} else if (touch.id == "on1") {
-		control->blue=100;
-	} else if (touch.id == "off1") {
-		control->blue=0;
-	} else if (touch.id == "on2") {
 		control->red=100;
-	} else if (touch.id == "off2") {
+	} else if (touch.id == "off1") {
 		control->red=0;
+	} else if (touch.id == "on2") {
+		control->blue=100;
+	} else if (touch.id == "off2") {
+		control->blue=0;
 	} else if (touch.id == "on3") {
 		control->fan=1;
 	} else if (touch.id == "off3") {
