@@ -58,15 +58,14 @@ int OpenPort(std::string port) {
 }
 
 
-void SendFrame(std::string port,Settings settings)
+void SendFrame(std::string port,int red,int blue,int fan,int crio)
 {
 	std::cout<<port<<std::endl;
 	int fd = OpenPort(port);
 	Initport(fd);
 	char buffer[21];
 
-	int length = sprintf(buffer,"NASTAWA%03d:%03d:%01d:%01d\r\n", settings.blue, settings.red, settings.fan,
-			settings.crio);
+	int length = sprintf(buffer,"NASTAWA%03d:%03d:%01d:%01d\r\n", red,blue,fan,crio);
 	write(fd, buffer, length);
 	std::cout<<buffer<<std::endl;
 

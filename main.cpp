@@ -14,6 +14,7 @@
 #include "inc/Utils.h"
 #include "inc/Touch.h"
 #include "inc/ConfigReader.h"
+#include "inc/Control.h"
 
 #define FrameTime 40
 
@@ -21,12 +22,12 @@ bool move = false;
 bool touch_flag = false;
 
 auto config = std::make_unique<ConfigReader>("./data/config/config.yml");
+auto control = std::make_unique<Control>();
 
 auto gui1 = std::make_unique<GUI>("./data/Screen1/img/"+config->config.language,"1",0,0);
 auto gui2 = std::make_unique<GUI>("./data/Screen2/img/"+config->config.language,"2",1280,0);
 
 Touch touch;
-Settings settings;
 
 void touch_callback(int event, int x, int y, int flags, void*) {
 	if (event == 1) {
@@ -264,7 +265,7 @@ while(1)
 	if(touch_flag==true)
 	{
 		touch_flag=false;
-		main_touch(settings,touch,gui1,config);
+		main_touch(control,touch,gui1,config);
 	}
 	std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
 	auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
