@@ -106,13 +106,10 @@ int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui)
 		initport(fd);
 		char buffer[20];
 
-		for(int i=0;i<101;i++)
-		{
-			int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 90, i,
-					0, 1);
+			int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 100,
+					0, 0);
 			write(fd, buffer, length);
-			usleep(10000);
-		}
+
 
 		close(fd);
 	}
@@ -122,16 +119,60 @@ int Screen3_callback(Touch touch,std::unique_ptr<GUI>&gui)
 		initport(fd);
 		char buffer[20];
 
-		for(int i=100;i>=0;--i)
-		{
-			int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 90, i,
-					0, 1);
+			int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 0,
+					0, 0);
 			write(fd, buffer, length);
-			usleep(10000);
-		}
 
 		close(fd);
 	}
+	else if(touch.id=="on2")
+	{
+		int fd = open_port(gui->config.usbPort);
+		initport(fd);
+		char buffer[20];
+
+			int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 100, 0,
+					0, 0);
+			write(fd, buffer, length);
+
+		close(fd);
+	}
+	else if(touch.id=="off2")
+	{
+		int fd = open_port(gui->config.usbPort);
+		initport(fd);
+		char buffer[20];
+
+			int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 0,
+					0, 0);
+			write(fd, buffer, length);
+
+		close(fd);
+	}
+	else if(touch.id=="on3")
+		{
+			int fd = open_port(gui->config.usbPort);
+			initport(fd);
+			char buffer[20];
+
+				int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 0,
+						1, 0);
+				write(fd, buffer, length);
+
+			close(fd);
+		}
+	else if(touch.id=="off3")
+		{
+			int fd = open_port(gui->config.usbPort);
+			initport(fd);
+			char buffer[20];
+
+				int length = sprintf(buffer, "NASTAWA%03d:%03d:%01d:%01d\r\n", 0, 0,
+						0, 0);
+				write(fd, buffer, length);
+
+			close(fd);
+		}
 
 	return -1;
 }
