@@ -30,7 +30,7 @@ public:
 	void add_button(std::string button_path, int x, int y, std::string id);
 	void add_trackbar(std::string radial_path,std::string slider_path,
 			int x, int y, int maxValue,std::string id);
-	void add_video(std::string video_path, int x, int y,std::string id, int res_x=X, int res_y=Y);
+	void add_video(std::string video_path, int x, int y,std::string id, int res_x=X, int res_y=Y, bool rectangle=false);
 	void add_image(std::string image_path,int x, int y, std::string id);
 
 	void Draw();

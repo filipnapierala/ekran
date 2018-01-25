@@ -61,9 +61,9 @@ void Screen::add_trackbar(std::string radial_path,std::string slider_path, int x
 	this->element_vector.push_back(std::make_unique<TrackBar>(this->path+radial_path, this->path+slider_path, x, y, maxValue, id));
 }
 
-void Screen::add_video(std::string video_path, int x, int y,std::string id, int res_x, int res_y)
+void Screen::add_video(std::string video_path, int x, int y,std::string id, int res_x, int res_y,bool rectangle)
 {
-	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y,id,res_x,res_y));
+	this->element_vector.push_back(std::make_unique<Video>(this->path+video_path,x,y,id,res_x,res_y,rectangle));
 }
 
 std::string Screen::touch_callback(int x, int y, int& n)

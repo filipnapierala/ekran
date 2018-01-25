@@ -27,6 +27,8 @@ public:
 
 	void copy_transparent(cv::Mat img, cv::Mat bg, int x_offset=0, int y_offset=0);
 	void draw_boundingBox(cv::Mat bg);
+
+	bool rectangle;
 };
 
 #endif /* ELEMENT_H_ */

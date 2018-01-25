@@ -58,6 +58,8 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 		if (touch.id == " ") {
 			gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n_1]->pushed =
 					false;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed =
+					false;
 		} else if (touch.id != " ") {
 			gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed =
 					!gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed;
@@ -98,7 +100,7 @@ void screen1() {
 	gui1->screen_vector[gui1->actual_screen]->add_image("/pr", x + 145, 480,
 			"pr");
 
-	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 600, 100, "video", 640, 360);
+	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 600, 100, "video", 640, 360, true);
 }
 
 void screen2() {
@@ -243,9 +245,9 @@ int main() {
 while(1)
 {
 	std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
-	gui1->draw_screen();
-
 	gui2->draw_screen();
+
+	gui1->draw_screen();
 
 	char key=cv::waitKey(1);
 	if(key=='d')
