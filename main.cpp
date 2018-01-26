@@ -225,22 +225,25 @@ int main() {
 	screen6();
 
 	gui1->actual_screen = 0;
+	gui2->actual_screen = 0;
 
 	//comment to disable intro
-//	system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
-//	while(gui1->screen_vector[gui1->actual_screen]->element_vector[0]->is_end==0)
-//	{
-//		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
-//		gui1->draw_screen();
-//		cv::waitKey(1);
-//		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
-//		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
-//		if(count<FrameTime)
-//		{
-//			cv::waitKey(FrameTime-count);
-//		}
-//	}
+	system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
+	while(gui1->screen_vector[gui1->actual_screen]->element_vector[0]->is_end==0)
+	{
+		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
+		gui1->draw_screen();
+		gui2->draw_screen();
+		cv::waitKey(1);
+		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
+		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
+		if(count<FrameTime)
+		{
+			cv::waitKey(FrameTime-count);
+		}
+	}
 	gui1->actual_screen = 1;
+	gui2->actual_screen = 1;
 
 while(1)
 {

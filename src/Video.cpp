@@ -13,7 +13,7 @@ Video::Video(std::string path,int x, int y, std::string id, int width, int heigh
 	this->path=path;
 	this->capture=cv::VideoCapture(this->path+".avi");
 
-	capture.set(CV_CAP_PROP_POS_FRAMES,2000);
+	//capture.set(CV_CAP_PROP_POS_FRAMES,2000);
 
 	this->width=width;
 	this->height=height;
