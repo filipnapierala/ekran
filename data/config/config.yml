@@ -1,4 +1,4 @@
 %YAML:1.0
 language: 'eng'
-customProgram: '...'
+customProgram: './data/programs/'
 usbPort: '/dev/ttyACM0'

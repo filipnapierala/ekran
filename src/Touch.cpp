@@ -79,7 +79,11 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 	if (touch.id == "ret") {
 		gui->actual_screen = 1;
-		SendFrame(config->config.usbPort,0,0,0,0);
+		SendFrame(config->config.usbPort,0,0,0,0,5);
+		control->red=0;
+		control->blue=0;
+		control->fan=0;
+		control->crio=0;
 
 		return 0;
 	} else if (touch.id == "on1") {
@@ -94,8 +98,11 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		control->fan=1;
 	} else if (touch.id == "off3") {
 		control->fan=0;
+	} else if (touch.id == "push") {
+		control->crio=1;
 	}
-	SendFrame(config->config.usbPort,control->blue,control->red,control->fan,control->crio);
+	SendFrame(config->config.usbPort,control->blue,control->red,control->fan,control->crio,5);
+	control->crio=0;
 
 	return -1;
 }

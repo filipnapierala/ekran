@@ -15,8 +15,10 @@
 #include "inc/Touch.h"
 #include "inc/ConfigReader.h"
 #include "inc/Control.h"
+#include "inc/Programs.h"
 
 #define FrameTime 40
+//#define intro
 
 bool move = false;
 bool touch_flag = false;
@@ -24,12 +26,14 @@ bool touch_flag = false;
 auto config = std::make_unique<ConfigReader>("./data/config/config.yml");
 auto control = std::make_unique<Control>();
 
-auto gui1 = std::make_unique<GUI>("./data/Screen1/img/"+config->config.language,"1",0,0);
 auto gui2 = std::make_unique<GUI>("./data/Screen2/img/"+config->config.language,"2",1280,0);
+auto gui1 = std::make_unique<GUI>("./data/Screen1/img/"+config->config.language,"1",0,0);
+
 
 Touch touch;
 
 void touch_callback(int event, int x, int y, int flags, void*) {
+
 	if (event == 1) {
 		touch.n_1 = touch.n;
 		touch.id = gui1->screen_vector[gui1->actual_screen]->touch_callback(x, y,
@@ -42,7 +46,7 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 
 		if (touch.id != " ") {
 			gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed =
-					!gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed;
+					true;
 		}
 	}
 	if (event == 4) {
@@ -55,14 +59,12 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 		touch.event = event;
 		touch.screen = gui1->actual_screen;
 
-		if (touch.id == " ") {
-			gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n_1]->pushed =
-					false;
-			gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed =
-					false;
-		} else if (touch.id != " ") {
-			gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed =
-					!gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed;
+        gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n_1]->pushed =
+                false;
+        gui1->screen_vector[gui1->actual_screen]->element_vector[touch.n]->pushed =
+                false;
+
+     if (touch.id != " ") {
 			touch_flag = true;
 		}
 	}
@@ -227,6 +229,7 @@ int main() {
 	gui1->actual_screen = 0;
 	gui2->actual_screen = 0;
 
+#ifdef intro
 	//comment to disable intro
 	system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
 	while(gui1->screen_vector[gui1->actual_screen]->element_vector[0]->is_end==0)
@@ -242,8 +245,12 @@ int main() {
 			cv::waitKey(FrameTime-count);
 		}
 	}
+#endif
 	gui1->actual_screen = 1;
 	gui2->actual_screen = 1;
+
+	auto programs = std::make_unique<Programs>();
+	programs->SetProgram(config->config.custom_program_path+"crio");
 
 while(1)
 {
@@ -278,6 +285,7 @@ while(1)
 	{
 		cv::waitKey(FrameTime-count);
 	}
+	programs->Refresh();
 	//std::cout<<"fps: "<<1000/double(count)<<std::endl;
 }
 
