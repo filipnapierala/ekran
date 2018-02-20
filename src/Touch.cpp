@@ -50,14 +50,28 @@ int Screen1_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		gui->actual_screen = 4;
 		return 0;
 	}
+	else if (touch.id == "hot") {
+		gui->screen_vector[1]->trackbarChangeValue(1,10);
+		return 0;
+	}
+	else if (touch.id == "crio") {
+		gui->screen_vector[1]->trackbarChangeValue(0,10);
+		return 0;
+	}
 	return -1;
 }
 
 int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
-	if (touch.id == "ret" || touch.id == "start") {
+	if (touch.id == "ret") {
 		gui->actual_screen = 1;
 		return 0;
-	} else if (touch.id == "plus1") {
+	}
+	else if (touch.id == "start") {
+		gui->actual_screen = 1;
+		gui->screen_vector[1]->trackbarChangeValue(2,10);
+		return 0;
+	}
+	else if (touch.id == "plus1") {
 		gui->screen_vector[gui->actual_screen]->element_vector[8]->changeValue(
 				1, 1);
 		;
@@ -112,7 +126,7 @@ int Screen4_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		gui->actual_screen = 1;
 		return 0;
 	} else {
-		gui->screen_vector[1]->change_value(10);
+		gui->screen_vector[1]->trackbarChangeValue(3,10);
 		gui->actual_screen = 1;
 		return 0;
 	}

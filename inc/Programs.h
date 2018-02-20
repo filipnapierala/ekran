@@ -10,6 +10,8 @@
 #include <chrono>
 #include <iostream>
 #include <fstream>
+#include <thread>
+
 
 class Programs {
 
@@ -19,7 +21,8 @@ public:
     virtual ~Programs();
 
     std::string ProgramName;
-    int ActualTime,OverallTime;
+    int ActualTime;
+    bool isEnd;
     int Refresh();
     void SetProgram(std::string path);
     void Stop();

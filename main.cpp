@@ -25,6 +25,8 @@ bool touch_flag = false;
 
 auto config = std::make_unique<ConfigReader>("./data/config/config.yml");
 auto control = std::make_unique<Control>();
+auto programs = std::make_unique<Programs>();
+
 
 auto gui2 = std::make_unique<GUI>("./data/Screen2/img/"+config->config.language,"2",1280,0);
 auto gui1 = std::make_unique<GUI>("./data/Screen1/img/"+config->config.language,"1",0,0);
@@ -212,8 +214,21 @@ void screen6() {
 	gui2->screen_vector[gui2->actual_screen]->add_video("/vid", 0, 0, "video", 1280, 800);
 }
 
+void ProgramTimer()
+{
+    for(;;)
+    {
+        std::this_thread::sleep_for(std::chrono::seconds(programs->ActualTime));
+        if(programs->isEnd==false) {
+            programs->Refresh();
+        }
+    }
+}
+
 int main() {
-	system("./data/scripts/config.sh");
+
+
+    system("./data/scripts/config.sh");
 
 	cv::setMouseCallback("1", touch_callback);
 
@@ -249,8 +264,9 @@ int main() {
 	gui1->actual_screen = 1;
 	gui2->actual_screen = 1;
 
-	auto programs = std::make_unique<Programs>();
-	programs->SetProgram(config->config.custom_program_path+"crio");
+    programs->SetProgram(config->config.custom_program_path+"crio");
+
+    std::thread(ProgramTimer).detach();
 
 while(1)
 {
@@ -285,7 +301,6 @@ while(1)
 	{
 		cv::waitKey(FrameTime-count);
 	}
-	programs->Refresh();
 	//std::cout<<"fps: "<<1000/double(count)<<std::endl;
 }
 

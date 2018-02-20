@@ -42,7 +42,7 @@ void Image::draw(cv::Mat bg)
 
 void Image::changeValue(int x, int y)
 {
-
+	this->state=x;
 }
 
 void Image::changeState()
