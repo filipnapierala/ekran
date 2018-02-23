@@ -32,6 +32,19 @@ void ConfigReader::Parse(std::string path)
 	{
 		file["usbPort"]>>config.usbPort;
 	}
+	if(!file["criovolume"].empty())
+	{
+		file["criovolume"]>>config.crioVolume;
+	}
+	file.release();
+}
 
+void ConfigReader::saveCrio(int number,std::string path)
+{
+	cv::FileStorage file(path,cv::FileStorage::APPEND);
+	if(!file["criovolume"].empty())
+	{
+		//file<<"criovolume"<<number;
+	}
 	file.release();
 }

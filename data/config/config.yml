@@ -2,3 +2,4 @@
 language: 'eng'
 customProgram: './data/programs/'
 usbPort: '/dev/ttyACM0'
+criovolume: 5

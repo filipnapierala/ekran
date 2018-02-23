@@ -55,7 +55,7 @@ int Screen1_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		return 0;
 	}
 	else if (touch.id == "crio") {
-		gui->screen_vector[1]->trackbarChangeValue(0,10);
+		gui->screen_vector[1]->trackbarChangeValue(4,10);
 		return 0;
 	}
 	return -1;

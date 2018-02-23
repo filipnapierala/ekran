@@ -21,7 +21,10 @@ public:
 		std::string language;
 		std::string custom_program_path;
 		std::string usbPort;
+		int crioVolume;
 	} config;
+
+	void saveCrio(int number,std::string path);
 
 private:
 	void Parse(std::string path);
