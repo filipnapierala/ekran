@@ -7,6 +7,7 @@
 
 #include <string>
 #include <opencv2/opencv.hpp>
+#include <fstream>
 
 #ifndef CONFIGREADER_H_
 #define CONFIGREADER_H_
@@ -15,6 +16,8 @@ class ConfigReader {
 public:
 	ConfigReader(std::string path);
 	virtual ~ConfigReader();
+
+	std::string crioPath;
 
 	struct
 	{

@@ -16,7 +16,7 @@ public:
 	Element();
 	virtual ~Element();
 
-	int resize, x, y, width, height, is_end;
+	int resize, x, y, width, height, is_end, pause;
 	bool pushed;
 
 	std::string id;

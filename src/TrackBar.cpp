@@ -47,8 +47,7 @@ void TrackBar::changeState()
 
 void TrackBar::changeValue(int x, int y)
 {
-	this->value+=10;
-	//this->value=float((float(x)-float(this->x))/float(this->width))*this->maxValue;
-	this->value=std::min(std::max(this->value,0),255);
+	this->value=x;
+	this->value=std::min(std::max(this->value,0),100);
 }
 

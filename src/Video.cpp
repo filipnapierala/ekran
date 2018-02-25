@@ -13,8 +13,6 @@ Video::Video(std::string path,int x, int y, std::string id, int width, int heigh
 	this->path=path;
 	this->capture=cv::VideoCapture(this->path+".avi");
 
-	//capture.set(CV_CAP_PROP_POS_FRAMES,2000);
-
 	this->width=width;
 	this->height=height;
 
@@ -22,6 +20,7 @@ Video::Video(std::string path,int x, int y, std::string id, int width, int heigh
 	this->id=id;
 
 	this->rectangle=rectangle;
+    this->pause=1;
 }
 
 Video::~Video() {
@@ -31,7 +30,12 @@ Video::~Video() {
 void Video::draw(cv::Mat bg)
 {
 	cv::Mat frame;
-	this->capture>>frame;
+    if(this->pause==1) {
+		this->capture.set(CV_CAP_PROP_POS_FRAMES,0);
+    }
+
+	this->capture >> frame;
+
 	if(frame.cols!=0)
 	{
 		cv::resize(frame,frame,cv::Size(this->width,this->height),0,0,CV_INTER_CUBIC);
@@ -51,7 +55,8 @@ void Video::draw(cv::Mat bg)
 
 void Video::changeValue(int x, int y)
 {
-
+	this->pause=x;
+	this->capture.set(CV_CAP_PROP_POS_FRAMES,0);
 }
 
 void Video::changeState()

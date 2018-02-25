@@ -9,7 +9,8 @@
 
 ConfigReader::ConfigReader(std::string path) {
 	// TODO Auto-generated constructor stub
-	this->Parse(path);
+	this->crioPath=path+"/usedCrio";
+	this->Parse(path+"/config.yml");
 }
 
 ConfigReader::~ConfigReader() {
@@ -35,6 +36,15 @@ void ConfigReader::Parse(std::string path)
 	if(!file["criovolume"].empty())
 	{
 		file["criovolume"]>>config.crioVolume;
+
+		std::fstream file;
+		file.open(this->crioPath);
+
+		std::string number;
+		getline(file,number);
+
+		config.crioVolume-=std::stoi(number);
+		file.close();
 	}
 	file.release();
 }

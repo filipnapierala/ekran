@@ -88,6 +88,16 @@ void Screen::trackbarChangeValue(int x,int element)
 	this->element_vector[element]->changeValue(x,1);
 }
 
+void Screen::VideoStart(int element)
+{
+	this->element_vector[element]->changeValue(0,0);
+}
+
+void Screen::VideoStop(int element)
+{
+	this->element_vector[element]->changeValue(1,0);
+}
+
 void Screen::change_value(int element)
 {
 	this->element_vector[element]->changeState();

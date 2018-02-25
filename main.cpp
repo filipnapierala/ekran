@@ -20,22 +20,16 @@
 #define FrameTime 40
 //#define intro
 
-bool move = false;
 bool touch_flag = false;
 
 bool fan=false;
-int ActualTime=600;
 
-int crioFlag=10;
-
-auto config = std::make_unique<ConfigReader>("./data/config/config.yml");
+auto config = std::make_unique<ConfigReader>("./data/config");
 auto control = std::make_unique<Control>();
-auto programs = std::make_unique<Programs>();
-
+auto programs = std::make_unique<Programs>(config->config.custom_program_path);
 
 auto gui2 = std::make_unique<GUI>("./data/Screen2/img/"+config->config.language,"2",1280,0);
 auto gui1 = std::make_unique<GUI>("./data/Screen1/img/"+config->config.language,"1",0,0);
-
 
 Touch touch;
 
@@ -135,11 +129,11 @@ void screen2() {
 			"plus3");
 
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y - 80, 255, "trackbar1");
+			y - 80, 100, "trackbar1");
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y - 10, 255, "trackbar2");
+			y - 10, 100, "trackbar2");
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y + 60, 255, "trackbar3");
+			y + 60, 100, "trackbar3");
 
 	gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 85,
 			"hot");
@@ -253,26 +247,31 @@ void setClock(int seconds)
     gui2->screen_vector[1]->trackbarChangeValue(secondsUnit,7);
 }
 
-void Clock()
+int Clock()
 {
     for(;;) {
+
         std::this_thread::sleep_for(std::chrono::seconds(1));
-        ActualTime--;
-        setClock(ActualTime);
-        crioFlag--;
-    }
+        if(programs->isEnd==false) {
+            if(programs->OverallTime>0) {
+                programs->OverallTime--;
+                setClock(programs->OverallTime);
+            }
+        }
+        }
+        //crioFlag--;
 }
 
-void ProgramTimer()
+int ProgramTimer()
 {
     for(;;)
     {
+
         std::this_thread::sleep_for(std::chrono::seconds(programs->ActualTime-2));
 
         if(programs->signals.redFuture==true)
         {
             gui2->screen_vector[1]->trackbarChangeValue(1,2);
-
         }
         if(programs->signals.blueFuture==true)
         {
@@ -346,12 +345,14 @@ int main() {
 	gui1->actual_screen = 1;
 	gui2->actual_screen = 1;
 
-    programs->SetProgram(config->config.custom_program_path+"crio");
-
+    //config->saveCrio(44,"./data/config/config.yml");
     std::thread(ProgramTimer).detach();
     std::thread(Clock).detach();
 
-    //config->saveCrio(44,"./data/config/config.yml");
+    if(config->config.crioVolume<0)
+    {
+        gui1->screen_vector[1]->trackbarChangeValue(1,6);
+    }
 
     while(1)
 {
@@ -378,12 +379,41 @@ int main() {
 	if(touch_flag==true)
 	{
 		touch_flag=false;
-		main_touch(control,touch,gui1,config);
+		int signal=main_touch(control,touch,gui1,config);
+
+        if(signal==12)
+        {
+            gui1->screen_vector[1]->trackbarChangeValue(0,8);
+            gui1->screen_vector[1]->trackbarChangeValue(0,9);
+
+            gui2->screen_vector[1]->trackbarChangeValue(0,1);
+            gui2->screen_vector[1]->trackbarChangeValue(0,2);
+
+            gui1->screen_vector[1]->trackbarChangeValue(0,10);
+
+            fan=false;
+            programs->isEnd=true;
+        }
+
+        if((signal>=1&&signal<=11)&&gui1->enable==true)
+        {
+            gui1->enable=false;
+            programs->SetProgramID(signal);
+            gui1->screen_vector[1]->VideoStart(11);
+            gui2->screen_vector[1]->VideoStart(0);
+        }
 	}
-    if(crioFlag<=0)
-    {
-        gui1->screen_vector[1]->trackbarChangeValue(1,6);
+
+    if(programs->isEnd==true){
+        gui1->enable=true;
+        programs->Stop();
+
+        gui1->screen_vector[1]->VideoStop(11);
+        gui2->screen_vector[1]->VideoStop(0);
+
+        gui1->screen_vector[1]->trackbarChangeValue(0,10);
     }
+
 	std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
 	auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
 	if(count<FrameTime)

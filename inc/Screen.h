@@ -38,6 +38,8 @@ public:
 	std::string touch_callback(int x, int y, int& n);
 
 	void trackbarChangeValue(int x,int element);
+	void VideoStart(int element);
+	void VideoStop(int element);
 
 	void change_value(int element);
 

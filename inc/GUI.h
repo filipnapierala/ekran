@@ -18,6 +18,7 @@ public:
 
 	std::string path;
 	int actual_screen;
+	bool enable;
 
 	void add_screen();
 	void delete_screen(int number);

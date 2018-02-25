@@ -20,6 +20,7 @@ public:
 	void changeValue(int x, int y);
 	void changeValue(int value);
 
+
 	bool pushed;
 
 private:

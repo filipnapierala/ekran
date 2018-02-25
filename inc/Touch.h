@@ -9,6 +9,7 @@
 #define TOUCH_H_
 
 #include <iostream>
+#include <fstream>
 #include "../inc/GUI.h"
 #include "../inc/Utils.h"
 #include "../inc/ConfigReader.h"

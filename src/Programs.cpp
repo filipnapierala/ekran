@@ -4,8 +4,9 @@
 
 #include "../inc/Programs.h"
 
-Programs::Programs()
+Programs::Programs(std::string path)
 {
+    this->path=path;
     this->isEnd=true;
     this->ActualTime=1;
 
@@ -75,8 +76,17 @@ void Programs::SetProgram(std::string path)
 }
 void Programs::Stop()
 {
+    this->isEnd=true;
+    this->file.close();
+    this->OverallTime=0;
+    this->ActualTime=1;
 
+    this->actualCommand="";
+    this->futureCommand="";
+
+    this->ClearSignals();
 }
+
 void Programs::Start() {
 
 }
@@ -119,4 +129,68 @@ void Programs::Parse()
     }
 
     std::cout<<this->signals.redActual<<","<<this->signals.blueActual<<","<<this->signals.fan<<","<<this->signals.redFuture<<","<<this->signals.blueFuture<<std::endl;
+}
+
+void Programs::SetProgramID(int ID)
+{
+    switch(ID)
+    {
+        case 1:
+        {
+            this->actualProgram=this->path+"hot";
+            break;
+        }
+        case 2:
+        {
+            this->actualProgram=this->path+"crio";
+            break;
+        }
+        case 3:
+        {
+            this->actualProgram=this->path+"manual";
+            break;
+        }
+        case 4:
+        {
+            this->actualProgram=this->path+"pr1";
+            break;
+        }
+        case 5:
+        {
+            this->actualProgram=this->path+"pr2";
+            break;
+        }
+        case 6:
+        {
+            this->actualProgram=this->path+"pr3";
+            break;
+        }
+        case 7:
+        {
+            this->actualProgram=this->path+"pr4";
+            break;
+        }
+        case 8:
+        {
+            this->actualProgram=this->path+"pr5";
+            break;
+        }
+        case 9:
+        {
+            this->actualProgram=this->path+"pr6";
+            break;
+        }
+        case 10:
+        {
+            this->actualProgram=this->path+"pr7";
+            break;
+        }
+        case 11:
+        {
+            this->actualProgram=this->path+"pr8";
+            break;
+        }
+    }
+    this->file.close();
+    this->SetProgram(this->actualProgram);
 }

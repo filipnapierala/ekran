@@ -17,14 +17,15 @@ class Programs {
 
 public:
 
-    Programs();
+    Programs(std::string path);
     virtual ~Programs();
 
     std::string ProgramName;
     int ActualTime, FutureTime, OverallTime;
     bool isEnd;
     int Refresh();
-    void SetProgram(std::string path);
+
+    void SetProgramID(int ID);
     void Stop();
     void Start();
 
@@ -43,10 +44,12 @@ private:
     void Parse();
     void Send();
     void ClearSignals();
+    void SetProgram(std::string path);
 
     std::fstream file;
     std::chrono::steady_clock::time_point start,stop;
-    std::string actualCommand, futureCommand;
+    std::string actualCommand, futureCommand, actualProgram;
+    std::string path;
 };
 
 

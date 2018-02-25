@@ -11,6 +11,7 @@ GUI::GUI(std::string data_path,std::string WindowName,int posX, int posY) {
 	this->path=data_path;
 
 	this->actual_screen=-1;
+	this->enable=true;
 	this->WinName=WindowName;
 
 	cv::namedWindow(this->WinName,CV_WINDOW_NORMAL);
