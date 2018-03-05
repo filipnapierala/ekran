@@ -27,7 +27,8 @@ public:
 		int crioVolume;
 	} config;
 
-	void saveCrio(int number,std::string path);
+    void increaseCrio();
+	void resetCrio();
 
 private:
 	void Parse(std::string path);

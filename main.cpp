@@ -18,7 +18,7 @@
 #include "inc/Programs.h"
 
 #define FrameTime 40
-#define intro
+//#define intro
 
 bool touch_flag = false;
 
@@ -165,6 +165,9 @@ void screen3() {
 			"off3");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/push", x + 150, y - 13,
 			"push");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/reset", 1180, 700,
+			"reset");
+
 #undef y
 #define y 400
 	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", x - 225, y - 262,
@@ -175,6 +178,8 @@ void screen3() {
 			"fan");
 	gui1->screen_vector[gui1->actual_screen]->add_image("/crio", x + 175, y + 138,
 			"crio");
+
+
 }
 
 void screen4() {
@@ -228,10 +233,9 @@ void screen6() {
                                                         "digit4");
 }
 
-void setClock(int seconds)
+void setClock(int seconds, std::unique_ptr<GUI>&gui )
 {
-    int minutesDecimal,minutesUnit;
-    int secondsDecimal,secondsUnit;
+    int minutesDecimal, minutesUnit, secondsDecimal, secondsUnit;
 
     minutesDecimal=(seconds/60)/10;
     minutesUnit=(seconds/60)%10;
@@ -241,13 +245,13 @@ void setClock(int seconds)
 
     std::cout<<secondsDecimal;
 
-    gui2->screen_vector[1]->trackbarChangeValue(minutesDecimal,3);
-    gui2->screen_vector[1]->trackbarChangeValue(minutesUnit,4);
-    gui2->screen_vector[1]->trackbarChangeValue(secondsDecimal,6);
-    gui2->screen_vector[1]->trackbarChangeValue(secondsUnit,7);
+	gui->screen_vector[1]->setImage(minutesDecimal,3);
+	gui->screen_vector[1]->setImage(minutesUnit,4);
+	gui->screen_vector[1]->setImage(secondsDecimal,6);
+	gui->screen_vector[1]->setImage(secondsUnit,7);
 }
 
-int Clock()
+void Clock()
 {
     for(;;) {
 
@@ -255,14 +259,13 @@ int Clock()
         if(programs->isEnd==false) {
             if(programs->OverallTime>0) {
                 programs->OverallTime--;
-                setClock(programs->OverallTime);
+                setClock(programs->OverallTime,gui2);
             }
         }
         }
-        //crioFlag--;
 }
 
-int ProgramTimer()
+void ProgramTimer()
 {
     for(;;)
     {
@@ -271,33 +274,31 @@ int ProgramTimer()
 
         if(programs->signals.redFuture==true)
         {
-            gui2->screen_vector[1]->trackbarChangeValue(1,2);
+            gui2->screen_vector[1]->setImage(1,2);
         }
         if(programs->signals.blueFuture==true)
         {
-            gui2->screen_vector[1]->trackbarChangeValue(1,1);
+            gui2->screen_vector[1]->setImage(1,1);
         }
 
         std::this_thread::sleep_for(std::chrono::seconds(2));
         if(programs->isEnd==false) {
             programs->Refresh();
 
-            gui1->screen_vector[1]->trackbarChangeValue(0,8);
-            gui1->screen_vector[1]->trackbarChangeValue(0,9);
+            gui1->screen_vector[1]->setImage(0,8);
+            gui1->screen_vector[1]->setImage(0,9);
 
-            gui2->screen_vector[1]->trackbarChangeValue(0,1);
-            gui2->screen_vector[1]->trackbarChangeValue(0,2);
+            gui2->screen_vector[1]->setImage(0,1);
+            gui2->screen_vector[1]->setImage(0,2);
             fan=false;
-
 
             if(programs->signals.redActual==true)
             {
-                gui1->screen_vector[1]->trackbarChangeValue(1,8);
-
+                gui1->screen_vector[1]->setImage(1,8);
             }
             if(programs->signals.blueActual==true)
             {
-                gui1->screen_vector[1]->trackbarChangeValue(1,9);
+                gui1->screen_vector[1]->setImage(1,9);
             }
             if(programs->signals.fan==true)
             {
@@ -347,13 +348,12 @@ int main() {
 	gui1->actual_screen = 1;
 	gui2->actual_screen = 1;
 
-    //config->saveCrio(44,"./data/config/config.yml");
     std::thread(ProgramTimer).detach();
     std::thread(Clock).detach();
 
     if(config->config.crioVolume<0)
     {
-        gui1->screen_vector[1]->trackbarChangeValue(1,6);
+        gui1->screen_vector[1]->setImage(1,6);
     }
 
     while(1)
@@ -385,13 +385,13 @@ int main() {
 
         if(signal==12)
         {
-            gui1->screen_vector[1]->trackbarChangeValue(0,8);
-            gui1->screen_vector[1]->trackbarChangeValue(0,9);
+            gui1->screen_vector[1]->setImage(0,8);
+            gui1->screen_vector[1]->setImage(0,9);
 
-            gui2->screen_vector[1]->trackbarChangeValue(0,1);
-            gui2->screen_vector[1]->trackbarChangeValue(0,2);
+            gui2->screen_vector[1]->setImage(0,1);
+            gui2->screen_vector[1]->setImage(0,2);
 
-            gui1->screen_vector[1]->trackbarChangeValue(0,10);
+            gui1->screen_vector[1]->setImage(0,10);
 
             fan=false;
             programs->isEnd=true;
@@ -413,7 +413,7 @@ int main() {
         gui1->screen_vector[1]->VideoStop(11);
         gui2->screen_vector[1]->VideoStop(0);
 
-        gui1->screen_vector[1]->trackbarChangeValue(0,10);
+        gui1->screen_vector[1]->setImage(0,10);
     }
 
 	std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();

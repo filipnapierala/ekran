@@ -49,12 +49,33 @@ void ConfigReader::Parse(std::string path)
 	file.release();
 }
 
-void ConfigReader::saveCrio(int number,std::string path)
+void ConfigReader::increaseCrio()
 {
-	cv::FileStorage file(path,cv::FileStorage::APPEND);
-	if(!file["criovolume"].empty())
-	{
-		//file<<"criovolume"<<number;
-	}
-	file.release();
+    std::fstream file;
+    file.open(this->crioPath);
+
+    std::string number;
+    getline(file,number);
+
+    int num=std::stoi(number);
+    file.close();
+    num++;
+
+    file.open(this->crioPath);
+
+    std::string out=std::to_string(num);
+
+    file.write(out.c_str(),out.size());
+    file.close();
+}
+
+void ConfigReader::resetCrio()
+{
+    std::fstream file;
+    file.open(this->crioPath,std::ios::out | std::ios::trunc);
+
+    std::string out=std::to_string(0);
+
+    file.write(out.c_str(),out.size());
+    file.close();
 }

@@ -29,12 +29,6 @@ void Programs::ClearSignals()
 
 int Programs::Refresh()
 {
-//    this->stop=std::chrono::steady_clock::now();
-//    auto count=std::chrono::duration_cast<std::chrono::seconds>(this->stop-this->start).count();
-//    std::cout<<"Time is: "<<this->OverallTime+count<<std::endl;
-//
-//    if(count>=this->ActualTime)
-//    {
             this->actualCommand=this->futureCommand;
 
             getline(this->file, this->futureCommand);
@@ -56,11 +50,8 @@ int Programs::Refresh()
             }
 
             this->ActualTime = std::stoi(line);
-
-        //this->OverallTime+=count;
-        //this->start=this->stop;
-    //}
 }
+
 void Programs::SetProgram(std::string path)
 {
     this->isEnd=false;
@@ -73,6 +64,7 @@ void Programs::SetProgram(std::string path)
     getline(this->file,line);
     std::cout<<line<<std::endl;
     this->OverallTime=std::stoi(line);
+    this->Refresh();
 }
 void Programs::Stop()
 {
@@ -85,10 +77,6 @@ void Programs::Stop()
     this->futureCommand="";
 
     this->ClearSignals();
-}
-
-void Programs::Start() {
-
 }
 
 void Programs::Parse()

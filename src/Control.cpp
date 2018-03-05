@@ -21,8 +21,8 @@ Control::~Control() {
 
 void Control::SetParams(int red,int blue,int fan,int crio)
 {
-//	this->settings.red=red;
-//	this->settings.blue=blue;
-//	this->settings.fan=fan;
-//	this->settings.crio=crio;
+	this->red=red;
+	this->blue=blue;
+	this->fan=fan;
+	this->crio=crio;
 }

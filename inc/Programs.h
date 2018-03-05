@@ -47,7 +47,6 @@ private:
     void SetProgram(std::string path);
 
     std::fstream file;
-    std::chrono::steady_clock::time_point start,stop;
     std::string actualCommand, futureCommand, actualProgram;
     std::string path;
 };

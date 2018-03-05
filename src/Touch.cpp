@@ -196,14 +196,12 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 }
 
 int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
+
+    int static flag=0;
 	if (touch.id == "ret") {
 		gui->actual_screen = 1;
 		SendFrame(config->config.usbPort,0,0,0,0,5);
-		control->red=0;
-		control->blue=0;
-		control->fan=0;
-		control->crio=0;
-
+        control->SetParams(0,0,0,0);
 		return 0;
 	} else if (touch.id == "on1") {
 		control->red=100;
@@ -219,25 +217,24 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		control->fan=0;
 	} else if (touch.id == "push") {
 		control->crio=1;
-
-        std::fstream file;
-        file.open(config->crioPath);
-
-        std::string number;
-        getline(file,number);
-
-        int num=std::stoi(number);
-        file.close();
-        num++;
-
-        file.open(config->crioPath);
-
-        std::string out=std::to_string(num);
-
-        file.write(out.c_str(),out.size());
-        file.close();
-
+        config->increaseCrio();
+    } else if(touch.id == "reset")
+    {
+        if(flag==5)
+        {
+            flag=0;
+            gui->actual_screen = 1;
+            SendFrame(config->config.usbPort,0,0,0,0,5);
+            control->SetParams(0,0,0,0);
+            config->resetCrio();
+            gui->screen_vector[1]->setImage(0,6);
+        }
+        else if (flag<5)
+        {
+            flag++;
+        }
     }
+
 	SendFrame(config->config.usbPort,control->blue,control->red,control->fan,control->crio,5);
 	control->crio=0;
 
@@ -249,8 +246,8 @@ int Screen4_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		gui->actual_screen = 1;
 		return 0;
 	} else {
-		gui->screen_vector[1]->trackbarChangeValue(3,10);
-        gui->screen_vector[1]->trackbarChangeValue(0,11);
+		gui->screen_vector[1]->setImage(3,10);
+        gui->screen_vector[1]->setImage(0,11);
         gui->actual_screen = 1;
 	}
 
