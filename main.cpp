@@ -18,7 +18,7 @@
 #include "inc/Programs.h"
 
 #define FrameTime 40
-//#define intro
+#define intro
 
 bool touch_flag = false;
 
@@ -327,7 +327,9 @@ int main() {
 
 #ifdef intro
 	//comment to disable intro
-	system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
+    gui1->screen_vector[0]->VideoStart(0);
+    gui2->screen_vector[0]->VideoStart(0);
+    system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
 	while(gui1->screen_vector[gui1->actual_screen]->element_vector[0]->is_end==0)
 	{
 		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
