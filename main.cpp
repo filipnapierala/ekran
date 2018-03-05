@@ -310,7 +310,7 @@ void ProgramTimer()
 
 int main() {
 
-    system("./data/scripts/config.sh");
+    int f=system("./data/scripts/config.sh");
 
 	cv::setMouseCallback("1", touch_callback);
 
