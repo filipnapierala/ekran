@@ -19,5 +19,6 @@ int Initport(int fd);
 int OpenPort(std::string port);
 
 void SendFrame(std::string port,int red,int blue, int fan, int crio,int time);
+void SendFrame(std::string port,std::string command);
 
 #endif /* UTILS_H_ */

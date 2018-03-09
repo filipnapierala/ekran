@@ -4,9 +4,10 @@
 
 #include "../inc/Programs.h"
 
-Programs::Programs(std::string path)
+Programs::Programs(std::string path, std::string port)
 {
     this->path=path;
+    this->port_=port;
     this->isEnd=true;
     this->ActualTime=1;
 
@@ -34,6 +35,8 @@ int Programs::Refresh()
             getline(this->file, this->futureCommand);
             std::cout << this->actualCommand << std::endl;
             std::cout << this->futureCommand << std::endl;
+
+            SendFrame(this->port_,this->actualCommand);
 
             std::string line;
 

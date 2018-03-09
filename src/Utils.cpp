@@ -57,6 +57,13 @@ int OpenPort(std::string port) {
 	return (fd);
 }
 
+void SendFrame(std::string port,std::string command)
+{
+    int fd = OpenPort(port);
+    Initport(fd);
+    write(fd, command.c_str(), command.size());
+    close(fd);
+}
 
 void SendFrame(std::string port,int red,int blue,int fan,int crio,int time)
 {

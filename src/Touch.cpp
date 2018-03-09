@@ -200,7 +200,7 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
     int static flag=0;
 	if (touch.id == "ret") {
 		gui->actual_screen = 1;
-		SendFrame(config->config.usbPort,0,0,0,0,5);
+		SendFrame(config->config.usbPort,0,0,0,0,0);
         control->SetParams(0,0,0,0);
 		return 0;
 	} else if (touch.id == "on1") {
@@ -224,7 +224,7 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
         {
             flag=0;
             gui->actual_screen = 1;
-            SendFrame(config->config.usbPort,0,0,0,0,5);
+            SendFrame(config->config.usbPort,0,0,0,0,0);
             control->SetParams(0,0,0,0);
             config->resetCrio();
             gui->screen_vector[1]->setImage(0,6);

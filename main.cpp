@@ -26,7 +26,7 @@ bool fan=false;
 
 auto config = std::make_unique<ConfigReader>("./data/config");
 auto control = std::make_unique<Control>();
-auto programs = std::make_unique<Programs>(config->config.custom_program_path);
+auto programs = std::make_unique<Programs>(config->config.custom_program_path,config->config.usbPort);
 
 auto gui2 = std::make_unique<GUI>("./data/Screen2/img/"+config->config.language,"2",1280,0);
 auto gui1 = std::make_unique<GUI>("./data/Screen1/img/"+config->config.language,"1",0,0);

@@ -12,12 +12,13 @@
 #include <fstream>
 #include <thread>
 
+#include "../inc/Utils.h"
 
 class Programs {
 
 public:
 
-    Programs(std::string path);
+    Programs(std::string path,std::string port);
     virtual ~Programs();
 
     std::string ProgramName;
@@ -47,8 +48,7 @@ private:
     void SetProgram(std::string path);
 
     std::fstream file;
-    std::string actualCommand, futureCommand, actualProgram;
-    std::string path;
+    std::string actualCommand, futureCommand, actualProgram, path, port_;
 };
 
 
