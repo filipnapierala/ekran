@@ -60,6 +60,8 @@ int Screen1_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
         return 2;
 	}
     else if (touch.id == "reset") {
+        SendFrame(config->config.usbPort,0,0,0,0,0);
+        control->SetParams(0,0,0,0);
         return 12;
     }
 	return -1;
