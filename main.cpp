@@ -255,8 +255,7 @@ void Clock()
 
         if (gui1->enable == true) {
             gui2->screen_vector[1]->setImage(0,1);
-            gui2->screen_vector[1]->setImage(0,2);
-            std::this_thread::sleep_for(std::chrono::microseconds(1));
+            gui2->screen_vector[1]->setImage(0,2);std::this_thread::sleep_for(std::chrono::microseconds(1));
         } else {
             if (programs->isEnd == false) {
                 std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -271,40 +270,40 @@ void Clock()
 
 void ProgramTimer()
 {
-    for(;;)
-    {
-        std::this_thread::sleep_for(std::chrono::seconds(programs->ActualTime-2));
+    for(;;) {
+        if (gui1->enable == true) {
+            std::this_thread::sleep_for(std::chrono::microseconds(1));
+        } else {
+            std::this_thread::sleep_for(std::chrono::seconds(programs->ActualTime - 2));
 
-        if (programs->signals.redFuture == true) {
+            if (programs->signals.redFuture == true) {
                 gui2->screen_vector[1]->setImage(1, 2);
             }
             if (programs->signals.blueFuture == true) {
                 gui2->screen_vector[1]->setImage(1, 1);
             }
 
-        if(programs->isEnd==false) {
-            std::this_thread::sleep_for(std::chrono::seconds(2));
+            if (programs->isEnd == false) {
+                std::this_thread::sleep_for(std::chrono::seconds(2));
 
-            programs->Refresh();
+                programs->Refresh();
 
-            gui1->screen_vector[1]->setImage(0,8);
-            gui1->screen_vector[1]->setImage(0,9);
+                gui1->screen_vector[1]->setImage(0, 8);
+                gui1->screen_vector[1]->setImage(0, 9);
 
-            gui2->screen_vector[1]->setImage(0,1);
-            gui2->screen_vector[1]->setImage(0,2);
-            fan=false;
+                gui2->screen_vector[1]->setImage(0, 1);
+                gui2->screen_vector[1]->setImage(0, 2);
+                fan = false;
 
-            if(programs->signals.redActual==true)
-            {
-                gui1->screen_vector[1]->setImage(1,8);
-            }
-            if(programs->signals.blueActual==true)
-            {
-                gui1->screen_vector[1]->setImage(1,9);
-            }
-            if(programs->signals.fan==true)
-            {
-                fan=true;
+                if (programs->signals.redActual == true) {
+                    gui1->screen_vector[1]->setImage(1, 8);
+                }
+                if (programs->signals.blueActual == true) {
+                    gui1->screen_vector[1]->setImage(1, 9);
+                }
+                if (programs->signals.fan == true) {
+                    fan = true;
+                }
             }
         }
     }
