@@ -272,14 +272,12 @@ void ProgramTimer()
     {
         std::this_thread::sleep_for(std::chrono::seconds(programs->ActualTime-2));
 
-        if(programs->isEnd==false) {
-            if (programs->signals.redFuture == true) {
+        if (programs->signals.redFuture == true) {
                 gui2->screen_vector[1]->setImage(1, 2);
             }
             if (programs->signals.blueFuture == true) {
                 gui2->screen_vector[1]->setImage(1, 1);
             }
-        }
 
         if(programs->isEnd==false) {
             std::this_thread::sleep_for(std::chrono::seconds(2));
@@ -386,7 +384,6 @@ int main() {
 
         if(signal==12)
         {
-            programs->Stop();
             setClock(0,gui2);
 
             gui1->screen_vector[1]->setImage(0,8);
@@ -398,6 +395,7 @@ int main() {
             gui1->screen_vector[1]->setImage(0,10);
 
             fan=false;
+            programs->Stop();
         }
 
         if((signal>=1&&signal<=11)&&gui1->enable==true)
