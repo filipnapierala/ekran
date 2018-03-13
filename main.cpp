@@ -386,7 +386,7 @@ int main() {
 
         if(signal==12)
         {
-            programs->isEnd=true;
+            programs->Stop();
             setClock(0,gui2);
 
             gui1->screen_vector[1]->setImage(0,8);
