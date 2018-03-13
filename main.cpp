@@ -252,10 +252,10 @@ void setClock(int seconds, std::unique_ptr<GUI>&gui)
 void Clock()
 {
     for(;;) {
-        gui2->screen_vector[1]->setImage(0,1);
-        gui2->screen_vector[1]->setImage(0,2);
 
         if (gui1->enable == true) {
+            gui2->screen_vector[1]->setImage(0,1);
+            gui2->screen_vector[1]->setImage(0,2);
             std::this_thread::sleep_for(std::chrono::microseconds(1));
         } else {
             if (programs->isEnd == false) {
