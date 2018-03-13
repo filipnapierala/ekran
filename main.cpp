@@ -394,7 +394,7 @@ int main() {
 
             gui1->screen_vector[1]->setImage(0,10);
 
-            setClock(0,gui1);
+            setClock(0,gui2);
             fan=false;
             programs->isEnd=true;
         }
