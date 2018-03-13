@@ -9,7 +9,7 @@ Programs::Programs(std::string path, std::string port)
     this->path=path;
     this->port_=port;
     this->isEnd=true;
-    this->ActualTime=1;
+    this->ActualTime=0;
 
     this->actualCommand="";
     this->futureCommand="";
@@ -28,31 +28,54 @@ void Programs::ClearSignals()
     this->signals.blueFuture=false;
 }
 
+bool Programs::GetActualTime()
+{
+    std::string line;
+    getline(this->file, line);
+
+    if(line=="")
+    {
+        return false;
+    }
+    else
+    {
+        this->ActualTime = std::stoi(line);
+        return true;
+    }
+}
+
+void Programs::Debug()
+{
+    std::cout<<"time: "<<this->ActualTime<<std::endl;
+    std::cout<<"actual: " << this->actualCommand << std::endl;
+    std::cout<<"future: " << this->futureCommand << std::endl;
+}
+
 int Programs::Refresh()
 {
-            this->actualCommand=this->futureCommand;
+    if(this->GetActualTime()==false)
+    {
+        this->actualCommand=this->futureCommand;
+        this->Parse();
+        SendFrame(this->port_,this->actualCommand);
 
-            getline(this->file, this->futureCommand);
-            std::cout << this->actualCommand << std::endl;
-            std::cout << this->futureCommand << std::endl;
+        this->isEnd=true;
+        this->file.close();
 
-            SendFrame(this->port_,this->actualCommand);
+#ifdef DEBUG
+        this->Debug();
+#endif
+        return 0;
+    }
 
-            std::string line;
+    this->actualCommand=this->futureCommand;
+    getline(this->file, this->futureCommand);
 
-            getline(this->file, line);
-            std::cout << line << std::endl;
-
-            this->Parse();
-
-            if(this->futureCommand=="")
-            {
-                this->isEnd=true;
-                this->file.close();
-                return 0;
-            }
-
-            this->ActualTime = std::stoi(line);
+    this->Parse();
+    SendFrame(this->port_,this->actualCommand);
+#ifdef DEBUG
+    this->Debug();
+#endif
 }
 
 void Programs::SetProgram(std::string path)
@@ -62,19 +85,17 @@ void Programs::SetProgram(std::string path)
 
     this->file.open(path);
 
-    //this->start= std::chrono::steady_clock::now();
     std::string line;
     getline(this->file,line);
     std::cout<<line<<std::endl;
     this->OverallTime=std::stoi(line);
-    this->Refresh();
 }
 void Programs::Stop()
 {
     this->isEnd=true;
     this->file.close();
     this->OverallTime=0;
-    this->ActualTime=1;
+    this->ActualTime=0;
 
     this->actualCommand="";
     this->futureCommand="";
@@ -119,7 +140,7 @@ void Programs::Parse()
         this->signals.fan=false;
     }
 
-    std::cout<<this->signals.redActual<<","<<this->signals.blueActual<<","<<this->signals.fan<<","<<this->signals.redFuture<<","<<this->signals.blueFuture<<std::endl;
+    //std::cout<<this->signals.redActual<<","<<this->signals.blueActual<<","<<this->signals.fan<<","<<this->signals.redFuture<<","<<this->signals.blueFuture<<std::endl;
 }
 
 void Programs::SetProgramID(int ID)
@@ -184,4 +205,10 @@ void Programs::SetProgramID(int ID)
     }
     this->file.close();
     this->SetProgram(this->actualProgram);
+}
+
+int Programs::GetTime()
+{
+    this->OverallTime--;
+    return this->OverallTime;
 }

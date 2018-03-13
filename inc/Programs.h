@@ -28,7 +28,7 @@ public:
 
     void SetProgramID(int ID);
     void Stop();
-    void Start();
+    int GetTime();
 
     struct Signals
     {
@@ -43,9 +43,10 @@ public:
 private:
 
     void Parse();
-    void Send();
+    bool GetActualTime();
     void ClearSignals();
     void SetProgram(std::string path);
+    void Debug();
 
     std::fstream file;
     std::string actualCommand, futureCommand, actualProgram, path, port_;

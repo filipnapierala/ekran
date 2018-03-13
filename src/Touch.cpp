@@ -90,41 +90,7 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
         red=std::min(std::max(red,0),100);
         blue=std::min(std::max(blue,0),100);
 
-        std::fstream file;
-
-        file.open(config->config.custom_program_path+"manual");
-        std::string buffer=std::to_string(time*10)+"\r\n";
-        file.write(buffer.c_str(),buffer.size());
-
-        std::vector<std::string>signals;
-
-        int timeRed;
-        if(blue!=0) {
-            timeRed = (red / blue) * time ;
-        }
-        else
-        {
-            timeRed=100;
-        }
-
-        int timeBlue = time - timeRed;
-
-        for(int i=0;i<10;i++)
-        {
-            char buf[30];
-            sprintf(buf,"NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n",100,5,0,5,0,0);
-            signals.push_back(buf);
-            signals.push_back(std::to_string(timeRed)+"\r\n");
-            sprintf(buf,"NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n",0,5,100,5,1,1);
-            signals.push_back(buf);
-            signals.push_back(std::to_string(timeBlue)+"\r\n");
-        }
-        for(int i=0;i<signals.size();i++)
-        {
-            file.write(signals[i].c_str(),signals[i].size());
-        }
-
-        file.close();
+        PrepareFile(config->config.custom_program_path+"manual",red,blue,time);
 
         return 3;
 	}

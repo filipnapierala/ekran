@@ -233,17 +233,15 @@ void screen6() {
                                                         "digit4");
 }
 
-void setClock(int seconds, std::unique_ptr<GUI>&gui )
+void setClock(int seconds, std::unique_ptr<GUI>&gui)
 {
     int minutesDecimal, minutesUnit, secondsDecimal, secondsUnit;
 
     minutesDecimal=(seconds/60)/10;
     minutesUnit=(seconds/60)%10;
 
-    secondsDecimal=(seconds-((minutesDecimal+minutesUnit)*60))/10;
-    secondsUnit=(seconds-((minutesDecimal+minutesUnit)*60))-(secondsDecimal*10);
-
-    std::cout<<secondsDecimal;
+    secondsDecimal=(seconds-((10*minutesDecimal+minutesUnit)*60))/10;
+    secondsUnit=(seconds-((10*minutesDecimal+minutesUnit)*60))-(secondsDecimal*10);
 
 	gui->screen_vector[1]->setImage(minutesDecimal,3);
 	gui->screen_vector[1]->setImage(minutesUnit,4);
@@ -254,22 +252,24 @@ void setClock(int seconds, std::unique_ptr<GUI>&gui )
 void Clock()
 {
     for(;;) {
-
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        if(programs->isEnd==false) {
-            if(programs->OverallTime>0) {
-                programs->OverallTime--;
-                setClock(programs->OverallTime,gui2);
+        if (gui1->enable == true) {
+            std::this_thread::sleep_for(std::chrono::microseconds(1));
+        } else {
+            if (programs->isEnd == false) {
+                std::this_thread::sleep_for(std::chrono::seconds(1));
+                int time = programs->GetTime();
+                if (time >= 0) {
+                    setClock(time, gui2);
+                }
             }
         }
-        }
+    }
 }
 
 void ProgramTimer()
 {
     for(;;)
     {
-
         std::this_thread::sleep_for(std::chrono::seconds(programs->ActualTime-2));
 
         if(programs->signals.redFuture==true)
@@ -281,8 +281,9 @@ void ProgramTimer()
             gui2->screen_vector[1]->setImage(1,1);
         }
 
-        std::this_thread::sleep_for(std::chrono::seconds(2));
         if(programs->isEnd==false) {
+            std::this_thread::sleep_for(std::chrono::seconds(2));
+
             programs->Refresh();
 
             gui1->screen_vector[1]->setImage(0,8);
