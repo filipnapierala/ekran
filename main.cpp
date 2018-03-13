@@ -399,6 +399,7 @@ int main() {
 
             fan=false;
             programs->Stop();
+            gui1->enable=true;
         }
 
         if((signal>=1&&signal<=11)&&gui1->enable==true)
