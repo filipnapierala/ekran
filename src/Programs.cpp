@@ -9,7 +9,7 @@ Programs::Programs(std::string path, std::string port)
     this->path=path;
     this->port_=port;
     this->isEnd=true;
-    this->ActualTime=0;
+    this->ActualTime=2;
 
     this->actualCommand="";
     this->futureCommand="";
@@ -95,7 +95,7 @@ void Programs::Stop()
     this->isEnd=true;
     this->file.close();
     this->OverallTime=0;
-    this->ActualTime=0;
+    this->ActualTime=2;
 
     this->actualCommand="";
     this->futureCommand="";
