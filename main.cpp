@@ -272,13 +272,13 @@ void ProgramTimer()
     {
         std::this_thread::sleep_for(std::chrono::seconds(programs->ActualTime-2));
 
-        if(programs->signals.redFuture==true)
-        {
-            gui2->screen_vector[1]->setImage(1,2);
-        }
-        if(programs->signals.blueFuture==true)
-        {
-            gui2->screen_vector[1]->setImage(1,1);
+        if(programs->isEnd==false) {
+            if (programs->signals.redFuture == true) {
+                gui2->screen_vector[1]->setImage(1, 2);
+            }
+            if (programs->signals.blueFuture == true) {
+                gui2->screen_vector[1]->setImage(1, 1);
+            }
         }
 
         if(programs->isEnd==false) {
