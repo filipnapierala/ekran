@@ -254,6 +254,9 @@ void Clock()
     for(;;) {
         if (gui1->enable == true) {
             std::this_thread::sleep_for(std::chrono::microseconds(1));
+            gui2->screen_vector[1]->setImage(0,1);
+            gui2->screen_vector[1]->setImage(0,2);
+
         } else {
             if (programs->isEnd == false) {
                 std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -396,8 +399,6 @@ int main() {
 
             fan=false;
             programs->Stop();
-            gui2->screen_vector[1]->setImage(0,1);
-            gui2->screen_vector[1]->setImage(0,2);
         }
 
         if((signal>=1&&signal<=11)&&gui1->enable==true)
