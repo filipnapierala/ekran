@@ -275,10 +275,10 @@ void ProgramTimer()
             std::this_thread::sleep_for(std::chrono::microseconds(1));
         } else {
 
-            for(int i=0;i<(programs->ActualTime-3)*1000;i++)
+            for(int i=0;i<(programs->ActualTime-2)*2;i++)
             {
                 if (programs->isEnd == false) {
-                    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 }
             }
 
@@ -289,10 +289,10 @@ void ProgramTimer()
                 gui2->screen_vector[1]->setImage(1, 1);
             }
 
-            for(int i=0;i<2000;i++)
+            for(int i=0;i<4;i++)
             {
                 if (programs->isEnd == false) {
-                    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 }
             }
             //std::this_thread::sleep_for(std::chrono::seconds(2));
