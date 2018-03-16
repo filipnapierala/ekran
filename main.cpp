@@ -18,7 +18,7 @@
 #include "inc/Programs.h"
 
 #define FrameTime 40
-//#define intro
+#define intro
 
 bool touch_flag = false;
 
