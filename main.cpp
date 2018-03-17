@@ -74,7 +74,7 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 void screen0() {
 	gui1->add_screen();
 
-	gui1->screen_vector[gui1->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
+	//gui1->screen_vector[gui1->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
 }
 
 void screen1() {
@@ -104,6 +104,12 @@ void screen1() {
 			"pr");
 
 	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 600, 100, "video", 640, 360, true);
+//nowe
+	gui1->screen_vector[gui1->actual_screen]->add_button("/playpauza", 950, 700, 
+			"playpauza");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/stop", 1030, 700, 
+			"stop");
+
 }
 
 void screen2() {
@@ -115,32 +121,63 @@ void screen2() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/start", 0, 650,
 			"start");
 
+	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490, 
+			y - 300, "minus1");//do usuniecia
+	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490, 
+			y - 160, "minus2");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490,
-			y - 75, "minus1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490, y - 5,
-			"minus2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490,
-			y + 65, "minus3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y - 85,
-			"plus1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y - 15,
+			y + 140, "minus3");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y - 300,
+			"plus1");//do usuniecia
+	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y - 175,
 			"plus2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y + 55,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y + 125,
 			"plus3");
 
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y - 80, 100, "trackbar1");
+			y - 300, 100, "trackbar1");//do usuniecia
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y - 10, 100, "trackbar2");
+			y - 160, 100, "trackbar2");
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y + 60, 100, "trackbar3");
+			y + 140, 100, "trackbar3");
 
-	gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 85,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 165,
 			"hot");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/cold", 40, y - 15,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/cold", 1190, y - 165,
 			"cold");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/time", 40, y + 55,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/time", 40, y + 135,
 			"time");
+//nowe
+//hot/cold
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-400, y - 175, "podz1");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-300, y - 175, "podz2");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-200, y - 175, "podz3");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-100, y - 175, "podz4");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x, y - 175, "podz5");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+100, y - 175, "podz6");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+200, y - 175, "podz7");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+300, y - 175, "podz8");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+400, y - 175, "podz9");
+//time
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-400, y + 125, "podz10");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-240, y + 125, "podz11");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-80, y + 125, "podz12");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+80, y + 125, "podz13");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+240, y + 125, "podz14");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+400, y + 125, "podz16");
+//napisy
+	gui1->screen_vector[gui1->actual_screen]->add_image("/max", x-440, y - 120, "max1");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/max", x+360, y - 120, "max2");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/5050", x-50, y - 120, "5050");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/7030", x-250, y - 120, "7030");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/3070", x+150, y - 120, "3070");
+
+	gui1->screen_vector[gui1->actual_screen]->add_image("/5", x-425, y + 180, "5");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/10", x-265, y + 180, "10");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/15", x-105, y + 180, "15");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/20", x+55, y + 180, "20");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/25", x+215, y + 180, "25");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/30", x+375, y + 180, "30");
 }
 
 void screen3() {
@@ -178,8 +215,17 @@ void screen3() {
 			"fan");
 	gui1->screen_vector[gui1->actual_screen]->add_image("/crio", x + 175, y + 138,
 			"crio");
-
-
+//nowe
+	gui1->screen_vector[gui1->actual_screen]->add_image("/video", x - 525, y -262,
+			"video");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v1", x - 537, y-162,
+			"v1");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v2", x - 537, y-62,
+			"v2");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v3", x - 537, y+38,
+			"v3");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v4", x - 537, y+138,
+			"v4");
 }
 
 void screen4() {
@@ -210,7 +256,7 @@ void screen4() {
 
 void screen5() {
 	gui2->add_screen();
-	gui2->screen_vector[gui2->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
+	//gui2->screen_vector[gui2->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
 }
 
 void screen6() {
@@ -342,22 +388,22 @@ int main() {
 
 #ifdef intro
 	//comment to disable intro
-    gui1->screen_vector[0]->VideoStart(0);
-    gui2->screen_vector[0]->VideoStart(0);
-    system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
-	while(gui1->screen_vector[gui1->actual_screen]->element_vector[0]->is_end==0)
-	{
-		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
-		gui1->draw_screen();
-		gui2->draw_screen();
-		cv::waitKey(1);
-		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
-		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
-		if(count<FrameTime)
-		{
-			cv::waitKey(FrameTime-count);
-		}
-	}
+//    gui1->screen_vector[0]->VideoStart(0);
+//    gui2->screen_vector[0]->VideoStart(0);
+//    system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
+//	while(gui1->screen_vector[gui1->actual_screen]->element_vector[0]->is_end==0)
+//	{
+//		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
+//		gui1->draw_screen();
+//		gui2->draw_screen();
+//		cv::waitKey(1);
+//		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
+//		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
+//		if(count<FrameTime)
+//		{
+//			cv::waitKey(FrameTime-count);
+//		}
+//	}
 #endif
 	gui1->actual_screen = 1;
 	gui2->actual_screen = 1;
