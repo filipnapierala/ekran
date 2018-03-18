@@ -41,21 +41,21 @@ int Screen0_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 }
 
 int Screen1_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
-	if (touch.id == "diag"&&gui->enable==true) {
+	if (touch.id == "diag") {
 		gui->actual_screen = 3;
 		return 0;
-	} else if (touch.id == "manual"&&gui->enable==true) {
+	} else if (touch.id == "manual") {
 		gui->actual_screen = 2;
 		return 0;
-	} else if (touch.id == "else"&&gui->enable==true) {
+	} else if (touch.id == "else") {
 		gui->actual_screen = 4;
 		return 0;
 	}
-	else if (touch.id == "hot"&&gui->enable==true) {
+	else if (touch.id == "hot") {
 		gui->screen_vector[1]->trackbarChangeValue(1,10);
 		return 1;
 	}
-	else if (touch.id == "crio"&&gui->enable==true) {
+	else if (touch.id == "crio") {
 		gui->screen_vector[1]->trackbarChangeValue(4,10);
         return 2;
 	}

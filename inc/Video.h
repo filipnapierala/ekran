@@ -26,7 +26,7 @@ public:
 private:
 
 	bool rectangle;
-	int frameNumber;
+    cv::Mat frame;
 };
 
 #endif /* VIDEO_H_ */

@@ -413,6 +413,12 @@ int main() {
         gui1->screen_vector[1]->setImage(1,6);
     }
 
+    gui1->screen_vector[gui1->actual_screen]->element_vector[5]->active =
+            false;
+    gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
+            false;
+
+
     while(1)
 {
 	std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
@@ -442,7 +448,10 @@ int main() {
 
         if(signal==12)
         {
-			gui1->screen_vector[gui1->actual_screen]->element_vector[0]->active =
+            gui1->screen_vector[1]->VideoStop(11);
+            gui2->screen_vector[1]->VideoStop(0);
+
+            gui1->screen_vector[gui1->actual_screen]->element_vector[0]->active =
 					true;
 			gui1->screen_vector[gui1->actual_screen]->element_vector[1]->active =
 					true;
@@ -452,6 +461,12 @@ int main() {
 					true;
 			gui1->screen_vector[gui1->actual_screen]->element_vector[4]->active =
 					true;
+
+            gui1->screen_vector[gui1->actual_screen]->element_vector[5]->active =
+                    false;
+            gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
+                    false;
+
 
             gui1->enable=true;
 
@@ -474,7 +489,7 @@ int main() {
 			gui2->screen_vector[1]->VideoToggle(0);
 		}
 
-        else if((signal>=1&&signal<=11)&&gui1->enable==true)
+        else if((signal>=1&&signal<=11))
         {
             gui1->enable=false;
             programs->SetProgramID(signal);
@@ -491,10 +506,16 @@ int main() {
 					false;
 			gui1->screen_vector[gui1->actual_screen]->element_vector[4]->active =
 					false;
-		}
+
+            gui1->screen_vector[gui1->actual_screen]->element_vector[5]->active =
+                    true;
+            gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
+                    true;
+
+        }
 	}
 
-    if(programs->isEnd==true){
+    if(programs->isEnd==true&&gui1->enable==false){
         gui1->enable=true;
         programs->Stop();
 
@@ -502,6 +523,22 @@ int main() {
         gui2->screen_vector[1]->VideoStop(0);
 
         gui1->screen_vector[1]->setImage(0,10);
+
+        gui1->screen_vector[gui1->actual_screen]->element_vector[0]->active =
+                true;
+        gui1->screen_vector[gui1->actual_screen]->element_vector[1]->active =
+                true;
+        gui1->screen_vector[gui1->actual_screen]->element_vector[2]->active =
+                true;
+        gui1->screen_vector[gui1->actual_screen]->element_vector[3]->active =
+                true;
+        gui1->screen_vector[gui1->actual_screen]->element_vector[4]->active =
+                true;
+
+        gui1->screen_vector[gui1->actual_screen]->element_vector[5]->active =
+                false;
+        gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
+                false;
     }
 
 	std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
@@ -510,7 +547,7 @@ int main() {
 	{
 		cv::waitKey(FrameTime-count);
 	}
-	//std::cout<<"fps: "<<1000/double(count)<<std::endl;
+	std::cout<<"fps: "<<1000/double(count)<<std::endl;
 }
 
 return 0;
