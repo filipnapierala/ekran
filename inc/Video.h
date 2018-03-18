@@ -26,6 +26,7 @@ public:
 private:
 
 	bool rectangle;
+	int frameNumber;
 };
 
 #endif /* VIDEO_H_ */

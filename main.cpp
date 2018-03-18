@@ -18,7 +18,7 @@
 #include "inc/Programs.h"
 
 #define FrameTime 40
-#define intro
+//#define intro
 
 bool touch_flag = false;
 
@@ -28,8 +28,8 @@ auto config = std::make_unique<ConfigReader>("./data/config");
 auto control = std::make_unique<Control>();
 auto programs = std::make_unique<Programs>(config->config.custom_program_path,config->config.usbPort);
 
-auto gui2 = std::make_unique<GUI>("./data/Screen2/img/"+config->config.language,"2",1280,0);
-auto gui1 = std::make_unique<GUI>("./data/Screen1/img/"+config->config.language,"1",0,0);
+auto gui2 = std::make_unique<GUI>("./data/Screen2/"+config->config.language,"2",1280,0);
+auto gui1 = std::make_unique<GUI>("./data/Screen1/"+config->config.language,"1",0,0);
 
 Touch touch;
 
@@ -74,7 +74,7 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 void screen0() {
 	gui1->add_screen();
 
-	//gui1->screen_vector[gui1->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
+	gui1->screen_vector[gui1->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
 }
 
 void screen1() {
@@ -87,8 +87,8 @@ void screen1() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/else", 0, 460, "else");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/diag", 1215, 35,
 			"diag");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/reset", 1180, 700,
-			"reset");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/stop", 1180, 700,
+			"stop");
 
 	gui1->screen_vector[gui1->actual_screen]->add_image("/alarm", 1170, 37,
 			"alarm");
@@ -105,11 +105,8 @@ void screen1() {
 
 	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 600, 100, "video", 640, 360, true);
 //nowe
-	gui1->screen_vector[gui1->actual_screen]->add_button("/playpauza", 950, 700, 
-			"playpauza");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/stop", 1030, 700, 
-			"stop");
-
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pause", 1120, 700,
+			"pause");
 }
 
 void screen2() {
@@ -388,22 +385,22 @@ int main() {
 
 #ifdef intro
 	//comment to disable intro
-//    gui1->screen_vector[0]->VideoStart(0);
-//    gui2->screen_vector[0]->VideoStart(0);
-//    system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
-//	while(gui1->screen_vector[gui1->actual_screen]->element_vector[0]->is_end==0)
-//	{
-//		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
-//		gui1->draw_screen();
-//		gui2->draw_screen();
-//		cv::waitKey(1);
-//		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
-//		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
-//		if(count<FrameTime)
-//		{
-//			cv::waitKey(FrameTime-count);
-//		}
-//	}
+    gui1->screen_vector[0]->VideoStart(0);
+    gui2->screen_vector[0]->VideoStart(0);
+    system(("mplayer -vo null "+gui1->path+"/s0/intro.avi &").c_str());
+	while(gui1->screen_vector[gui1->actual_screen]->element_vector[0]->is_end==0)
+	{
+		std::chrono::steady_clock::time_point begin=std::chrono::steady_clock::now();
+		gui1->draw_screen();
+		gui2->draw_screen();
+		cv::waitKey(1);
+		std::chrono::steady_clock::time_point end=std::chrono::steady_clock::now();
+		auto count=std::chrono::duration_cast<std::chrono::milliseconds>(end-begin).count();
+		if(count<FrameTime)
+		{
+			cv::waitKey(FrameTime-count);
+		}
+	}
 #endif
 	gui1->actual_screen = 1;
 	gui2->actual_screen = 1;
@@ -445,6 +442,17 @@ int main() {
 
         if(signal==12)
         {
+			gui1->screen_vector[gui1->actual_screen]->element_vector[0]->active =
+					true;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[1]->active =
+					true;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[2]->active =
+					true;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[3]->active =
+					true;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[4]->active =
+					true;
+
             gui1->enable=true;
 
             gui1->screen_vector[1]->setImage(0,8);
@@ -459,14 +467,31 @@ int main() {
             programs->Stop();
             setClock(0,gui2);
         }
+		else if(signal==13)
+		{
+			programs->Pause();
+			gui1->screen_vector[1]->VideoToggle(11);
+			gui2->screen_vector[1]->VideoToggle(0);
+		}
 
-        if((signal>=1&&signal<=11)&&gui1->enable==true)
+        else if((signal>=1&&signal<=11)&&gui1->enable==true)
         {
             gui1->enable=false;
             programs->SetProgramID(signal);
             gui1->screen_vector[1]->VideoStart(11);
             gui2->screen_vector[1]->VideoStart(0);
-        }
+
+			gui1->screen_vector[gui1->actual_screen]->element_vector[0]->active =
+					false;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[1]->active =
+					false;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[2]->active =
+					false;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[3]->active =
+					false;
+			gui1->screen_vector[gui1->actual_screen]->element_vector[4]->active =
+					false;
+		}
 	}
 
     if(programs->isEnd==true){

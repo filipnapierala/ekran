@@ -12,9 +12,11 @@
 Button::Button(std::string path,int x, int y, std::string id) {
 
 	this->pushed=0;
+	this->active=1;
 	this->path=path;
 	this->img_u=cv::imread(this->path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
 	this->img_p=cv::imread(this->path+"_"+std::to_string(!this->pushed)+".png",cv::IMREAD_UNCHANGED);
+	this->img_i=cv::imread(this->path+"_"+std::to_string(2)+".png",cv::IMREAD_UNCHANGED);
 
 	this->x=x;
 	this->y=y;
@@ -32,7 +34,11 @@ Button::~Button() {
 
 void Button::draw(cv::Mat bg)
 {
-	if(pushed)
+	if(this->active==0)
+	{
+		this->copy_transparent(this->img_i,bg);
+	}
+	else if(pushed)
 	{
 		this->copy_transparent(this->img_p,bg);
 	}

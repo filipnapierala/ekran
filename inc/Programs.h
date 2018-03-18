@@ -23,11 +23,12 @@ public:
 
     std::string ProgramName;
     int ActualTime, FutureTime, OverallTime;
-    bool isEnd;
+    bool isEnd, isPause;
     int Refresh();
 
     void SetProgramID(int ID);
     void Stop();
+    void Pause();
     int GetTime();
 
     struct Signals

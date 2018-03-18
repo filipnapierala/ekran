@@ -31,7 +31,7 @@ void Video::draw(cv::Mat bg)
 {
 	cv::Mat frame;
     if(this->pause==1) {
-		this->capture.set(CV_CAP_PROP_POS_FRAMES,0);
+		this->capture.set(CV_CAP_PROP_POS_FRAMES,this->frameNumber-1);
     }
 
 	this->capture >> frame;
@@ -56,7 +56,10 @@ void Video::draw(cv::Mat bg)
 void Video::changeValue(int x, int y)
 {
 	this->pause=x;
-	this->capture.set(CV_CAP_PROP_POS_FRAMES,0);
+	if(y==0) {
+		this->capture.set(CV_CAP_PROP_POS_FRAMES, 0);
+	}
+	this->frameNumber=capture.get(CV_CAP_PROP_POS_FRAMES);
 }
 
 void Video::changeState()

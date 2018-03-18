@@ -9,6 +9,7 @@ Programs::Programs(std::string path, std::string port)
     this->path=path;
     this->port_=port;
     this->isEnd=true;
+    this->isPause=false;
     this->ActualTime=0;
 
     this->actualCommand="";
@@ -30,18 +31,15 @@ void Programs::ClearSignals()
 
 bool Programs::GetActualTime()
 {
-    std::string line;
-    getline(this->file, line);
+        std::string line;
+        getline(this->file, line);
 
-    if(line=="")
-    {
-        return false;
-    }
-    else
-    {
-        this->ActualTime = std::stoi(line);
-        return true;
-    }
+        if (line == "") {
+            return false;
+        } else {
+            this->ActualTime = std::stoi(line);
+            return true;
+        }
 }
 
 void Programs::Debug()
@@ -53,29 +51,30 @@ void Programs::Debug()
 
 int Programs::Refresh()
 {
-    if(this->GetActualTime()==false)
-    {
-        this->actualCommand=this->futureCommand;
+    if(this->isPause==false) {
+        if (this->GetActualTime() == false) {
+            this->actualCommand = this->futureCommand;
+            this->Parse();
+            SendFrame(this->port_, this->actualCommand);
+
+            this->isEnd = true;
+            this->file.close();
+
+#ifdef DEBUG
+            this->Debug();
+#endif
+            return 0;
+        }
+
+        this->actualCommand = this->futureCommand;
+        getline(this->file, this->futureCommand);
+
         this->Parse();
-        SendFrame(this->port_,this->actualCommand);
-
-        this->isEnd=true;
-        this->file.close();
-
+        SendFrame(this->port_, this->actualCommand);
 #ifdef DEBUG
         this->Debug();
 #endif
-        return 0;
     }
-
-    this->actualCommand=this->futureCommand;
-    getline(this->file, this->futureCommand);
-
-    this->Parse();
-    SendFrame(this->port_,this->actualCommand);
-#ifdef DEBUG
-    this->Debug();
-#endif
 }
 
 void Programs::SetProgram(std::string path)
@@ -101,6 +100,11 @@ void Programs::Stop()
     this->futureCommand="";
 
     this->ClearSignals();
+}
+
+void Programs::Pause()
+{
+    this->isPause=!this->isPause;
 }
 
 void Programs::Parse()
@@ -209,6 +213,8 @@ void Programs::SetProgramID(int ID)
 
 int Programs::GetTime()
 {
-    this->OverallTime--;
+    if(this->isPause==false) {
+        this->OverallTime--;
+    }
     return this->OverallTime;
 }

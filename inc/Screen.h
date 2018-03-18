@@ -41,8 +41,9 @@ public:
 	void setImage(int x,int element);
 	void VideoStart(int element);
 	void VideoStop(int element);
+    void VideoToggle(int element);
 
-	void change_value(int element);
+    void change_value(int element);
 
 	std::vector<std::unique_ptr<Element>> element_vector;
 

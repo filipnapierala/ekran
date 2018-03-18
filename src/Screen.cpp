@@ -103,6 +103,11 @@ void Screen::VideoStop(int element)
 	this->element_vector[element]->changeValue(1,0);
 }
 
+void Screen::VideoToggle(int element)
+{
+    this->element_vector[element]->changeValue(!this->element_vector[element]->pause,1);
+}
+
 void Screen::change_value(int element)
 {
 	this->element_vector[element]->changeState();

@@ -59,10 +59,13 @@ int Screen1_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		gui->screen_vector[1]->trackbarChangeValue(4,10);
         return 2;
 	}
-    else if (touch.id == "reset") {
+    else if (touch.id == "stop") {
         SendFrame(config->config.usbPort,0,0,0,0,0);
         control->SetParams(0,0,0,0);
         return 12;
+    }
+    else if (touch.id == "pause") {
+        return 13;
     }
 	return -1;
 }

@@ -24,7 +24,7 @@ private:
 
 	void changeState();
 
-	cv::Mat img_u,img_p;
+	cv::Mat img_u,img_p,img_i;
 
 	std::string path;
 };
