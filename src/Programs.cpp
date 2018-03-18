@@ -88,6 +88,8 @@ void Programs::SetProgram(std::string path)
     getline(this->file,line);
     std::cout<<line<<std::endl;
     this->OverallTime=std::stoi(line);
+
+    this->isPause=false;
 }
 void Programs::Stop()
 {
