@@ -38,12 +38,6 @@ Touch touch;
 
 void touch_callback(int event, int x, int y, int flags, void*) {
 
-	if(demoFlag==true)
-	{
-		demoFlag==false;
-		SendFrame(config->config.usbPort,"N");
-	}
-
 	if (event == 1) {
 		touch.n_1 = touch.n;
 		touch.id = gui1->screen_vector[gui1->actual_screen]->touch_callback(x, y,
@@ -76,6 +70,11 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 
      if (touch.id != " ") {
 			touch_flag = true;
+         if(demoFlag==true)
+         {
+             demoFlag=false;
+             SendFrame(config->config.usbPort,"N");
+         }
 		}
 	}
 }
@@ -302,9 +301,10 @@ void setClock(int seconds, std::unique_ptr<GUI>&gui)
 void DemoClock()
 {
 	for(;;) {
-		if (gui1->enable == true) {
-			std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if (demoFlag == false) {
 			demoCounter++;
+            std::cout<<demoCounter<<std::endl;
 			if(demoCounter>10&&demoFlag==false)
 			{
                 demoCounter=0;
