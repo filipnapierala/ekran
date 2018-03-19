@@ -310,9 +310,9 @@ void DemoClock()
             std::cout<<demoCounter<<std::endl;
 			if(demoCounter>10&&demoFlag==false)
 			{
+                SendFrame(config->config.usbPort,0,0,0,0,0);
                 demoCounter=0;
 				demoFlag=true;
-                SendFrame(config->config.usbPort,0,0,0,0,0);
                 SendFrame(config->config.usbPort,"Demo");
 			}
 		}
