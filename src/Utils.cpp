@@ -70,7 +70,7 @@ void SendFrame(std::string port,int blue,int red,int fan,int crio,int time)
 	std::cout<<port<<std::endl;
 	int fd = OpenPort(port);
 	Initport(fd);
-	char buffer[40];
+	char buffer[50];
 
 	int length = sprintf(buffer,"NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n", red,time,blue,time,fan,crio);
 	write(fd, buffer, length);

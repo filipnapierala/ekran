@@ -227,7 +227,7 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
         }
     }
 
-	SendFrame(config->config.usbPort,control->blue,control->red,control->fan,control->crio,20);
+	SendFrame(config->config.usbPort,control->blue,control->red,control->fan,control->crio,5);
 	control->crio=0;
 
 	return -1;
