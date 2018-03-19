@@ -23,6 +23,7 @@ public:
 	{
 		std::string language;
 		std::string custom_program_path;
+		std::string scripts;
 		std::string usbPort;
 		int crioVolume;
 	} config;

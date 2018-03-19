@@ -176,7 +176,24 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		return 0;
 	} else if (touch.id == "on1") {
 		control->red=100;
-	} else if (touch.id == "off1") {
+	}
+    else if (touch.id == "v1") {
+        int f=system(("./"+config->config.scripts+"video.sh 1 "+config->config.language).c_str());
+        gui->actual_screen = 1;
+    }
+    else if (touch.id == "v2") {
+        int f=system(("./"+config->config.scripts+"video.sh 2 "+config->config.language).c_str());
+        gui->actual_screen = 1;
+    }
+    else if (touch.id == "v3") {
+        int f=system(("./"+config->config.scripts+"video.sh 3 "+config->config.language).c_str());
+        gui->actual_screen = 1;
+    }
+    else if (touch.id == "v4") {
+        int f=system(("./"+config->config.scripts+"video.sh 4 "+config->config.language).c_str());
+        gui->actual_screen = 1;
+    }
+    else if (touch.id == "off1") {
 		control->red=0;
 	} else if (touch.id == "on2") {
 		control->blue=100;

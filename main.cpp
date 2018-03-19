@@ -73,7 +73,6 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 
 void screen0() {
 	gui1->add_screen();
-
 	gui1->screen_vector[gui1->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
 }
 
@@ -253,7 +252,7 @@ void screen4() {
 
 void screen5() {
 	gui2->add_screen();
-	//gui2->screen_vector[gui2->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
+	gui2->screen_vector[gui2->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
 }
 
 void screen6() {
@@ -367,7 +366,7 @@ void ProgramTimer()
 
 int main() {
 
-    int f=system("./data/scripts/config.sh");
+    int f=system((config->config.scripts+"config.sh").c_str());
 
 	cv::setMouseCallback("1", touch_callback);
 
@@ -547,7 +546,7 @@ int main() {
 	{
 		cv::waitKey(FrameTime-count);
 	}
-	std::cout<<"fps: "<<1000/double(count)<<std::endl;
+	//std::cout<<"fps: "<<1000/double(count)<<std::endl;
 }
 
 return 0;

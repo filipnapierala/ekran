@@ -33,6 +33,10 @@ void ConfigReader::Parse(std::string path)
 	{
 		file["usbPort"]>>config.usbPort;
 	}
+	if(!file["scripts"].empty())
+	{
+		file["scripts"]>>config.scripts;
+	}
 	if(!file["criovolume"].empty())
 	{
 		file["criovolume"]>>config.crioVolume;
