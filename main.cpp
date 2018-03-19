@@ -553,6 +553,7 @@ int main() {
 
 	if(touch_flag==true)
 	{
+        demoCounter=0;
 		touch_flag=false;
 		int signal=main_touch(control,touch,gui1,config);
 
