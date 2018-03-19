@@ -112,3 +112,8 @@ void Screen::change_value(int element)
 {
 	this->element_vector[element]->changeState();
 }
+
+void Screen::resetVideo(int element)
+{
+    this->element_vector[element]->changeState();
+}

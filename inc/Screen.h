@@ -45,7 +45,9 @@ public:
 
     void change_value(int element);
 
-	std::vector<std::unique_ptr<Element>> element_vector;
+    void resetVideo(int element);
+
+    std::vector<std::unique_ptr<Element>> element_vector;
 
 	bool debug;
 

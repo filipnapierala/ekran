@@ -51,7 +51,6 @@ void Video::draw(cv::Mat bg)
 	}
 }
 
-
 void Video::changeValue(int x, int y)
 {
 	this->pause=x;
@@ -63,5 +62,6 @@ void Video::changeValue(int x, int y)
 
 void Video::changeState()
 {
-
+    this->capture=cv::VideoCapture(this->path+".avi");
+	this->capture >> this->frame;
 }

@@ -487,6 +487,11 @@ int main() {
 			gui1->screen_vector[1]->VideoToggle(11);
 			gui2->screen_vector[1]->VideoToggle(0);
 		}
+        else if(signal==14)
+        {
+            gui1->screen_vector[1]->resetVideo(11);
+            gui2->screen_vector[1]->resetVideo(0);
+        }
 
         else if((signal>=1&&signal<=11))
         {
