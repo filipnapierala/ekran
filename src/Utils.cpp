@@ -114,12 +114,12 @@ void PrepareFile(std::string path, int red, int blue, int time)
         char buf[100];
         if(timeRed>0) {
             signals.push_back(std::to_string(timeRed) + "\r\n");
-            sprintf(buf, "NASTAWA%03d-%01d:%03d-%01d:%01d:%01d\r\n", 100, 5, 0, 5, 0, 0);
+            sprintf(buf, "NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n", 100, 5, 0, 5, 0, 0);
             signals.push_back(buf);
         }
         if(timeBlue>0) {
             signals.push_back(std::to_string(timeBlue) + "\r\n");
-            sprintf(buf, "NASTAWA%03d-%01d:%03d-%01d:%01d:%01d\r\n", 0, 5, 100, 5, 1, 1);
+            sprintf(buf, "NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n", 0, 5, 100, 5, 1, 1);
             signals.push_back(buf);
         }
     }
