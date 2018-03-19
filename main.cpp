@@ -19,6 +19,7 @@
 
 #define FrameTime 40
 //#define intro
+//#define crioTest
 
 bool touch_flag = false;
 
@@ -312,6 +313,7 @@ void Clock()
 
 void ProgramTimer()
 {
+#define SECONDS 10
     for(;;) {
         if (gui1->enable == true) {
             std::this_thread::sleep_for(std::chrono::microseconds(1));
@@ -342,21 +344,13 @@ void ProgramTimer()
             }
 
             std::cout<<"czeka..."<<std::endl;
-            for(int i=0;i<20;i++)
+            for(int i=0;i<SECONDS*2;i++)
             {
                 if (programs->isEnd == false) {
                     std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 }
             }
-            std::cout<<programs->ActualTime-10<<std::endl;
-
-//            for(int i=0;i<20;i++)
-//            {
-//                if (programs->isEnd == false) {
-//                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-//                }
-//            }
-//            std::cout<<"10 s"<<std::endl;
+            std::cout<<programs->ActualTime-SECONDS<<std::endl;
 
             programs->Refresh();
 
@@ -365,7 +359,7 @@ void ProgramTimer()
                 fan = true;
             }
 
-            for(int i=0;i<20;i++)
+            for(int i=0;i<SECONDS*2;i++)
             {
                 if (programs->isEnd == false) {
                     std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -376,8 +370,8 @@ void ProgramTimer()
             gui2->screen_vector[1]->setImage(0, 1);
             gui2->screen_vector[1]->setImage(0, 2);
 
-            if((programs->ActualTime-40)>0) {
-                for (int i = 0; i < (programs->ActualTime - 20) * 2; i++) {
+            if((programs->ActualTime-(SECONDS*2))>0) {
+                for (int i = 0; i < (programs->ActualTime - SECONDS*2) * 2; i++) {
                     if (programs->isEnd == false) {
                         std::this_thread::sleep_for(std::chrono::milliseconds(500));
                     }
@@ -495,11 +489,16 @@ int main() {
     gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
             false;
 
+#ifdef crioTest
 	//uncomment to test Crio
+	int counter=0;
 	while(cv::waitKey(3000)!='x')
 	{
 		programs->TestCrio();
+		counter++;
+		std::cout<<"usedCrio: "<<counter<<std::endl;
 	}
+#endif
 
     while(1)
 {
@@ -636,7 +635,7 @@ int main() {
 	{
 		cv::waitKey(FrameTime-count);
 	}
-	//std::cout<<"fps: "<<1000/double(count)<<std::endl;
+	std::cout<<"fps: "<<1000/double(count)<<std::endl;
 }
 
 return 0;
