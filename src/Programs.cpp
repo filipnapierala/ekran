@@ -10,7 +10,7 @@ Programs::Programs(std::string path, std::string port)
     this->port_=port;
     this->isEnd=true;
     this->isPause=false;
-    this->ActualTime=0;
+    this->ActualTime=10;
 
     this->actualCommand="";
     this->futureCommand="";
@@ -90,13 +90,15 @@ void Programs::SetProgram(std::string path)
     this->OverallTime=std::stoi(line);
 
     this->isPause=false;
+
+    this->Refresh();
 }
 void Programs::Stop()
 {
     this->isEnd=true;
     this->file.close();
     this->OverallTime=0;
-    this->ActualTime=0;
+    this->ActualTime=10;
 
     this->actualCommand="";
     this->futureCommand="";
@@ -146,7 +148,7 @@ void Programs::Parse()
         this->signals.fan=false;
     }
 
-    //std::cout<<this->signals.redActual<<","<<this->signals.blueActual<<","<<this->signals.fan<<","<<this->signals.redFuture<<","<<this->signals.blueFuture<<std::endl;
+    std::cout<<this->signals.redActual<<","<<this->signals.blueActual<<","<<this->signals.fan<<","<<this->signals.redFuture<<","<<this->signals.blueFuture<<std::endl;
 }
 
 void Programs::SetProgramID(int ID)

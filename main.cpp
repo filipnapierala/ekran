@@ -297,7 +297,8 @@ void Clock()
 
         if (gui1->enable == true) {
             gui2->screen_vector[1]->setImage(0,1);
-            gui2->screen_vector[1]->setImage(0,2);std::this_thread::sleep_for(std::chrono::microseconds(1));
+            gui2->screen_vector[1]->setImage(0,2);
+            std::this_thread::sleep_for(std::chrono::microseconds(1));
         } else {
             if (programs->isEnd == false) {
                 std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -317,12 +318,13 @@ void ProgramTimer()
             std::this_thread::sleep_for(std::chrono::microseconds(1));
         } else {
 
-            for(int i=0;i<(programs->ActualTime-2)*2;i++)
-            {
-                if (programs->isEnd == false) {
-                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                }
-            }
+            gui1->screen_vector[1]->setImage(0, 8);
+            gui1->screen_vector[1]->setImage(0, 9);
+
+            gui2->screen_vector[1]->setImage(0, 1);
+            gui2->screen_vector[1]->setImage(0, 2);
+
+            fan = false;
 
             if (programs->signals.redFuture == true) {
                 gui2->screen_vector[1]->setImage(1, 2);
@@ -330,39 +332,111 @@ void ProgramTimer()
             if (programs->signals.blueFuture == true) {
                 gui2->screen_vector[1]->setImage(1, 1);
             }
+            if (programs->signals.redFuture == true) {
+                gui1->screen_vector[1]->setImage(1, 8);
+            }
+            if (programs->signals.blueFuture == true) {
+                gui1->screen_vector[1]->setImage(1, 9);
+            }
 
-            for(int i=0;i<4;i++)
+            std::cout<<"czeka..."<<std::endl;
+            for(int i=0;i<20;i++)
             {
                 if (programs->isEnd == false) {
                     std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 }
             }
-            //std::this_thread::sleep_for(std::chrono::seconds(2));
+            std::cout<<programs->ActualTime-10<<std::endl;
 
-            if (programs->isEnd == false) {
+//            for(int i=0;i<20;i++)
+//            {
+//                if (programs->isEnd == false) {
+//                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+//                }
+//            }
+//            std::cout<<"10 s"<<std::endl;
 
-                programs->Refresh();
+            programs->Refresh();
 
-                gui1->screen_vector[1]->setImage(0, 8);
-                gui1->screen_vector[1]->setImage(0, 9);
+            if (programs->signals.fan == true) {
+                fan = true;
+            }
 
-                gui2->screen_vector[1]->setImage(0, 1);
-                gui2->screen_vector[1]->setImage(0, 2);
-                fan = false;
-
-                if (programs->signals.redActual == true) {
-                    gui1->screen_vector[1]->setImage(1, 8);
+            for(int i=0;i<20;i++)
+            {
+                if (programs->isEnd == false) {
+                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 }
-                if (programs->signals.blueActual == true) {
-                    gui1->screen_vector[1]->setImage(1, 9);
-                }
-                if (programs->signals.fan == true) {
-                    fan = true;
+            }
+            std::cout<<"10 s"<<std::endl;
+
+            gui2->screen_vector[1]->setImage(0, 1);
+            gui2->screen_vector[1]->setImage(0, 2);
+
+            for(int i=0;i<(programs->ActualTime-20)*2;i++)
+            {
+                if (programs->isEnd == false) {
+                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 }
             }
         }
     }
+
 }
+
+//void ProgramTimer()
+//{
+//    for(;;) {
+//        if (gui1->enable == true) {
+//            std::this_thread::sleep_for(std::chrono::microseconds(1));
+//        } else {
+//
+//            for(int i=0;i<(programs->ActualTime-2)*2;i++)
+//            {
+//                if (programs->isEnd == false) {
+//                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+//                }
+//            }
+//
+//            if (programs->signals.redFuture == true) {
+//                gui2->screen_vector[1]->setImage(1, 2);
+//            }
+//            if (programs->signals.blueFuture == true) {
+//                gui2->screen_vector[1]->setImage(1, 1);
+//            }
+//
+//            for(int i=0;i<4;i++)
+//            {
+//                if (programs->isEnd == false) {
+//                    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+//                }
+//            }
+//            //std::this_thread::sleep_for(std::chrono::seconds(2));
+//
+//            if (programs->isEnd == false) {
+//
+//                programs->Refresh();
+//
+//                gui1->screen_vector[1]->setImage(0, 8);
+//                gui1->screen_vector[1]->setImage(0, 9);
+//
+//                gui2->screen_vector[1]->setImage(0, 1);
+//                gui2->screen_vector[1]->setImage(0, 2);
+//                fan = false;
+//
+//                if (programs->signals.redActual == true) {
+//                    gui1->screen_vector[1]->setImage(1, 8);
+//                }
+//                if (programs->signals.blueActual == true) {
+//                    gui1->screen_vector[1]->setImage(1, 9);
+//                }
+//                if (programs->signals.fan == true) {
+//                    fan = true;
+//                }
+//            }
+//        }
+//    }
+//}
 
 int main() {
 
@@ -497,7 +571,6 @@ int main() {
 
         else if((signal>=1&&signal<=11))
         {
-            gui1->enable=false;
             programs->SetProgramID(signal);
             gui1->screen_vector[1]->VideoStart(11);
             gui2->screen_vector[1]->VideoStart(0);
@@ -517,6 +590,7 @@ int main() {
                     true;
             gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
                     true;
+            gui1->enable=false;
 
         }
 	}

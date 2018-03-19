@@ -77,11 +77,9 @@ std::string Screen::touch_callback(int x, int y, int& n)
 				&&(y>offset_y&&y<offset_y+this->element_vector[i]->height)&&(this->element_vector[i]->active==true))
 		{
 			n=i;
-            std::cout<<this->element_vector[i]->id<<std::endl;
 			return this->element_vector[i]->id;
 		}
 	}
-    std::cout<<"nic..."<<std::endl;
 	return " ";
 }
 
