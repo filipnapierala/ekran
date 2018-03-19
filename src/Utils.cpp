@@ -65,12 +65,12 @@ void SendFrame(std::string port,std::string command)
     close(fd);
 }
 
-void SendFrame(std::string port,int red,int blue,int fan,int crio,int time)
+void SendFrame(std::string port,int blue,int red,int fan,int crio,int time)
 {
 	std::cout<<port<<std::endl;
 	int fd = OpenPort(port);
 	Initport(fd);
-	char buffer[30];
+	char buffer[40];
 
 	int length = sprintf(buffer,"NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n", red,time,blue,time,fan,crio);
 	write(fd, buffer, length);
