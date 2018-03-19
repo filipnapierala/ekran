@@ -307,6 +307,7 @@ void DemoClock()
 			demoCounter++;
 			if(demoCounter>10&&demoFlag==false)
 			{
+                demoCounter=0;
 				demoFlag=true;
 				SendFrame(config->config.usbPort,"Demo");
 			}
