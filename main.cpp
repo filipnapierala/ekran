@@ -349,6 +349,7 @@ void ProgramTimer()
                 if (programs->isEnd == false) {
                     std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 }
+				while(programs->isPause==true);
             }
             std::cout<<programs->ActualTime-SECONDS<<std::endl;
 
@@ -364,7 +365,8 @@ void ProgramTimer()
                 if (programs->isEnd == false) {
                     std::this_thread::sleep_for(std::chrono::milliseconds(500));
                 }
-            }
+				while(programs->isPause==true);
+			}
             std::cout<<"10 s"<<std::endl;
 
             gui2->screen_vector[1]->setImage(0, 1);
@@ -375,11 +377,11 @@ void ProgramTimer()
                     if (programs->isEnd == false) {
                         std::this_thread::sleep_for(std::chrono::milliseconds(500));
                     }
-                }
+					while(programs->isPause==true);
+				}
             }
         }
     }
-
 }
 
 //void ProgramTimer()
