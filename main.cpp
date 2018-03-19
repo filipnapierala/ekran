@@ -325,6 +325,9 @@ void ProgramTimer()
             gui2->screen_vector[1]->setImage(0, 2);
 
             fan = false;
+            if (programs->signals.fan == true) {
+                fan = true;
+            }
 
             if (programs->signals.redFuture == true) {
                 gui2->screen_vector[1]->setImage(1, 2);
@@ -358,6 +361,7 @@ void ProgramTimer()
 
             programs->Refresh();
 
+            fan = false;
             if (programs->signals.fan == true) {
                 fan = true;
             }
