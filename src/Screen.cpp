@@ -74,12 +74,14 @@ std::string Screen::touch_callback(int x, int y, int& n)
 		auto offset_y=this->element_vector[i]->y;
 
 		if((x>offset_x&&x<offset_x+this->element_vector[i]->width)
-				&&(y>offset_y&&y<offset_y+this->element_vector[i]->height)&&this->element_vector[i]->active==true)
+				&&(y>offset_y&&y<offset_y+this->element_vector[i]->height)&&(this->element_vector[i]->active==true))
 		{
 			n=i;
+            std::cout<<this->element_vector[i]->id<<std::endl;
 			return this->element_vector[i]->id;
 		}
 	}
+    std::cout<<"nic..."<<std::endl;
 	return " ";
 }
 

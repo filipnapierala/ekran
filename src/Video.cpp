@@ -31,7 +31,6 @@ Video::~Video() {
 void Video::draw(cv::Mat bg)
 {
     if(this->pause==0) {
-		//this->capture.set(CV_CAP_PROP_POS_FRAMES,0);
         this->capture >> this->frame;
     }
 
@@ -62,6 +61,6 @@ void Video::changeValue(int x, int y)
 
 void Video::changeState()
 {
-    this->capture=cv::VideoCapture(this->path+".avi");
+	this->capture=cv::VideoCapture(this->path+".avi");
 	this->capture >> this->frame;
 }

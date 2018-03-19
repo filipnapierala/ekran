@@ -179,22 +179,22 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 	}
     else if (touch.id == "v1") {
         int f=system(("./"+config->config.scripts+"video.sh 1 "+config->config.language).c_str());
-        gui->actual_screen = 1;
+        //gui->actual_screen = 1;
         return 14;
     }
     else if (touch.id == "v2") {
         int f=system(("./"+config->config.scripts+"video.sh 2 "+config->config.language).c_str());
-        gui->actual_screen = 1;
+        //gui->actual_screen = 1;
         return 14;
     }
     else if (touch.id == "v3") {
         int f=system(("./"+config->config.scripts+"video.sh 3 "+config->config.language).c_str());
-        gui->actual_screen = 1;
+        //gui->actual_screen = 1;
         return 14;
     }
     else if (touch.id == "v4") {
         int f=system(("./"+config->config.scripts+"video.sh 4 "+config->config.language).c_str());
-        gui->actual_screen = 1;
+        //gui->actual_screen = 1;
         return 14;
     }
     else if (touch.id == "off1") {
