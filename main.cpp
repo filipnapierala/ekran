@@ -22,6 +22,8 @@
 //#define crioTest
 
 bool touch_flag = false;
+bool demoFlag=false;
+int demoCounter=0;
 
 bool fan=false;
 
@@ -35,6 +37,12 @@ auto gui1 = std::make_unique<GUI>("./data/Screen1/"+config->config.language,"1",
 Touch touch;
 
 void touch_callback(int event, int x, int y, int flags, void*) {
+
+	if(demoFlag==true)
+	{
+		demoFlag==false;
+		SendFrame(config->config.usbPort,"N");
+	}
 
 	if (event == 1) {
 		touch.n_1 = touch.n;
@@ -291,6 +299,21 @@ void setClock(int seconds, std::unique_ptr<GUI>&gui)
 	gui->screen_vector[1]->setImage(secondsUnit,7);
 }
 
+void DemoClock()
+{
+	for(;;) {
+		if (gui1->enable == true) {
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+			demoCounter++;
+			if(demoCounter>10&&demoFlag==false)
+			{
+				demoFlag=true;
+				SendFrame(config->config.usbPort,"Demo");
+			}
+		}
+	}
+}
+
 void Clock()
 {
     for(;;) {
@@ -480,6 +503,7 @@ int main() {
 
     std::thread(ProgramTimer).detach();
     std::thread(Clock).detach();
+	std::thread(DemoClock).detach();
 
     if(config->config.crioVolume<0)
     {
@@ -637,7 +661,7 @@ int main() {
 	{
 		cv::waitKey(FrameTime-count);
 	}
-	std::cout<<"fps: "<<1000/double(count)<<std::endl;
+	//std::cout<<"fps: "<<1000/double(count)<<std::endl;
 }
 
 return 0;
