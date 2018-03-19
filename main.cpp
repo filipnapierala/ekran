@@ -40,6 +40,7 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 
 	if (event == 1) {
 
+        demoCounter=0;
         if(demoFlag==true)
         {
             demoFlag=false;
@@ -311,7 +312,8 @@ void DemoClock()
 			{
                 demoCounter=0;
 				demoFlag=true;
-				SendFrame(config->config.usbPort,"Demo");
+                SendFrame(config->config.usbPort,"NASTAWA000-01:000-01:0:0");
+                SendFrame(config->config.usbPort,"Demo");
 			}
 		}
 	}
@@ -553,7 +555,6 @@ int main() {
 
 	if(touch_flag==true)
 	{
-        demoCounter=0;
 		touch_flag=false;
 		int signal=main_touch(control,touch,gui1,config);
 
