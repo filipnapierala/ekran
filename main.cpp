@@ -18,7 +18,7 @@
 #include "inc/Programs.h"
 
 #define FrameTime 40
-//#define intro
+#define intro
 
 bool touch_flag = false;
 
@@ -249,7 +249,6 @@ void screen4() {
 			"pr8");
 }
 
-
 void screen5() {
 	gui2->add_screen();
 	gui2->screen_vector[gui2->actual_screen]->add_video("/intro", 0, 0, "intro",1280,800);
@@ -259,9 +258,9 @@ void screen6() {
 	gui2->add_screen();
 	gui2->screen_vector[gui2->actual_screen]->add_video("/vid", 0, 0, "video", 1280, 800);
 
-    gui2->screen_vector[gui2->actual_screen]->add_image("/blue", 1100, 30,
+    gui2->screen_vector[gui2->actual_screen]->add_image("/blue", 1200, 30,
                                                         "blue");
-    gui2->screen_vector[gui2->actual_screen]->add_image("/red", 1200, 30,
+    gui2->screen_vector[gui2->actual_screen]->add_image("/red", 1100, 30,
                                                         "red");
     gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 600, 700,
                                                         "digit1");
