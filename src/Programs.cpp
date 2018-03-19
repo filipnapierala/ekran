@@ -115,7 +115,7 @@ void Programs::Parse()
 {
     this->ClearSignals();
     int red,blue,fan,t1,t2,crio;
-    sscanf(this->actualCommand.c_str(),"NASTAWA%03d-%01d:%03d-%01d:%01d:%01d", &red,&t1,&blue,&t2,&fan,&crio);
+    sscanf(this->actualCommand.c_str(),"NASTAWA%03d-%02d:%03d-%02d:%01d:%01d", &red,&t1,&blue,&t2,&fan,&crio);
 
     if(red>0)
     {
@@ -130,7 +130,7 @@ void Programs::Parse()
         this->signals.fan=true;
     }
 
-    sscanf(this->futureCommand.c_str(),"NASTAWA%03d-%01d:%03d-%01d:%01d:%01d", &red,&t1,&blue,&t2,&fan,&crio);
+    sscanf(this->futureCommand.c_str(),"NASTAWA%03d-%02d:%03d-%02d:%01d:%01d", &red,&t1,&blue,&t2,&fan,&crio);
 
     if(red>0)
     {
