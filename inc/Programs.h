@@ -29,6 +29,8 @@ public:
     void SetProgramID(int ID);
     void Stop();
     void Pause();
+    void TestCrio();
+
     int GetTime();
 
     struct Signals

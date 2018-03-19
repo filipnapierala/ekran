@@ -18,7 +18,7 @@
 #include "inc/Programs.h"
 
 #define FrameTime 40
-#define intro
+//#define intro
 
 bool touch_flag = false;
 
@@ -495,6 +495,11 @@ int main() {
     gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
             false;
 
+	//uncomment to test Crio
+	while(cv::waitKey(3000)!='x')
+	{
+		programs->TestCrio();
+	}
 
     while(1)
 {

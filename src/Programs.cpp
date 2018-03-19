@@ -222,3 +222,8 @@ int Programs::GetTime()
     }
     return this->OverallTime;
 }
+
+void Programs::TestCrio()
+{
+        SendFrame(this->port_, "NASTAWA000-05:000-05:0:1");
+}
