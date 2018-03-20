@@ -55,7 +55,9 @@ int Programs::Refresh()
         if (this->GetActualTime() == false) {
             this->actualCommand = this->futureCommand;
             this->Parse();
-            SendFrame(this->port_, this->actualCommand);
+            if(this->actualCommand!="") {
+                SendFrame(this->port_, this->actualCommand);
+            }
 
             this->isEnd = true;
             this->file.close();
@@ -92,6 +94,8 @@ void Programs::SetProgram(std::string path)
     this->isPause=false;
 
     this->Refresh();
+
+    SendFrame(this->port_, "NASTAWA000-05:050-5:0:0");
 }
 void Programs::Stop()
 {

@@ -52,11 +52,11 @@ int Screen1_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		return 0;
 	}
 	else if (touch.id == "hot") {
-		gui->screen_vector[1]->trackbarChangeValue(1,10);
+		gui->screen_vector[1]->setImage(1,10);
 		return 1;
 	}
 	else if (touch.id == "crio") {
-		gui->screen_vector[1]->trackbarChangeValue(4,10);
+		gui->screen_vector[1]->setImage(4,10);
         return 2;
 	}
     else if (touch.id == "stop") {
@@ -73,94 +73,55 @@ int Screen1_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 
     static int time=0;
-    static int red=0;
-    static int blue=0;
+    static int HotCold=0;
+#define HOT_SATURATION 8
+#define TIME_SATURATION 5
 
 	if (touch.id == "ret") {
 		gui->actual_screen = 1;
-        time=0;
-        red=0;
-        blue=0;
+        time=1;
+        HotCold=1;
 		return 0;
 	}
-
 	else if (touch.id == "start") {
 		gui->actual_screen = 1;
-		gui->screen_vector[1]->trackbarChangeValue(2,10);
-        gui->screen_vector[1]->trackbarChangeValue(0,11);
+		gui->screen_vector[1]->setImage(2,10);
+        gui->screen_vector[1]->setImage(0,11);
 
-        time=std::min(std::max(time,0),100);
-        red=std::min(std::max(red,0),100);
-        blue=std::min(std::max(blue,0),100);
+        time=std::min(std::max(time,0),TIME_SATURATION);
+        HotCold=std::min(std::max(HotCold,0),HOT_SATURATION);
 
-        PrepareFile(config->config.custom_program_path+"manual",red,blue,time);
-
+        PrepareFile(config->config.custom_program_path+"manual",(HotCold+1)*10,(HotCold+1)*10,(time+1)*5);
         return 3;
 	}
 	else if (touch.id == "plus1") {
-        red+=10;
-        blue=100-red;
-        red=std::min(std::max(red,0),100);
-        blue=std::min(std::max(blue,0),100);
+        HotCold+=1;
+        HotCold=std::min(std::max(HotCold,0),HOT_SATURATION);
 
-        gui->screen_vector[gui->actual_screen]->element_vector[8]->changeValue(
-				red, 1);
-		;
-        gui->screen_vector[gui->actual_screen]->element_vector[9]->changeValue(
-                blue, 1);
-        ;
+        gui->screen_vector[gui->actual_screen]->element_vector[6]->changeValue(
+                HotCold, 1);
 		return 0;
-	} else if (touch.id == "plus2"){
-        blue+=10;
-        red=100-blue;
-        red=std::min(std::max(red,0),100);
-        blue=std::min(std::max(blue,0),100);
+	} else if (touch.id == "plus2") {
+        time += 1;
+        time = std::min(std::max(time, 0), TIME_SATURATION);
 
-        gui->screen_vector[gui->actual_screen]->element_vector[9]->changeValue(
-				blue, 1);
-		;
-        gui->screen_vector[gui->actual_screen]->element_vector[8]->changeValue(
-                red, 1);
-        ;
-		return 0;
-	} else if (touch.id == "plus3") {
-        time+=10;
-		gui->screen_vector[gui->actual_screen]->element_vector[10]->changeValue(
-				time, 1);
-		;
-		return 0;
-	}
+        gui->screen_vector[gui->actual_screen]->element_vector[7]->changeValue(
+                time, 1);
+        return 0;
+    }
     else if (touch.id == "minus1") {
-        red-=10;
-        blue=100-red;
-        red=std::min(std::max(red,0),100);
-        blue=std::min(std::max(blue,0),100);
+        HotCold-=1;
+        HotCold=std::min(std::max(HotCold,0),HOT_SATURATION);
 
-        gui->screen_vector[gui->actual_screen]->element_vector[8]->changeValue(
-                red, 1);
-        ;
-        gui->screen_vector[gui->actual_screen]->element_vector[9]->changeValue(
-                blue, 1);
-        ;
+        gui->screen_vector[gui->actual_screen]->element_vector[6]->changeValue(
+                HotCold, 1);
         return 0;
     } else if (touch.id == "minus2") {
-        blue-=10;
-        red=100-blue;
-        red=std::min(std::max(red,0),100);
-        blue=std::min(std::max(blue,0),100);
+        time-=1;
+        time=std::min(std::max(time,0),TIME_SATURATION);
 
-        gui->screen_vector[gui->actual_screen]->element_vector[9]->changeValue(
-                blue, 1);
-        ;
-        gui->screen_vector[gui->actual_screen]->element_vector[8]->changeValue(
-                red, 1);
-        ;
-        return 0;
-    } else if (touch.id == "minus3") {
-        time-=10;
-        gui->screen_vector[gui->actual_screen]->element_vector[10]->changeValue(
+        gui->screen_vector[gui->actual_screen]->element_vector[7]->changeValue(
                 time, 1);
-        ;
         return 0;
     }
 	return -1;

@@ -128,25 +128,25 @@ void screen2() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/start", 0, 650,
 			"start");
 
+	//gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490,
+	//		y - 300, "minus1");//do usuniecia
 	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490, 
-			y - 300, "minus1");//do usuniecia
-	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490, 
-			y - 160, "minus2");
+			y - 160, "minus1");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 490,
-			y + 140, "minus3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y - 300,
-			"plus1");//do usuniecia
+			y + 140, "minus2");
+	//gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y - 300,
+	//		"plus1");//do usuniecia
 	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y - 175,
-			"plus2");
+			"plus1");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 460, y + 125,
-			"plus3");
+			"plus2");
 
+	//gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
+	//		y - 300, 100, "trackbar1");//do usuniecia
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y - 300, 100, "trackbar1");//do usuniecia
+			y - 160,8, "trackbar1");
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y - 160, 100, "trackbar2");
-	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y + 140, 100, "trackbar3");
+			y + 140, 5, "trackbar2");
 
 	gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 165,
 			"hot");
@@ -468,7 +468,7 @@ void ProgramTimer()
 
 int main() {
 
-    SendFrame(config->config.usbPort,0,0,0,0,0);
+    SendFrame(config->config.usbPort,"Demo");
     int f=system((config->config.scripts+"config.sh").c_str());
 
 	cv::setMouseCallback("1", touch_callback);

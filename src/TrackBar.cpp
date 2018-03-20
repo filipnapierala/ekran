@@ -51,3 +51,7 @@ void TrackBar::changeValue(int x, int y)
 	this->value=std::min(std::max(this->value,0),100);
 }
 
+int TrackBar::getMaxValue()
+{
+	return this->maxValue;
+}

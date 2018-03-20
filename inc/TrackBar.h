@@ -19,7 +19,7 @@ public:
 	void changeState();
 	void changeValue(int x, int y);
 	void changeValue(int value);
-
+	int getMaxValue();
 
 	bool pushed;
 
