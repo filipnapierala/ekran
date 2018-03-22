@@ -164,9 +164,9 @@ void screen2() {
 			"plus2");
 
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y - 160,8, "trackbar1");
-	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y + 140, 5, "trackbar2");
+			y - 175,8, "trackbar1");
+	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s2", 240,
+			y + 125, 5, "trackbar2");
 
 	gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 165,
 			"hot");
@@ -176,18 +176,18 @@ void screen2() {
 			"time");
 //nowe
 //hot/cold
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-307, y - 175, "podz2");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-207, y - 175, "podz3");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-107, y - 175, "podz4");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-7, y - 175, "podz5");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+92, y - 175, "podz6");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+193, y - 175, "podz7");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+292, y - 175, "podz8");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-307, y - 175, "podz2");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-207, y - 175, "podz3");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-107, y - 175, "podz4");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-7, y - 175, "podz5");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+92, y - 175, "podz6");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+193, y - 175, "podz7");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+292, y - 175, "podz8");
 //time
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-248, y + 125, "podz11");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-88, y + 125, "podz12");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+72, y + 125, "podz13");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+232, y + 125, "podz14");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-248, y + 125, "podz11");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-88, y + 125, "podz12");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+72, y + 125, "podz13");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+232, y + 125, "podz14");
 //napisy
 	gui1->screen_vector[gui1->actual_screen]->add_image("/max", x-440, y - 120, "max1");
 	gui1->screen_vector[gui1->actual_screen]->add_image("/max", x+360, y - 120, "max2");
