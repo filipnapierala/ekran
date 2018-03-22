@@ -25,6 +25,6 @@ int OpenPort(std::string port);
 void SendFrame(std::string port, int red, int blue, int fan, int crio, int time);
 void SendFrame(std::string port, std::string command);
 
-void PrepareFile(std::string path, int red, int blue, int time);
+void PrepareFile(std::string path, int HotCold, int time);
 
 #endif /* UTILS_H_ */

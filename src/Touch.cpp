@@ -91,7 +91,7 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
         time=std::min(std::max(time,0),TIME_SATURATION);
         HotCold=std::min(std::max(HotCold,0),HOT_SATURATION);
 
-        PrepareFile(config->config.custom_program_path+"manual",(HotCold+1)*10,(HotCold+1)*10,(time+1)*5);
+        PrepareFile(config->config.custom_program_path+"manual",(HotCold+1),(time+1)*5*60);
         return 3;
 	}
 	else if (touch.id == "plus1") {

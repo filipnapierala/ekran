@@ -82,29 +82,21 @@ void SendFrame(std::string port,int blue,int red,int fan,int crio,int time)
 	close(fd);
 }
 
-void PrepareFile(std::string path, int red, int blue, int time)
+void PrepareFile(std::string path, int HotCold, int time)
 {
     std::fstream file;
 
     file.open(path);
-    std::string buffer=std::to_string(time*20)+"\r\n";
+    std::string buffer=std::to_string(time)+"\r\n";
     file.write(buffer.c_str(),buffer.size());
 
     std::vector<std::string>signals;
 
     int timeRed, timeBlue;
 
-    if(blue!=0&&red!=0)
-    {
-        if(blue>=red)
-        {
-            timeRed = (float(red) / float(blue)) *time;
-            timeBlue = 2*time - timeRed;
-        } else{
-            timeBlue = (float(blue) / float(red)) *time;
-            timeRed = 2*time - timeBlue;
-        }
-    }
+    timeRed = (float(HotCold) / float(10)) *(time/10);
+    timeBlue = (1-(float(HotCold) / float(10)))*(time/10);
+
 
     //std::cout<<"timeRED: "<<timeRed<<std::endl;
     //std::cout<<"timeBLUE: "<<timeBlue<<std::endl;
@@ -112,16 +104,13 @@ void PrepareFile(std::string path, int red, int blue, int time)
     for(int i=0;i<10;i++)
     {
         char buf[100];
-        if(timeRed>0) {
-            signals.push_back(std::to_string(timeRed) + "\r\n");
-            sprintf(buf, "NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n", 100, 5, 0, 5, 0, 0);
-            signals.push_back(buf);
-        }
-        if(timeBlue>0) {
-            signals.push_back(std::to_string(timeBlue) + "\r\n");
-            sprintf(buf, "NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n", 0, 5, 100, 5, 1, 1);
-            signals.push_back(buf);
-        }
+        signals.push_back(std::to_string(timeRed) + "\r\n");
+        sprintf(buf, "NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n", 100, 5, 0, 5, 0, 0);
+        signals.push_back(buf);
+
+        signals.push_back(std::to_string(timeBlue) + "\r\n");
+        sprintf(buf, "NASTAWA%03d-%02d:%03d-%02d:%01d:%01d\r\n", 0, 5, 100, 5, 1, 1);
+        signals.push_back(buf);
     }
     for(int i=0;i<signals.size();i++)
     {

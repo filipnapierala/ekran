@@ -17,6 +17,7 @@ TrackBar::TrackBar(std::string radial_path, std::string slider_path, int x, int 
 	this->value=0;
 
 	this->pushed=0;
+    this->active=true;
 
 	this->slider=cv::imread(slider_path+".png",cv::IMREAD_UNCHANGED);
 	this->radial=cv::imread(radial_path+"_"+std::to_string(this->pushed)+".png",cv::IMREAD_UNCHANGED);
@@ -48,7 +49,7 @@ void TrackBar::changeState()
 void TrackBar::changeValue(int x, int y)
 {
 	this->value=x;
-	this->value=std::min(std::max(this->value,0),100);
+	this->value=std::min(std::max(this->value,0),this->maxValue);
 }
 
 int TrackBar::getMaxValue()
