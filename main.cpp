@@ -209,46 +209,51 @@ void screen3() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 1130, 0, "ret");
 #undef y
 #define y 213
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x - 282, y,
+//blue
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x - 40, y,
 			"on1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x - 187, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x + 65, y,
 			"off1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x + 113, y,
+//red
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x + 280, y,
 			"on2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x + 213, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x + 385, y,
 			"off2");
 #undef y
-#define y 613	
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x - 282, y,
+#define y 613
+//fan	
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x - 40, y,
 			"on3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x - 187, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x + 65, y,
 			"off3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/push", x + 150, y - 13,
+//crio
+	gui1->screen_vector[gui1->actual_screen]->add_button("/push", x + 320, y - 13,
 			"push");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/reset", 1180, 700,
 			"reset");
 
 #undef y
 #define y 400
-	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", x - 225, y - 262,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", x + 25, y - 262,
 			"blue");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/red", x + 175, y - 262,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/red", x + 345, y - 262,
 			"red");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", x - 225, y + 138,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", x + 25, y + 138,
 			"fan");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/crio", x + 175, y + 138,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/crio", x + 345, y + 138,
 			"crio");
 //nowe
-	gui1->screen_vector[gui1->actual_screen]->add_image("/video", x - 525, y -262,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/video", x - 345, y -262,
 			"video");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/v1", x - 537, y-162,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v1", x - 465, y-145,
 			"v1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/v2", x - 537, y-62,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v2", x - 250, y-145,
 			"v2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/v3", x - 537, y+38,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v3", x - 465, y+70,
 			"v3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/v4", x - 537, y+138,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v4", x - 250, y+70,
 			"v4");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/imageV", x-370, y - 50, "30");
 }
 
 void screen4() {
