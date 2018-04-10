@@ -40,7 +40,6 @@ bool trackbarFlag=false;
 
 void touch_callback(int event, int x, int y, int flags, void*) {
 
-
 	if (event == 1) {
 
         demoCounter=0;
@@ -322,7 +321,12 @@ void DemoClock()
 	for(;;) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
         if (demoFlag == false) {
-			demoCounter++;
+            demoCounter++;
+
+            if(gui1->enable==false){
+                demoCounter=0;
+            }
+
             std::cout<<demoCounter<<std::endl;
 			if(demoCounter>10&&demoFlag==false)
 			{
@@ -596,7 +600,6 @@ int main() {
             gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
                     false;
 
-
             gui1->enable=true;
 
             gui1->screen_vector[1]->setImage(0,8);
@@ -647,7 +650,6 @@ int main() {
             gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
                     true;
             gui1->enable=false;
-
         }
 	}
 
