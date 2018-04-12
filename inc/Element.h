@@ -24,6 +24,7 @@ public:
 	virtual void draw(cv::Mat bg)=0;
 	virtual void changeState()=0;
 	virtual void changeValue(int, int)=0;
+    virtual void Reload(std::string name)=0;
 	//virtual int getMaxValue()=0;
 
 

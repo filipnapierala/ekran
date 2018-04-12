@@ -18,6 +18,7 @@ public:
 	void draw(cv::Mat bg);
 	void changeState();
 	void changeValue(int x, int y);
+	void Reload(std::string name);
 
 private:
 	int state;

@@ -18,6 +18,8 @@ public:
 
 	void draw(cv::Mat bg);
 	void changeValue(int x, int y);
+	void Reload(std::string name);
+
 
 private:
 	int resize=0;

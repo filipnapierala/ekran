@@ -23,6 +23,8 @@ public:
 	void changeValue(int x, int y);
 	void changeState();
     void resetVideo();
+	void Reload(std::string name);
+
 
 private:
 

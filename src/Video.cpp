@@ -64,3 +64,8 @@ void Video::changeState()
 	this->capture=cv::VideoCapture(this->path+".avi");
 	this->capture >> this->frame;
 }
+
+void Video::Reload(std::string name)
+{
+
+}

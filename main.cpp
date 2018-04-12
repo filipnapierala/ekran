@@ -252,7 +252,7 @@ void screen3() {
 			"v3");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/v4", x - 250, y+70,
 			"v4");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/imageV", x-370, y - 50, "30");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/imgVid", x-370, y - 50, "30");
 }
 
 void screen4() {

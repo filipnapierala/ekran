@@ -57,3 +57,8 @@ void Button::changeState()
 {
 
 }
+
+void Button::Reload(std::string name)
+{
+
+}

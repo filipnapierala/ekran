@@ -56,3 +56,8 @@ int TrackBar::getMaxValue()
 {
 	return this->maxValue;
 }
+
+void TrackBar::Reload(std::string name)
+{
+
+}

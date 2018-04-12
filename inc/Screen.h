@@ -47,6 +47,8 @@ public:
 
     void resetVideo(int element);
 
+	std::string GetPath();
+
     std::vector<std::unique_ptr<Element>> element_vector;
 
 	bool debug;

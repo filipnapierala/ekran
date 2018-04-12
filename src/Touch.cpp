@@ -139,23 +139,23 @@ int Screen3_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		control->blue=100;
 	}
     else if (touch.id == "v1") {
-        int f=system(("./"+config->config.scripts+"video.sh 1 "+config->config.language).c_str());
-        //gui->actual_screen = 1;
+        int f=system(("./"+config->config.scripts+"video.sh 0 "+config->config.language).c_str());
+        gui->screen_vector[gui->actual_screen]->element_vector[18]->Reload(gui->screen_vector[gui->actual_screen]->GetPath()+"/imgVid");
         return 14;
     }
     else if (touch.id == "v2") {
-        int f=system(("./"+config->config.scripts+"video.sh 2 "+config->config.language).c_str());
-        //gui->actual_screen = 1;
+        int f=system(("./"+config->config.scripts+"video.sh 1 "+config->config.language).c_str());
+        gui->screen_vector[gui->actual_screen]->element_vector[18]->Reload(gui->screen_vector[gui->actual_screen]->GetPath()+"/imgVid");
         return 14;
     }
     else if (touch.id == "v3") {
-        int f=system(("./"+config->config.scripts+"video.sh 3 "+config->config.language).c_str());
-        //gui->actual_screen = 1;
+        int f=system(("./"+config->config.scripts+"video.sh 2 "+config->config.language).c_str());
+        gui->screen_vector[gui->actual_screen]->element_vector[18]->Reload(gui->screen_vector[gui->actual_screen]->GetPath()+"/imgVid");
         return 14;
     }
     else if (touch.id == "v4") {
-        int f=system(("./"+config->config.scripts+"video.sh 4 "+config->config.language).c_str());
-        //gui->actual_screen = 1;
+        int f=system(("./"+config->config.scripts+"video.sh 3 "+config->config.language).c_str());
+        gui->screen_vector[gui->actual_screen]->element_vector[18]->Reload(gui->screen_vector[gui->actual_screen]->GetPath()+"/imgVid");
         return 14;
     }
     else if (touch.id == "off1") {

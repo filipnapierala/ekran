@@ -117,3 +117,8 @@ void Screen::resetVideo(int element)
 {
     this->element_vector[element]->changeState();
 }
+
+std::string Screen::GetPath()
+{
+	return this->path;
+}

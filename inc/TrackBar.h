@@ -20,8 +20,9 @@ public:
 	void changeValue(int x, int y);
 	void changeValue(int value);
 	int getMaxValue();
+    void Reload(std::string name);
 
-	bool pushed;
+    bool pushed;
 
 private:
 	cv::Mat radial, slider;

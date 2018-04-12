@@ -49,3 +49,25 @@ void Image::changeState()
 {
 	this->state=(this->state+1)%this->img_vector.size();
 }
+
+void Image::Reload(std::string name)
+{
+    this->state=0;
+    this->path=name;
+
+    cv::Mat img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
+    this->width=img.cols;
+    this->height=img.rows;
+
+    this->img_vector.clear();
+
+    while(img.cols!=0)
+    {
+        cv::resize(img,img,cv::Size(),resize,resize,CV_INTER_CUBIC);
+        this->img_vector.push_back(img);
+        this->state++;
+        img=cv::imread(this->path+"_"+std::to_string(this->state)+".png",cv::IMREAD_UNCHANGED);
+    }
+
+    this->state=0;
+}
