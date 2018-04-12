@@ -70,9 +70,7 @@ void touch_callback(int event, int x, int y, int flags, void*) {
 	}
 	if (event == 4) {
 
-        if(touch.id=="trackbar1"||touch.id=="trackbar2") {
-            trackbarFlag = false;
-        }
+        trackbarFlag = false;
 
 		touch.n_1 = touch.n;
 		touch.id = gui1->screen_vector[gui1->actual_screen]->touch_callback(x, y,
@@ -99,7 +97,7 @@ void touch_callback(int event, int x, int y, int flags, void*) {
             gui1->screen_vector[gui1->actual_screen]->element_vector[6]->changeValue(
                     int((float(x - 240) / 800) * 9), 1);
         }
-        else if(touch.id=="trackbar2") {
+        if(touch.id=="trackbar2") {
             gui1->screen_vector[gui1->actual_screen]->element_vector[7]->changeValue(
                     int((float(x - 240) / 800) * 5), 1);
         }
@@ -173,21 +171,7 @@ void screen2() {
 			"cold");
 	gui1->screen_vector[gui1->actual_screen]->add_image("/time", 40, y + 135,
 			"time");
-//nowe
-//hot/cold
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-307, y - 175, "podz2");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-207, y - 175, "podz3");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-107, y - 175, "podz4");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-7, y - 175, "podz5");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+92, y - 175, "podz6");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+193, y - 175, "podz7");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+292, y - 175, "podz8");
-//time
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-248, y + 125, "podz11");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x-88, y + 125, "podz12");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+72, y + 125, "podz13");
-	//gui1->screen_vector[gui1->actual_screen]->add_image("/podz", x+232, y + 125, "podz14");
-//napisy
+
 	gui1->screen_vector[gui1->actual_screen]->add_image("/max", x-440, y - 120, "max1");
 	gui1->screen_vector[gui1->actual_screen]->add_image("/max", x+360, y - 120, "max2");
 	gui1->screen_vector[gui1->actual_screen]->add_image("/5050", x-50, y - 120, "5050");
@@ -333,7 +317,7 @@ void DemoClock()
             }
 
             std::cout<<demoCounter<<std::endl;
-			if(demoCounter>10&&demoFlag==false)
+			if(demoCounter>30&&demoFlag==false)
 			{
                 SendFrame(config->config.usbPort,0,0,0,0,0);
                 demoCounter=0;
