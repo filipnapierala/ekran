@@ -113,14 +113,14 @@ void screen0() {
 void screen1() {
 	gui1->add_screen();
 
-	gui1->screen_vector[gui1->actual_screen]->add_button("/crio", 50, 25, "crio");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/hot", 150, 250, "hot");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/manual", 340, 350,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/crio", 638, 543, "crio");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/hot", 723, 455, "hot");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/manual", 569,645,
 			"manual");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/else", 0, 460, "else");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/diag", 1215, 35,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/else", 1152, 697, "else");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/diag", 1076, 697,
 			"diag");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/stop", 1180, 700,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/stop", 118,682,
 			"stop");
 
 	gui1->screen_vector[gui1->actual_screen]->add_image("/alarm", 1170, 37,
@@ -129,16 +129,16 @@ void screen1() {
 #define x 920
 	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", x - 220, 480,
 			"fan");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/red", x - 75, 500,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/red",220, 475,
 			"red");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", x + 25, 500,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", 315, 475,
 			"blue");
 	gui1->screen_vector[gui1->actual_screen]->add_image("/pr", x + 145, 480,
 			"pr");
 
-	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 600, 100, "video", 640, 360, true);
+	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 50, 84, "video", 640, 360, true);
 //nowe
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pause", 1120, 700,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pause", 224, 682,
 			"pause");
 }
 
