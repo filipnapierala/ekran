@@ -84,9 +84,8 @@ void SendFrame(std::string port,int blue,int red,int fan,int crio,int time)
 
 void PrepareFile(std::string path, int HotCold, int time)
 {
-    std::fstream file;
+	std::ofstream file (path, std::ios::out | std::ios::trunc); // clear contents
 
-    file.open(path);
     std::string buffer=std::to_string(time)+"\r\n";
     file.write(buffer.c_str(),buffer.size());
 
@@ -94,8 +93,8 @@ void PrepareFile(std::string path, int HotCold, int time)
 
     int timeRed, timeBlue;
 
-    timeRed = (float(HotCold) / float(10)) *(time/10);
-    timeBlue = (1-(float(HotCold) / float(10)))*(time/10);
+    timeRed = (ceil(float(HotCold) / float(10))) *(time/10);
+    timeBlue = (1-(ceil(float(HotCold) / float(10))))*(time/10);
 
 
     //std::cout<<"timeRED: "<<timeRed<<std::endl;

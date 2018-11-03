@@ -39,6 +39,8 @@ auto gui1 = std::make_unique<GUI>("./data/Screen1/"+config->config.language,"1",
 Touch touch;
 bool trackbarFlag=false;
 
+int tim=0;
+int HotCold=0;
 
 void touch_callback(int event, int x, int y, int flags, void*) {
 
@@ -97,11 +99,13 @@ void touch_callback(int event, int x, int y, int flags, void*) {
     {
         if(touch.id=="trackbar1") {
             gui1->screen_vector[gui1->actual_screen]->element_vector[6]->changeValue(
-                    int((float(x - 240) / 800) * 9), 1);
+                    int((float(x - 295) / 909) * 8), 1);
+            HotCold=int((float(x - 295) / 909) * 8);
         }
         if(touch.id=="trackbar2") {
             gui1->screen_vector[gui1->actual_screen]->element_vector[7]->changeValue(
-                    int((float(x - 240) / 800) * 5), 1);
+                    int((float(x - 295) / 909) * 7), 1);
+            tim=int((float(x - 295) / 909) * 7);
         }
         //std::cout<<"value: "<<int((float(x-240)/800)*9) <<std::endl;
     }
@@ -347,7 +351,8 @@ void DemoClock()
                 demoCounter=0;
 				demoFlag=true;
                 SendFrame(config->config.usbPort,"Demo");
-			}
+                gui1->actual_screen = 0;//NEW!!!
+            }
 		}
 	}
 }
@@ -372,6 +377,8 @@ void Clock()
                 {
                     setClock(0, gui2);
                     setClock_2(0,gui1);//NEW!!!
+                    arrow=false;
+                    gui1->screen_vector[gui1->actual_screen]->VideoStart(13);
                 }
             }
         }

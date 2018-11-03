@@ -30,4 +30,5 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch,std::unique_pt
 int Screen3_callback(std::unique_ptr<Control>&control,Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
 int Screen4_callback(std::unique_ptr<Control>&control,Touch touch,std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config);
 
+
 #endif /* TOUCH_H_ */

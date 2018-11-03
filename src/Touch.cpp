@@ -72,14 +72,13 @@ int Screen1_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 
 int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_ptr<GUI>&gui,std::unique_ptr<ConfigReader>&config) {
 
-    static int time=0;
-    static int HotCold=0;
+
 #define HOT_SATURATION 8
 #define TIME_SATURATION 7
 
 	if (touch.id == "ret") {
 		gui->actual_screen = 1;
-        time=1;
+        tim=1;
         HotCold=1;
 		return 0;
 	}
@@ -88,10 +87,10 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
 		gui->screen_vector[1]->setImage(2,10);
         gui->screen_vector[1]->setImage(0,11);
 
-        time=std::min(std::max(time,0),TIME_SATURATION);
+        tim=std::min(std::max(tim,0),TIME_SATURATION);
         HotCold=std::min(std::max(HotCold,0),HOT_SATURATION);
 
-        PrepareFile(config->config.custom_program_path+"manual",(HotCold+1),(time+1)*5*60);
+        PrepareFile(config->config.custom_program_path+"manual",(HotCold+1),(tim+1)*5*60);
         return 3;
 	}
 	else if (touch.id == "plus1") {
@@ -102,11 +101,11 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
                 HotCold, 1);
 		return 0;
 	} else if (touch.id == "plus2") {
-        time += 1;
-        time = std::min(std::max(time, 0), TIME_SATURATION);
+        tim += 1;
+        tim = std::min(std::max(tim, 0), TIME_SATURATION);
 
         gui->screen_vector[gui->actual_screen]->element_vector[7]->changeValue(
-                time, 1);
+                tim, 1);
         return 0;
     }
     else if (touch.id == "minus1") {
@@ -117,11 +116,11 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
                 HotCold, 1);
         return 0;
     } else if (touch.id == "minus2") {
-        time-=1;
-        time=std::min(std::max(time,0),TIME_SATURATION);
+        tim-=1;
+        tim=std::min(std::max(tim,0),TIME_SATURATION);
 
         gui->screen_vector[gui->actual_screen]->element_vector[7]->changeValue(
-                time, 1);
+                tim, 1);
         return 0;
     }
 	return -1;
