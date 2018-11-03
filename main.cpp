@@ -26,6 +26,8 @@ bool demoFlag=false;
 int demoCounter=0;
 
 bool fan=false;
+bool fan_temp=false;
+bool arrow=false;
 
 auto config = std::make_unique<ConfigReader>("./data/config");
 auto control = std::make_unique<Control>();
@@ -113,7 +115,7 @@ void screen0() {
 void screen1() {
 	gui1->add_screen();
 
-	gui1->screen_vector[gui1->actual_screen]->add_button("/crio", 638, 543, "crio");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/crio", 638, 553, "crio");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/hot", 723, 455, "hot");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/manual", 569,645,
 			"manual");
@@ -127,19 +129,32 @@ void screen1() {
 			"alarm");
 
 #define x 920
-	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", x - 220, 480,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", 124, 400,//!!
 			"fan");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/red",220, 475,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/red",220, 400,
 			"red");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", 315, 475,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", 315, 400,
 			"blue");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/pr", x + 145, 480,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/pr", x + 145, 480,//!!
 			"pr");
 
-	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 50, 84, "video", 640, 360, true);
+	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 50, 25, "video", 640, 360, true);
 //nowe
 	gui1->screen_vector[gui1->actual_screen]->add_button("/pause", 224, 682,
 			"pause");
+
+    gui1->screen_vector[gui1->actual_screen]->add_image("/arrow", 384, 395,
+                                                         "arrow");
+
+    gui1->screen_vector[gui1->actual_screen]->add_image("/digit", 459, 456,
+                                                        "digit1");
+    gui1->screen_vector[gui1->actual_screen]->add_image("/digit", 513, 456,
+                                                        "digit2");
+    gui1->screen_vector[gui1->actual_screen]->add_image("/digit", 459, 521,
+                                                        "digit3");
+    gui1->screen_vector[gui1->actual_screen]->add_image("/digit", 513, 521,
+                                                        "digit4");
+
 }
 
 void screen2() {
@@ -147,8 +162,8 @@ void screen2() {
 #undef x
 #define x 640
 #define y 400
-	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 1130, 0, "ret");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/start", 0, 650,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 87, 600, "ret");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/start", 87, 350,
 			"start");
 
 	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 500, 
@@ -160,108 +175,101 @@ void screen2() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 450, y + 115,
 			"plus2");
 
-	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 240,
-			y - 175,8, "trackbar1");
-	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s2", 240,
-			y + 125, 5, "trackbar2");
+	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 295,
+			202,9, "trackbar1");
+	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s2", 295,
+			406, 8, "trackbar2");
 
-	gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 165,
-			"hot");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/cold", 1190, y - 165,
-			"cold");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/time", 40, y + 135,
-			"time");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 165,
+	//		"hot");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/cold", 1190, y - 165,
+	//		"cold");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/time", 40, y + 135,
+	//		"time");
 
-	gui1->screen_vector[gui1->actual_screen]->add_image("/max", x-440, y - 120, "max1");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/max", x+360, y - 120, "max2");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/5050", x-50, y - 120, "5050");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/7030", x-250, y - 120, "7030");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/3070", x+150, y - 120, "3070");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/max", x-440, y - 120, "max1");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/max", x+360, y - 120, "max2");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/5050", x-50, y - 120, "5050");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/7030", x-250, y - 120, "7030");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/3070", x+150, y - 120, "3070");
 
-	gui1->screen_vector[gui1->actual_screen]->add_image("/5", x-425, y + 180, "5");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/10", x-265, y + 180, "10");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/15", x-105, y + 180, "15");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/20", x+55, y + 180, "20");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/25", x+215, y + 180, "25");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/30", x+375, y + 180, "30");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/5", x-425, y + 180, "5");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/10", x-265, y + 180, "10");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/15", x-105, y + 180, "15");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/20", x+55, y + 180, "20");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/25", x+215, y + 180, "25");
+	//gui1->screen_vector[gui1->actual_screen]->add_image("/30", x+375, y + 180, "30");
 }
 
 void screen3() {
 	gui1->add_screen();
 
-	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 1130, 0, "ret");
-#undef y
-#define y 213
+	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 120, 320, "ret");
+
 //blue
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x - 40, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 190,
 			"on1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x + 65, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 190,
 			"off1");
 //red
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x + 280, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 301,
 			"on2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x + 385, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 301,
 			"off2");
-#undef y
-#define y 613
+
 //fan	
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", x - 40, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 415,
 			"on3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", x + 65, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 415,
 			"off3");
 //crio
-	gui1->screen_vector[gui1->actual_screen]->add_button("/push", x + 320, y - 13,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/push", 823, 531,
 			"push");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/reset", 1180, 700,
 			"reset");
 
-#undef y
-#define y 400
-	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", x + 25, y - 262,
+
+	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", 730, 313,
 			"blue");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/red", x + 345, y - 262,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/red", 738, 422,
 			"red");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", x + 25, y + 138,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", 730, 214,
 			"fan");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/crio", x + 345, y + 138,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/crio", 736, 545,
 			"crio");
 //nowe
-	gui1->screen_vector[gui1->actual_screen]->add_image("/video", x - 345, y -262,
-			"video");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/v1", x - 465, y-145,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/video", 352, 301,
+			"video");//!!
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v1", 376, 194,
 			"v1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/v2", x - 250, y-145,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v2", 531, 194,
 			"v2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/v3", x - 465, y+70,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v3", 376, 470,
 			"v3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/v4", x - 250, y+70,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/v4", 531, 470,
 			"v4");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/imgVid", x-370, y - 50, "30");
+	gui1->screen_vector[gui1->actual_screen]->add_image("/imgVid", 352, 301, "30");
 }
 
 void screen4() {
 	gui1->add_screen();
 #undef y
 #define y 220
-	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 1130, 0, "ret");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pr1", x - 500, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 120, 320, "ret");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pr1", 895, 206,
 			"pr1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pr2", x - 200, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pr2",1034 , 206,
 			"pr2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pr3", x + 100, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pr3", 895, 335,
 			"pr3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pr4", x + 400, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pr4",1034 , 335,
 			"pr4");
 #undef y
 #define y 480
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pr5", x - 500, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pr5", 895, 464,
 			"pr5");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pr6", x - 200, y,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pr6", 1034, 464,
 			"pr6");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pr7", x + 100, y,
-			"pr7");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pr8", x + 400, y,
-			"pr8");
 }
 
 void screen5() {
@@ -277,15 +285,15 @@ void screen6() {
                                                         "blue");
     gui2->screen_vector[gui2->actual_screen]->add_image("/red", 1100, 30,
                                                         "red");
-    gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 600, 700,
+    gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 580, 630,
                                                         "digit1");
-    gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 620, 700,
+    gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 640, 630,
                                                         "digit2");
     gui2->screen_vector[gui2->actual_screen]->add_image("/sep", 640, 700,
                                                         "separator");
-    gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 660, 700,
+    gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 580, 700,
                                                         "digit3");
-    gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 680, 700,
+    gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 640, 700,
                                                         "digit4");
 }
 
@@ -303,6 +311,22 @@ void setClock(int seconds, std::unique_ptr<GUI>&gui)
 	gui->screen_vector[1]->setImage(minutesUnit,4);
 	gui->screen_vector[1]->setImage(secondsDecimal,6);
 	gui->screen_vector[1]->setImage(secondsUnit,7);
+}
+
+void setClock_2(int seconds, std::unique_ptr<GUI>&gui)
+{
+    int minutesDecimal, minutesUnit, secondsDecimal, secondsUnit;
+
+    minutesDecimal=(seconds/60)/10;
+    minutesUnit=(seconds/60)%10;
+
+    secondsDecimal=(seconds-((10*minutesDecimal+minutesUnit)*60))/10;
+    secondsUnit=(seconds-((10*minutesDecimal+minutesUnit)*60))-(secondsDecimal*10);
+
+    gui->screen_vector[1]->setImage(minutesDecimal,14);
+    gui->screen_vector[1]->setImage(minutesUnit,15);
+    gui->screen_vector[1]->setImage(secondsDecimal,16);
+    gui->screen_vector[1]->setImage(secondsUnit,17);
 }
 
 void DemoClock()
@@ -342,6 +366,12 @@ void Clock()
                 int time = programs->GetTime();
                 if (time >= 0) {
                     setClock(time, gui2);
+                    setClock_2(time,gui1);
+                }
+                else
+                {
+                    setClock(0, gui2);
+                    setClock_2(0,gui1);//NEW!!!
                 }
             }
         }
@@ -548,7 +578,7 @@ int main() {
 
 	gui1->draw_screen();
 
-	char key=cv::waitKey(1);
+    char key=cv::waitKey(1);
 	if(key=='d')
 	{
 		gui1->turnBoxes();
@@ -558,10 +588,20 @@ int main() {
 		break;
 	}
 
-	if(gui1->actual_screen==1&&fan==true)
+	if(gui1->actual_screen==1&&fan==true&&fan_temp==false)
     {
 		gui1->screen_vector[gui1->actual_screen]->change_value(7);
+        fan_temp=true;
 	}
+    if(gui1->actual_screen==1&&fan==false&&fan_temp==true)
+    {
+        gui1->screen_vector[gui1->actual_screen]->change_value(7);
+        fan_temp=false;
+    }
+    if(arrow==true)
+    {
+        gui1->screen_vector[gui1->actual_screen]->change_value(13);
+    }
 
 	if(touch_flag==true)
 	{
@@ -602,6 +642,8 @@ int main() {
             fan=false;
             programs->Stop();
             setClock(0,gui2);
+            arrow=false;
+            gui1->screen_vector[gui1->actual_screen]->VideoStart(13);
         }
 
         else if(signal==14)
@@ -615,6 +657,7 @@ int main() {
 			programs->Pause();
 			gui1->screen_vector[1]->VideoToggle(11);
 			gui2->screen_vector[1]->VideoToggle(0);
+            arrow=!arrow;
 		}
 
         else if((signal>=1&&signal<=11))
@@ -639,6 +682,8 @@ int main() {
             gui1->screen_vector[gui1->actual_screen]->element_vector[12]->active =
                     true;
             gui1->enable=false;
+
+            arrow=true;
         }
 	}
 

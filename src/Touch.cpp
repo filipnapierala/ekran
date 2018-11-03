@@ -75,7 +75,7 @@ int Screen2_callback(std::unique_ptr<Control>&control,Touch touch, std::unique_p
     static int time=0;
     static int HotCold=0;
 #define HOT_SATURATION 8
-#define TIME_SATURATION 5
+#define TIME_SATURATION 7
 
 	if (touch.id == "ret") {
 		gui->actual_screen = 1;
