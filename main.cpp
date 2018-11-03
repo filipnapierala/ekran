@@ -351,7 +351,7 @@ void DemoClock()
                 demoCounter=0;
 				demoFlag=true;
                 SendFrame(config->config.usbPort,"Demo");
-                gui1->actual_screen = 0;//NEW!!!
+                gui1->actual_screen = 1;//NEW!!!
             }
 		}
 	}
