@@ -212,15 +212,15 @@ void screen3() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 301,
 			"off1");
 //red
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 190,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 415,
 			"on2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 190,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 415,
 			"off2");
 
 //fan	
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 415,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 190,
 			"on3");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 415,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 190,
 			"off3");
 //crio
 	gui1->screen_vector[gui1->actual_screen]->add_button("/push", 823, 531,
