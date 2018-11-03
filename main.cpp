@@ -207,14 +207,14 @@ void screen3() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 120, 320, "ret");
 
 //blue
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 190,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 301,
 			"on1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 190,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 301,
 			"off1");
 //red
-	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 301,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/on", 822, 190,
 			"on2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 301,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/off", 956, 190,
 			"off2");
 
 //fan	
