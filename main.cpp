@@ -229,7 +229,7 @@ void screen3() {
 			"reset");
 
 
-	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", 730, 313,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", 738, 313,
 			"blue");
 	gui1->screen_vector[gui1->actual_screen]->add_image("/red", 738, 422,
 			"red");
