@@ -99,13 +99,13 @@ void touch_callback(int event, int x, int y, int flags, void*) {
     {
         if(touch.id=="trackbar1") {
             gui1->screen_vector[gui1->actual_screen]->element_vector[6]->changeValue(
-                    int((float(x - 295) / 909) * 8), 1);
-            HotCold=int((float(x - 295) / 909) * 8);
+                    int((float(x - 320) / 796) * 8), 1);
+            HotCold=int((float(x - 320) / 796) * 8);
         }
         if(touch.id=="trackbar2") {
             gui1->screen_vector[gui1->actual_screen]->element_vector[7]->changeValue(
-                    int((float(x - 295) / 909) * 7), 1);
-            tim=int((float(x - 295) / 909) * 7);
+                    int((float(x - 320) / 796) * 7), 1);
+            tim=int((float(x - 320) / 796) * 7);
         }
         //std::cout<<"value: "<<int((float(x-240)/800)*9) <<std::endl;
     }
@@ -123,13 +123,13 @@ void screen1() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/hot", 723, 455, "hot");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/manual", 569,645,
 			"manual");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/else", 1152, 697, "else");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/else", 122, 511, "else");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/diag", 1076, 697,
 			"diag");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/stop", 118,682,
 			"stop");
 
-	gui1->screen_vector[gui1->actual_screen]->add_image("/alarm", 1170, 37,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/alarm", 1152, 697,
 			"alarm");
 
 #define x 920
@@ -163,25 +163,23 @@ void screen1() {
 
 void screen2() {
 	gui1->add_screen();
-#undef x
-#define x 640
-#define y 400
+
 	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 87, 600, "ret");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/start", 87, 350,
 			"start");
 
-	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 500, 
-			y - 185, "minus1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", x - 500,
-			y + 115, "minus2");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 450, y - 185,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", 270,
+			277, "minus1");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/minus", 270,
+			481, "minus2");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", 1126,  277,
 			"plus1");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", x + 450, y + 115,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/plus", 1126,  481,
 			"plus2");
 
-	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 295,
+	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 320,
 			202,9, "trackbar1");
-	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s2", 295,
+	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s2", 320,
 			406, 8, "trackbar2");
 
 	//gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 165,
@@ -343,8 +341,9 @@ void DemoClock()
             if(gui1->enable==false){
                 demoCounter=0;
             }
-
+#ifdef DEBUG
             std::cout<<demoCounter<<std::endl;
+#endif
 			if(demoCounter>30&&demoFlag==false)
 			{
                 SendFrame(config->config.usbPort,0,0,0,0,0);
@@ -416,8 +415,9 @@ void ProgramTimer()
             if (programs->signals.blueFuture == true) {
                 gui1->screen_vector[1]->setImage(1, 9);
             }
-
+#ifdef DEBUG
             std::cout<<"czeka..."<<std::endl;
+#endif
             for(int i=0;i<SECONDS*2;i++)
             {
                 if (programs->isEnd == false) {
@@ -425,7 +425,9 @@ void ProgramTimer()
                 }
 				while(programs->isPause==true);
             }
+#ifdef DEBUG
             std::cout<<programs->ActualTime-SECONDS<<std::endl;
+#endif
 
             programs->Refresh();
 
@@ -441,8 +443,9 @@ void ProgramTimer()
                 }
 				while(programs->isPause==true);
 			}
+#ifdef DEBUG
             std::cout<<"10 s"<<std::endl;
-
+#endif
             gui2->screen_vector[1]->setImage(0, 1);
             gui2->screen_vector[1]->setImage(0, 2);
 

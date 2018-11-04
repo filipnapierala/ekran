@@ -18,7 +18,7 @@
 #include <vector>
 #include <math.h>
 
-#define DEBUG
+//#define DEBUG
 
 int Initport(int fd);
 int OpenPort(std::string port);
