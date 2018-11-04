@@ -123,28 +123,27 @@ void screen1() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/hot", 723, 455, "hot");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/manual", 569,645,
 			"manual");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/else", 122, 511, "else");
+	gui1->screen_vector[gui1->actual_screen]->add_button("/else", 82, 511, "else");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/diag", 1076, 697,
 			"diag");
-	gui1->screen_vector[gui1->actual_screen]->add_button("/stop", 118,682,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/stop", 82,682,
 			"stop");
 
 	gui1->screen_vector[gui1->actual_screen]->add_image("/alarm", 1152, 697,
 			"alarm");
 
-#define x 920
-	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", 124, 400,//!!
+	gui1->screen_vector[gui1->actual_screen]->add_image("/fan", 84, 400,//!!
 			"fan");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/red",220, 400,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/red",180, 400,
 			"red");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", 315, 400,
+	gui1->screen_vector[gui1->actual_screen]->add_image("/blue", 275, 400,
 			"blue");
-	gui1->screen_vector[gui1->actual_screen]->add_image("/pr", x + 145, 480,//!!
+	gui1->screen_vector[gui1->actual_screen]->add_image("/pr", 1065, 480,//!!
 			"pr");
 
-	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 50, 25, "video", 640, 360, true);
+	gui1->screen_vector[gui1->actual_screen]->add_video("/vid", 50, 25, "video", 640, 360, false);
 //nowe
-	gui1->screen_vector[gui1->actual_screen]->add_button("/pause", 224, 682,
+	gui1->screen_vector[gui1->actual_screen]->add_button("/pause", 184, 682,
 			"pause");
 
     gui1->screen_vector[gui1->actual_screen]->add_image("/arrow", 384, 395,
@@ -255,8 +254,7 @@ void screen3() {
 
 void screen4() {
 	gui1->add_screen();
-#undef y
-#define y 220
+
 	gui1->screen_vector[gui1->actual_screen]->add_button("/ret", 120, 320, "ret");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/pr1", 895, 206,
 			"pr1");
@@ -266,8 +264,6 @@ void screen4() {
 			"pr3");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/pr4",1034 , 335,
 			"pr4");
-#undef y
-#define y 480
 	gui1->screen_vector[gui1->actual_screen]->add_button("/pr5", 895, 464,
 			"pr5");
 	gui1->screen_vector[gui1->actual_screen]->add_button("/pr6", 1034, 464,
