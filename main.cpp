@@ -402,19 +402,26 @@ void ProgramTimer()
             if (programs->signals.fan == true) {
                 fan = true;
             }
-
             if (programs->signals.redFuture == true) {
                 gui2->screen_vector[1]->setImage(1, 2);
-            }
-            if (programs->signals.blueFuture == true) {
-                gui2->screen_vector[1]->setImage(1, 1);
-            }
-            if (programs->signals.redFuture == true) {
                 gui1->screen_vector[1]->setImage(1, 8);
             }
             if (programs->signals.blueFuture == true) {
+                gui2->screen_vector[1]->setImage(1, 1);
                 gui1->screen_vector[1]->setImage(1, 9);
             }
+//            if (programs->signals.redFuture == true) {
+//                gui2->screen_vector[1]->setImage(1, 2);
+//            }
+//            if (programs->signals.blueFuture == true) {
+//                gui2->screen_vector[1]->setImage(1, 1);
+//            }
+//            if (programs->signals.redFuture == true) {
+//                gui1->screen_vector[1]->setImage(1, 8);
+//            }
+//            if (programs->signals.blueFuture == true) {
+//                gui1->screen_vector[1]->setImage(1, 9);
+//            }
 #ifdef DEBUG
             std::cout<<"czeka..."<<std::endl;
 #endif
