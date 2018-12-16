@@ -177,9 +177,9 @@ void screen2() {
 			"plus2");
 
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 320,
-			202,9, "trackbar1");
+			202,8, "trackbar1");
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s2", 320,
-			406, 8, "trackbar2");
+			406, 7, "trackbar2");
 
 	//gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 165,
 	//		"hot");
