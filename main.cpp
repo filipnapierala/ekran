@@ -146,7 +146,7 @@ void screen1() {
 	gui1->screen_vector[gui1->actual_screen]->add_button("/pause", 184, 682,
 			"pause");
 
-    gui1->screen_vector[gui1->actual_screen]->add_image("/arrow", 384, 395,
+    gui1->screen_vector[gui1->actual_screen]->add_image("/arrow", 385, 397,
                                                          "arrow");
 
     gui1->screen_vector[gui1->actual_screen]->add_image("/digit", 459, 456,
