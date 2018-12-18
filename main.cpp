@@ -177,9 +177,9 @@ void screen2() {
 			"plus2");
 
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s1", 320,
-			202,9, "trackbar1");
+			202,8, "trackbar1");
 	gui1->screen_vector[gui1->actual_screen]->add_trackbar("/r1", "/s2", 320,
-			406, 8, "trackbar2");
+			406, 7, "trackbar2");
 
 	//gui1->screen_vector[gui1->actual_screen]->add_image("/hot", 40, y - 165,
 	//		"hot");
@@ -287,8 +287,8 @@ void screen6() {
                                                         "digit1");
     gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 640, 630,
                                                         "digit2");
-    gui2->screen_vector[gui2->actual_screen]->add_image("/sep", 640, 700,
-                                                        "separator");
+    //gui2->screen_vector[gui2->actual_screen]->add_image("/sep", 640, 700,
+      //                                                  "separator");
     gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 580, 700,
                                                         "digit3");
     gui2->screen_vector[gui2->actual_screen]->add_image("/digit", 640, 700,
@@ -307,8 +307,8 @@ void setClock(int seconds, std::unique_ptr<GUI>&gui)
 
 	gui->screen_vector[1]->setImage(minutesDecimal,3);
 	gui->screen_vector[1]->setImage(minutesUnit,4);
-	gui->screen_vector[1]->setImage(secondsDecimal,6);
-	gui->screen_vector[1]->setImage(secondsUnit,7);
+	gui->screen_vector[1]->setImage(secondsDecimal,5);
+	gui->screen_vector[1]->setImage(secondsUnit,6);
 }
 
 void setClock_2(int seconds, std::unique_ptr<GUI>&gui)

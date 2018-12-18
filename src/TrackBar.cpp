@@ -38,7 +38,7 @@ void TrackBar::draw(cv::Mat bg)
 
 	int position=(float(this->width)/float(this->maxValue))
 					*this->value-this->radial.cols/2;
-	this->copy_transparent(this->radial,bg,position-10,90);
+	this->copy_transparent(this->radial,bg,position-18,90);
 }
 
 void TrackBar::changeState()
